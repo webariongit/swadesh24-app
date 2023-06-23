@@ -1,0 +1,7 @@
+{
+  "name": "swadesh24",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

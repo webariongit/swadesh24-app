@@ -1,0 +1,45 @@
+<ion-card class="news-card">
+  <ion-grid class="news-card-img">
+    <ion-img class="news-img"
+        src="./assets/img/new-img.png"
+        alt=""
+      ></ion-img>
+    <ion-badge class="news-tag">Lifestyle</ion-badge>
+    <ion-img class="news-type-tag"
+      src="./assets/img/video-icon.svg"
+      alt=""
+    ></ion-img>
+  </ion-grid>
+  <ion-grid class="news-card-content">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="1.5">
+        <ion-img
+          src="./assets/img/avatar.png"
+          alt=""
+        ></ion-img>
+      </ion-col>
+      <ion-col size="10.5">
+        <ion-row class="ion-align-items-center">
+          <ion-text class="text-h4">Falconar Agnes </ion-text> <span class="dot"></span> <ion-text class="text-h6">May 20, 2021</ion-text>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-grid class="news-content">
+      <h4>Microsoft announces a five-year commitment</h4>
+      <!-- <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p> -->
+    </ion-grid>
+    <ion-grid class="news-action-btn">
+      <ion-row>
+        <ion-col size="8" class="ion-no-padding">
+          <ion-row>
+            <app-like-btn></app-like-btn>
+            <app-comment-btn></app-comment-btn>
+          </ion-row>
+        </ion-col>
+        <ion-col size="4" class="ion-text-end ion-no-padding">
+          <app-save-btn></app-save-btn>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+</ion-card>

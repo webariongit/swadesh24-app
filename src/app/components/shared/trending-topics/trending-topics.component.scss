@@ -1,0 +1,53 @@
+.trend-topic-card{
+    padding:0px;
+    margin:2px 0px 15px;
+    box-shadow:none;
+    background-color: transparent;
+}
+
+.trending-top-img{
+    position: relative;
+    padding: 0;
+}
+
+.trending-img{
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.trending-tag{
+    padding: 3px 10px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    --background: #D0D2FB;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 20px;
+    color: #3F3F97;
+}
+
+.trend-top-content{
+    padding-top:10px ;
+}
+
+.trend-top-content .dot{
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-color: #FF6501;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.trend-top-content h4{
+    font-size: 14px;
+    font-weight: 400;
+    color:#2d2d2d;
+    margin: 0;
+}
+
+.trend-top-content p{
+    font-size:12px;
+    margin: 0;
+}

@@ -1,0 +1,32 @@
+.section-header{
+    padding: 0px 10px;
+    h4{
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        padding-bottom: 5px;
+        position: relative;
+        margin-bottom: 10px;
+        &::before{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 36px;
+            content: '';
+            height: 2px;
+            background-color: #FF6501;
+        }
+    }
+}
+
+.trending-topic-sec{
+    background-color: #fff;
+}
+
+.home-carousel, .trending-carousel{
+    padding-bottom: 15px;
+}
+
+.trending-carousel{
+    margin:0px 10px;
+}

@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<ion-content [fullscreen]="true">
+  <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="true" [pagination]="true" pagination-clickable="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+    <swiper-slide  *ngFor="let data of sliderData">
+      <app-news-box></app-news-box>
+    </swiper-slide>
+  </swiper-container>
+  <ion-grid class="trending-topic-sec">
+    <ion-grid class="section-header">
+      <h4>Trending Topics</h4>
+    </ion-grid>
+    <swiper-container class="trending-carousel" [slidesPerView]="2.5" [loop]="true" [pagination]="true" [spaceBetween]="10" autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination-clickable="true" >
+      <swiper-slide  *ngFor="let data of sliderData">
+        <app-trending-topics></app-trending-topics>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+  <ion-grid>
+    <ion-grid class="section-header">
+      <h4>News</h4>
+    </ion-grid>
+    <app-news-list-box></app-news-list-box>
+    <app-news-list-box></app-news-list-box>
+    <app-news-list-box></app-news-list-box>
+  </ion-grid>
+</ion-content>
