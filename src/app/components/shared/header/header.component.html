@@ -18,9 +18,9 @@
       </ion-col>
     </ion-row>
   </ion-toolbar>
-  <ion-segment value="buttons">
+  <ion-segment [scrollable]="true">
     <ng-container *ngFor="let link of pageLink">
-      <ion-segment-button value="{{link?.value}}">
+      <ion-segment-button value="{{link?.value}}" (click)="gotoPage(link?.value)">
         <ion-label>{{link?.title}}</ion-label>
       </ion-segment-button>
     </ng-container>

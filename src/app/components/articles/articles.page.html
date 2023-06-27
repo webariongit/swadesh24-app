@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="4" class="ion-no-padding">
+        <div class="header-logo" routerLink="/">
+          <img src="./assets/img/logo.png" alt="">
+        </div>
+      </ion-col>
+      <ion-col size="8" class="ion-no-padding">
+        <ion-row class="ion-justify-content-end">
+          <ion-button class="icon-btns">
+            <ion-icon name="search-outline"></ion-icon>
+          </ion-button>
+          <ion-buttons>
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-segment class="category-menu" [scrollable]="true" value="{{selectedTab}}" [(ngModel)]="selectedTab">
+    <ng-container *ngFor="let link of pageLink">
+      <ion-segment-button value="{{link?.value}}">
+        <ion-label>{{link?.title}}</ion-label>
+      </ion-segment-button>
+    </ng-container>
+  </ion-segment>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">articles</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-segment class="sub-category-menu" [scrollable]="true" value="latest" [(ngModel)]="selectedCategoryTab">
+    <ion-segment-button value="latest">
+      <ion-label>Latest</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="social">
+      <ion-label>Social Media</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="top">
+      <ion-label>Top News</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ng-container *ngIf="selectedCategoryTab == 'latest'">
+    <app-news-box></app-news-box>
+    <app-news-box></app-news-box>
+    <app-news-box></app-news-box>
+  </ng-container>
+  <ng-container *ngIf="selectedCategoryTab == 'social'">
+    <app-news-box></app-news-box>
+    <app-news-box></app-news-box>
+    <app-news-box></app-news-box>
+  </ng-container>
+  <ng-container *ngIf="selectedCategoryTab == 'top'">
+    <app-news-box></app-news-box>
+    <app-news-box></app-news-box>
+    <app-news-box></app-news-box>
+  </ng-container>
+</ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-list-box',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsListBoxComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit() {}
+
+  gotoDetails(){
+    this.router.navigate(['article-details'])
+  }
 
 }

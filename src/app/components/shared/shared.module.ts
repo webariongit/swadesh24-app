@@ -7,6 +7,10 @@ import { CommentBtnComponent } from './action-btns/comment-btn/comment-btn.compo
 import { SaveBtnComponent } from './action-btns/save-btn/save-btn.component';
 import { TrendingTopicsComponent } from './trending-topics/trending-topics.component';
 import { NewsListBoxComponent } from './news-list-box/news-list-box.component';
+import { StoriesBoxComponent } from './stories-box/stories-box.component';
+import { EntertainmentBoxComponent } from './entertainment-box/entertainment-box.component';
+import { ArticlesBoxComponent } from './articles-box/articles-box.component';
+import { ShareBtnComponent } from './action-btns/share-btn/share-btn.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { NewsListBoxComponent } from './news-list-box/news-list-box.component';
     CommentBtnComponent,
     SaveBtnComponent,
     TrendingTopicsComponent,
-    NewsListBoxComponent
+    NewsListBoxComponent,
+    StoriesBoxComponent,
+    EntertainmentBoxComponent,
+    ArticlesBoxComponent,
+    ShareBtnComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +36,11 @@ import { NewsListBoxComponent } from './news-list-box/news-list-box.component';
     CommentBtnComponent,
     SaveBtnComponent,
     TrendingTopicsComponent,
-    NewsListBoxComponent
+    NewsListBoxComponent,
+    StoriesBoxComponent,
+    EntertainmentBoxComponent,
+    ArticlesBoxComponent,
+    ShareBtnComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

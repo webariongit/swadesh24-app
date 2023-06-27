@@ -1,0 +1,144 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>Settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">settings</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="hastag-box">
+    <ion-grid class="section-header">
+      <h4>General</h4>
+    </ion-grid>
+    <ion-list>
+      <ion-item >
+        <div class="list-icon">
+          <ion-icon name="globe-outline"></ion-icon>
+        </div>
+        <ion-label>Change Language</ion-label>
+        <ion-toggle slot="end" aria-label="Primary toggle" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item id="rate-modal" expand="block">
+        <div class="list-icon">
+          <ion-icon name="star-outline"></ion-icon>
+        </div>
+        <ion-label>Rate Swadesh24</ion-label>
+      </ion-item>
+      <ion-item id="share-modal" expand="block">
+        <div class="list-icon">
+          <ion-icon name="share-social-outline"></ion-icon>
+        </div>
+        <ion-label>Share App</ion-label>
+      </ion-item>
+      <ion-item (click)="gotoPage('feedback')">
+        <div class="list-icon">
+          <ion-icon name="heart-outline"></ion-icon>
+        </div>
+        <ion-label>Feedback</ion-label>
+      </ion-item>
+      <ion-item (click)="gotoPage('about-us')">
+        <div class="list-icon">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </div>
+        <ion-label>About Us</ion-label>
+      </ion-item>
+      <ion-item  (click)="gotoPage('contact-us')">
+        <div class="list-icon">
+          <ion-icon name="call-outline"></ion-icon>
+        </div>
+        <ion-label>Contact Us</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-grid class="section-header">
+      <h4>Legal</h4>
+    </ion-grid>
+    <ion-list>
+      <ion-item (click)="gotoPage('privacy-policy')">
+        <div class="list-icon">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+        <ion-label>Privacy Policy</ion-label>
+      </ion-item>
+      <ion-item (click)="gotoPage('terms-of-use')">
+        <div class="list-icon" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+        <ion-label>Terms of Use</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-modal id="example-modal" #modal trigger="rate-modal">
+    <ng-template>
+      <div class="wrapper rate-us-modal">
+        <ion-button (click)="modal.dismiss()" class="close-btn"><ion-icon name="close"></ion-icon></ion-button>
+        <h4>Rate us</h4>
+        <p>Do you like Swadesh24? Share your experience by rating it!</p>
+        <div class="rating-star">
+          <div id="full-stars-example-two">
+            <div class="rating-group">
+                <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
+                <label aria-label="1 star" class="rating__label" for="rating3-1">
+                  <ion-icon name="star" class="rating__icon rating__icon--star"></ion-icon>
+                  <!-- <mat-icon class="rating__icon rating__icon--star">star</mat-icon> -->
+                </label>
+                <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
+                <label aria-label="2 stars" class="rating__label" for="rating3-2">
+                  <ion-icon name="star" class="rating__icon rating__icon--star"></ion-icon>
+                </label>
+                <input class="rating__input" name="rating3" id="rating3-2" value="2" type="radio">
+                <label aria-label="3 stars" class="rating__label" for="rating3-3">
+                  <ion-icon name="star" class="rating__icon rating__icon--star"></ion-icon>
+                </label>
+                <input class="rating__input" name="rating3" id="rating3-3" value="3" type="radio">
+                <label aria-label="4 stars" class="rating__label" for="rating3-4">
+                  <ion-icon name="star" class="rating__icon rating__icon--star"></ion-icon>
+                </label>
+                <input class="rating__input" name="rating3" id="rating3-4" value="4" type="radio">
+                <label aria-label="5 stars" class="rating__label" for="rating3-5">
+                  <ion-icon name="star" class="rating__icon rating__icon--star"></ion-icon>
+                </label>
+                <input class="rating__input" name="rating3" id="rating3-5" value="5" type="radio">
+            </div>
+          </div>
+        </div>
+        <ion-grid class="ion-item-center">
+          <ion-button class="main-btn">Submit</ion-button>
+        </ion-grid>
+      </div>
+    </ng-template>
+  </ion-modal>
+  <ion-modal trigger="share-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div class="share-bodal-content">
+        <h4>Share Now</h4>
+        <div class="copy-field">
+          <ion-input [(ngModel)]="CopyInputText" readonly="true" label="Website Url" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+          <ion-button slot="end" (click)="copyString()" class="copy-btn">Copy</ion-button>
+        </div>
+        <div class="copy-field">
+          <ion-input [(ngModel)]="CopyInputText" readonly="true" label="App Url" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+          <ion-button slot="end" (click)="copyString()" class="copy-btn">Copy</ion-button>
+        </div>
+        <div class="ion-divider">
+          <hr>
+          <span>Or</span>
+        </div>
+        <div class="ion-text-center">
+          <h4>Share it social media</h4>
+          <ion-row class="ion-justify-content-center">
+            <ion-button class="share-icon"><img src="./assets/img/social-icon/facebook.svg" alt=""></ion-button>
+            <ion-button class="share-icon"><img src="./assets/img/social-icon/twitter.svg" alt=""></ion-button>
+            <ion-button class="share-icon"><img src="./assets/img/social-icon/linkedin.svg" alt=""></ion-button>
+          </ion-row>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>

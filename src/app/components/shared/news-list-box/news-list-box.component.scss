@@ -1,6 +1,6 @@
 .news-list-box{
-    margin: 0px 5px;
-    margin-top: 5px;
+    margin: 0px 10px;
+    margin-top: 10px;
     border: 1px solid #EBEBEB;
     background-color: #fff;
     box-shadow: none;
@@ -22,7 +22,7 @@
 }
 
 .news-tag{
-    padding: 6px 15px;
+    padding: 5px 10px;
     --background: #D0D2FB;
     font-size: 12px;
     font-weight: 400;
@@ -37,6 +37,7 @@
         font-size: 14px;
         font-weight: 500;
         color:#2d2d2d;
+        margin-bottom: 10px;
     }
 }
 
@@ -48,4 +49,36 @@
 .news-thumbs-img{
     border-radius: 6px;
     overflow: hidden;
+    height: 140px;
+    object-fit: cover;
+    object-position: 50% top;
+
+}
+
+
+.author-profile ion-img{
+    width: 24px;
+    height: 24px;
+}
+
+.author-profile .text-h4{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.author-profile .text-h6{
+    font-size: 11px;
+}
+
+.dot{
+    width: 3px;
+    height: 3px;
+    display: inline-block;
+    border-radius: 100%;
+    background-color: #d3d3d3;
+    margin: 0px 5px;
+}
+
+.author-profile{
+    margin-bottom: 6px;
 }

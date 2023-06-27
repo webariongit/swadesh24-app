@@ -1,0 +1,42 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>Hastage <ion-icon name="chevron-forward-outline"></ion-icon> {{pageTitle}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="hastags"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">hastags-article</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-segment class="bookmark-list" [(ngModel)]="segmentButton">
+    <ion-segment-button value="news">
+      <ion-label><ion-icon name="reader-outline"></ion-icon> News <span class="count-badge">3</span></ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="shows">
+      <ion-label><ion-icon name="play-outline"></ion-icon> Shows <span class="count-badge">4</span></ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="listen">
+      <ion-label><ion-icon name="musical-notes-outline"></ion-icon> Listen <span class="count-badge">2</span></ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="segmentButton == 'news'">
+    <app-articles-box></app-articles-box>
+    <app-articles-box></app-articles-box>
+    <app-articles-box></app-articles-box>
+  </div>
+  <div *ngIf="segmentButton == 'shows'">
+    <app-articles-box></app-articles-box>
+    <app-articles-box></app-articles-box>
+    <app-articles-box></app-articles-box>
+    <app-articles-box></app-articles-box>
+  </div>
+  <div *ngIf="segmentButton == 'listen'">
+    <app-articles-box></app-articles-box>
+    <app-articles-box></app-articles-box>
+  </div>
+</ion-content>

@@ -1,0 +1,226 @@
+.hastag-box{
+    border-radius: 15px;
+    padding: 10px 5px;
+    box-shadow: 0px 3px 8px #ebebeb1f;
+}
+
+.section-header{
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h4{
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        padding-bottom: 5px;
+        position: relative;
+        margin-bottom: 0;
+        &::before{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 36px;
+            content: '';
+            height: 2px;
+            background-color: #FF6501;
+        }
+    }
+}
+
+ion-item{
+    font-size: 14px;
+    --inner-border-width:0;
+    --padding-start:10px;
+    --inner-padding-end:10px;
+    ion-label{
+        font-size: 14px;
+        color: #334155;
+        font-weight:500;
+    }
+}
+
+.list-icon{
+    width: 35px;
+    height: 35px;
+    border: 1px solid #EBEBEB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #3F3F97;
+    ion-icon{
+        font-size: 20px;
+    }
+}
+
+ion-modal#example-modal {
+    --width: fit-content;
+    --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+    padding: 10px;
+}
+  
+ion-modal#example-modal ion-icon {
+    margin-right: 6px;
+    width: 30px;
+    height: 30px;
+    padding: 4px 0;
+    color: #aaaaaa;
+}
+  
+ion-modal#example-modal .wrapper {
+    margin-bottom: 10px;
+}
+
+.share-bodal-content{
+  width: 100%;
+  position: relative;
+  padding:20px 10px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.share-bodal-content h4{
+  font-size: 16px;
+  text-align: center;
+}
+
+ion-modal {
+  --height: auto;
+}
+
+
+.rate-us-modal{
+  position: relative;
+}
+
+.form-field{
+  padding-right: 80px;
+  z-index: 999;
+}
+
+.close-btn{
+  --box-shadow: none;
+  --background:transparent;
+  --color: #000;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  --padding-start:0px;
+  --padding-end:0px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  ion-icon{
+    font-size: 20px;
+  }
+}
+
+.rate-us-modal{
+    padding: 10px;
+    text-align: center;
+    h4{
+      font-size: 20px;
+      font-weight: 500;
+      color: #334155;
+    }
+    p{
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: 400;
+      line-height: 26px;
+    }
+}
+
+#full-stars-example-two {
+    /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+    .rating-group {
+      display: inline-flex;
+    }
+    
+    /* make hover effect work properly in IE */
+    .rating__icon {
+      pointer-events: none;
+    }
+    
+    /* hide radio inputs */
+    .rating__input {
+     position: absolute !important;
+     left: -9999px !important;
+    }
+    
+    /* hide 'none' input from screenreaders */
+    .rating__input--none {
+      display: none
+    }
+  
+    /* set icon padding and size */
+    .rating__label {
+      cursor: pointer;
+      padding: 0 0.1em;
+      font-size: 2rem;
+    }
+    
+    /* set default star color */
+    .rating__icon--star {
+      color: orange;
+    }
+  
+    /* if any input is checked, make its following siblings grey */
+    .rating__input:checked ~ .rating__label .rating__icon--star {
+      color: #ddd;
+    }
+    
+    /* make all stars orange on rating group hover */
+    .rating-group:hover .rating__label .rating__icon--star {
+      color: orange;
+    }
+  
+    /* make hovered input's following siblings grey on hover */
+    .rating__input:hover ~ .rating__label .rating__icon--star {
+      color: #ddd;
+    }
+}
+
+.copy-btn{
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  --box-shadow: none;
+  --background: #3C3F9C;
+  z-index: 999;
+  --border-radius: 0px 4px 4px 0px;
+}
+
+.copy-field{
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.share-icon{
+  --background:transparent;
+  --box-shadow:none;
+  --padding-start:0px;
+  --padding-end:0px;
+  height: auto;
+  margin: 0px 10px;
+  img{
+    width: 40px;
+  }
+}
+
+
+
+ion-toggle{
+  --handle-background-checked: #3f3f97;
+}

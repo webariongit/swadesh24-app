@@ -1,0 +1,165 @@
+ion-toolbar{
+    ion-button{
+        --background: transparent;
+        --box-shadow: none;
+        --border-radius: 30px;
+        --padding-start: 7px;
+        --padding-end: 7px;
+    }
+}
+
+
+ion-button + ion-button{
+    margin-left: 5px;
+}
+
+.text-h4{
+    font-size: 15px;
+    font-weight: 500;
+    color:#2d2d2d;
+}
+
+.text-h6{
+    font-size: 12px;
+}
+
+.dot{
+    width: 4px;
+    height: 4px;
+    display: inline-block;
+    border-radius: 100%;
+    background-color: #d3d3d3;
+    margin: 0px 5px;
+}
+
+.news-content h4{
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.news-content p{
+    font-size: 13px;
+    margin-bottom: 10px;
+    line-height: 24px;
+    color: #6C6C6C;
+}
+
+.comment-card{
+    border-radius: 10px;
+    box-shadow: 0px 3px 8px #ebebeb1f;
+}
+
+.add-comment-box{
+    position: relative;
+    margin-bottom: 10px;
+    ion-img{
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        object-fit: cover;
+        object-position: 50% top;
+        position: absolute;
+        left: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 9;
+    }
+    .form-field{
+        --border-radius: 35px;
+        --padding-start: 45px;
+        --padding-end: 45px;
+        min-height: 46px;
+    }
+    ion-button{
+        --background: #3F3F97;
+        --box-shadow: none;
+        --padding-start: 8px;
+        --padding-end: 8px;
+        --border-radius: 100%;
+    }
+}
+
+.comment-card-content{
+    padding: 10px;
+}
+
+
+.send-btn{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    z-index: 9;
+    margin: 0;
+}
+
+.comments-box{
+    h4{
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        border-bottom: 1px solid #EBEBEB;
+        display: flex;
+        align-items: center;
+        ion-icon{
+            margin-right: 10px;
+        }
+    }
+    h5{
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        .dot{
+            display: inline-block;
+            height: 4px;
+            width: 4px;
+            border-radius: 100%;
+            background-color: #cdcdcd;
+        }
+        span{
+            font-size: 12px;
+            font-weight: 300;
+            color: #838383;
+        }
+    }
+    a{
+        font-weight: 400;
+        font-size: 13px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+    p{
+        font-size: 13px;
+    }
+}
+
+.action-btn{
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    --background: transparent;
+    --box-shadow: none;
+    color: #616161;
+    margin: 0;
+}
+
+.comment-action-btn{
+    height: 120px;
+}
+
+ion-modal {
+    --height: auto;
+}
+
+ion-item{
+    --inner-border-width:0;
+    ion-icon{
+        margin-right:10px;
+    }
+}

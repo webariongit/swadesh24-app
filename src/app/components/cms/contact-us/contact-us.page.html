@@ -1,0 +1,81 @@
+<ion-header [translucent]="true"  class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>Contact Us</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">contact-us</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid class="map-img">
+    <ion-img src="./assets/img/map-img.png"></ion-img>
+  </ion-grid>
+  <ion-card class="contact-card">
+    <ion-card-content class="contact-card-content">
+      <ion-list>
+        <ion-item >
+          <div class="list-icon">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+          <ion-label>info@gmail.com</ion-label>
+        </ion-item>
+        <ion-item >
+          <div class="list-icon">
+            <ion-icon name="call-outline"></ion-icon>
+          </div>
+          <ion-label>+91 18000456643</ion-label>
+        </ion-item>
+        <ion-item >
+          <div class="list-icon">
+            <ion-icon name="navigate-outline"></ion-icon>
+          </div>
+          <div>
+            <h5>Swadesh24</h5>
+            <ion-label>38-E, Kamla Nagar, Delhi <br> New Delhi, 110007, India</ion-label>
+          </div>
+        </ion-item>
+      </ion-list>
+      <h4>Follow Us</h4>
+      <div class="follow-us-content">
+        <a href="#"><ion-img src="./assets/img/follow-us/1.svg"></ion-img></a>
+        <a href="#"><ion-img src="./assets/img/follow-us/2.svg"></ion-img></a>
+        <a href="#"><ion-img src="./assets/img/follow-us/3.svg"></ion-img></a>
+        <a href="#"><ion-img src="./assets/img/follow-us/4.svg"></ion-img></a>
+        <a href="#"><ion-img src="./assets/img/follow-us/5.svg"></ion-img></a>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="contact-card">
+    <ion-card-content class="contact-card-content">
+      <h4>Get in touch with us</h4>
+      <form action="">
+        <ion-input aria-label="First Name" label="First Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+        <ion-input aria-label="Last Name" label="Last Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+        <ion-input aria-label="Email" label="Email *" fill="outline" class="form-field" labelPlacement="floating"></ion-input>
+        <ion-row class="ion-align-items mobile-number-field">
+          <ion-col size="3" class="ion-no-padding padding-right">
+            <ion-select fill="outline" class="mobile-code-field" [(ngModel)]="countryCode" [ngModelOptions]="{standalone: true}">
+              <ion-select-option value="+91">+91</ion-select-option>
+              <ion-select-option value="+92">+91</ion-select-option>
+              <ion-select-option value="+93">+91</ion-select-option>
+              <ion-select-option value="+94">+91</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col size="9" class="ion-no-padding">
+            <ion-input aria-label="Mobile Number" label="Mobile Number" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-textarea aria-label="Feedback" label="Feedback *" placeholder="Write your feedback here..." class="form-field" fill="outline" labelPlacement="floating"></ion-textarea>
+        <ion-grid class="ion-text-center">
+          <ion-button class="main-btn">Submit</ion-button>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

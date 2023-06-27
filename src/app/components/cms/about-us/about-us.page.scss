@@ -1,0 +1,19 @@
+.about-card{
+    border-radius: 15px;
+    box-shadow: 0px 3px 8px #ebebeb1f;
+}
+
+.about-card-content{
+    padding:15px;
+    h4{
+        font-size: 16px;
+        font-weight: 500;
+        color: #3F3F97;
+        margin-bottom: 10px;
+    }
+    p{
+        font-size: 14px;
+        color: #6C6C6C;
+        margin-bottom: 20px;
+    }
+}

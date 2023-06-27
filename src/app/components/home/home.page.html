@@ -10,18 +10,73 @@
     <ion-grid class="section-header">
       <h4>Trending Topics</h4>
     </ion-grid>
-    <swiper-container class="trending-carousel" [slidesPerView]="2.5" [loop]="true" [pagination]="true" [spaceBetween]="10" autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination-clickable="true" >
+    <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="true" [pagination]="true" [spaceBetween]="10" autoplay-delay="2500" autoplay-disable-on-interaction="false" pagination-clickable="true" >
       <swiper-slide  *ngFor="let data of sliderData">
         <app-trending-topics></app-trending-topics>
       </swiper-slide>
     </swiper-container>
   </ion-grid>
-  <ion-grid>
+  <ion-grid  class="news-list">
     <ion-grid class="section-header">
       <h4>News</h4>
+      <a href="#" class="view-all-btn">
+        View All
+      </a>
     </ion-grid>
     <app-news-list-box></app-news-list-box>
     <app-news-list-box></app-news-list-box>
     <app-news-list-box></app-news-list-box>
+  </ion-grid>
+  <ion-grid class="trending-topic-sec">
+    <ion-grid class="section-header">
+      <h4>Visual Stories</h4>
+    </ion-grid>
+    <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [pagination]="true" [spaceBetween]="10" autoplay-disable-on-interaction="false" pagination-clickable="true" >
+      <swiper-slide  *ngFor="let data of sliderData">
+        <app-stories-box></app-stories-box>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+  <ion-grid  class="news-list">
+    <ion-grid class="section-header">
+      <h4>Sports</h4>
+      <a href="#" class="view-all-btn">
+        View All
+      </a>
+    </ion-grid>
+    <app-news-list-box></app-news-list-box>
+    <app-news-list-box></app-news-list-box>
+    <app-news-list-box></app-news-list-box>
+  </ion-grid>
+  <ion-grid class="entertainment-sec">
+    <ion-grid class="section-header">
+      <h4>Entertainment</h4>
+    </ion-grid>
+    <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" [pagination]="true" autoplay-disable-on-interaction="false" pagination-clickable="true" >
+      <swiper-slide *ngFor="let data of sliderData">
+        <app-entertainment-box></app-entertainment-box>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+  <ion-grid class="news-list">
+    <ion-grid class="section-header">
+      <h4>Business</h4>
+      <a href="#" class="view-all-btn">
+        View All
+      </a>
+    </ion-grid>
+    <app-news-list-box></app-news-list-box>
+    <app-news-list-box></app-news-list-box>
+    <app-news-list-box></app-news-list-box>
+  </ion-grid>
+  <ion-grid class="raffel-draw-banner">
+    <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" [pagination]="true" autoplay-disable-on-interaction="false" pagination-clickable="true" >
+      <swiper-slide *ngFor="let data of sliderData">
+        <div class="raffle-banner">
+          <ion-img src="./assets/img/raffle-banner.png"
+          alt=""></ion-img>
+        </div>
+      </swiper-slide>
+    </swiper-container>
   </ion-grid>
 </ion-content>

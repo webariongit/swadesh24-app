@@ -1,0 +1,46 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>My Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">my-profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="profile-card">
+    <ion-card-content>
+      <form action="">
+        <div class="profile-img">
+          <ion-img src="./assets/img/avatar.png"
+          alt=""></ion-img>
+          <ion-button class="camera-btn"><ion-icon name="camera-outline"></ion-icon></ion-button>
+        </div>
+        <ion-input aria-label="First Name" label="First Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+        <ion-input aria-label="Last Name" label="Last Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+        <ion-input aria-label="Email" label="Email *" fill="outline" class="form-field" labelPlacement="floating"></ion-input>
+        <ion-row class="ion-align-items mobile-number-field">
+          <ion-col size="3" class="ion-no-padding padding-right">
+            <ion-select fill="outline" class="mobile-code-field" [(ngModel)]="countryCode" [ngModelOptions]="{standalone: true}">
+              <ion-select-option value="+91">+91</ion-select-option>
+              <ion-select-option value="+92">+91</ion-select-option>
+              <ion-select-option value="+93">+91</ion-select-option>
+              <ion-select-option value="+94">+91</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col size="9" class="ion-no-padding">
+            <ion-input aria-label="Mobile Number" placeholder="Mobile Number" class="form-field" fill="outline"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-grid class="ion-text-center">
+          <ion-button class="main-btn">Update</ion-button>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

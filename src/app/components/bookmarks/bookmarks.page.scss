@@ -1,0 +1,30 @@
+.bookmark-list ion-segment-button{
+    text-transform: capitalize;
+    --padding-start:0px;
+    --padding-end:0px;
+    font-size: 13px;
+    ion-label{
+        margin: 0;
+        display: flex;
+        align-items: center;
+        ion-icon{
+            font-size: 18px;
+            margin-right: 5px;
+        }
+        span{
+            border: 1px solid #E2E2E2;
+            padding: 0px 6px;
+            border-radius: 25px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+    }
+    &.segment-button-checked{
+        color: #3f3f97;
+        --color-checked:#3f3f97;
+    }
+}
+
+ion-segment{
+    background-color: #fff;
+}

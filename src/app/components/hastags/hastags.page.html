@@ -1,0 +1,50 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>Hastags</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">hastags</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="hastag-box">
+    <ion-grid class="section-header">
+      <h4>Followed Hastags</h4>
+      <a href="#" class="view-all-btn">
+        View All
+      </a>
+    </ion-grid>
+    <ion-list>
+      <ion-item (click)="gotoPage('#swadesh24')">
+        #swadesh24
+        <ion-button class="btn-outline" slot="end">Unfollow</ion-button>
+      </ion-item>
+      <ion-item (click)="gotoPage('#swadeshTR24')">
+        #swadeshTR24
+        <ion-button class="btn-outline" slot="end">Unfollow</ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-grid class="section-header">
+      <h4>Popular Hastags</h4>
+      <a href="#" class="view-all-btn">
+        View All
+      </a>
+    </ion-grid>
+    <ion-list>
+      <ion-item>
+        #swadesh24
+        <ion-button class="main-btn" slot="end">Follow</ion-button>
+      </ion-item>
+      <ion-item>
+        #swadeshTR24
+        <ion-button class="main-btn" slot="end">Follow</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

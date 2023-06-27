@@ -13,8 +13,7 @@ export class AppComponent {
     { title: 'My Profile', url: '/my-profile', icon: 'person' },
     { title: 'Hastags', url: '/hastags', icon: 'extension-puzzle' },
     { title: 'Bookmarks', url: '/bookmarks', icon: 'bookmark' },
-    { title: 'Setting', url: '/setting', icon: 'settings' },
-    { title: 'Logout', url: '/logout', icon: 'log-out' },
+    { title: 'Setting', url: '/settings', icon: 'settings' },
   ];
   constructor() {}
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -18,8 +19,16 @@ export class HeaderComponent  implements OnInit {
     { title: 'Recruitment', value: 'recruitment'},
     { title: 'Politics', value: 'politics'},
   ];
-  constructor() { }
+
+  constructor(
+    private router:Router
+  ) { 
+  }
 
   ngOnInit() {}
+
+  gotoPage(value:any){
+    this.router.navigate(['articles',value])
+  }
 
 }

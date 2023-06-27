@@ -1,0 +1,40 @@
+<ion-card class="entertainment-box">
+  <ion-grid class="entertainment-img">
+    <a href="#" class="play-btn">
+      <ion-img
+        src="./assets/img/video-icon.svg"
+        alt=""
+      ></ion-img>
+    </a>
+      <ion-img class="news-img"
+      src="./assets/img/entertainment.png"
+      alt=""
+    ></ion-img>
+    <div class="save-btn">
+      <app-save-btn></app-save-btn>
+    </div>
+  </ion-grid>
+  <ion-card-content class="entertainment-box-content">
+    <ion-row class="ion-align-items-center">
+      <ion-col size="6" class="ion-no-padding">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="ion-no-padding">
+            <ion-img
+              src="./assets/img/avatar.png"
+              alt=""
+            ></ion-img>
+          </ion-col>
+          <ion-col size="9" class="ion-no-padding">
+            <ion-text class="text-h4">Falconar Agnes </ion-text>
+            <ion-text class="text-h6">May 20, 2021</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="6" class="ion-text-end ion-no-padding">
+        <app-like-btn></app-like-btn>
+        <app-comment-btn></app-comment-btn>
+      </ion-col>
+    </ion-row>
+    <h4>Microsoft announces a five-year commitment</h4>
+  </ion-card-content>
+</ion-card>

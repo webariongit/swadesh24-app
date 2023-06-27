@@ -1,0 +1,31 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>Feedback</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="settings"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">feedback</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="profile-card">
+    <ion-card-content>
+      <form action="">
+        <ion-select label="Feedback Type *" class="form-field" fill="outline" labelPlacement="floating">
+          <ion-select-option value="apple">Feedback Type</ion-select-option>
+          <ion-select-option value="banana">Feedback Type</ion-select-option>
+          <ion-select-option value="orange">Feedback Type</ion-select-option>
+        </ion-select>    
+        <ion-textarea aria-label="Feedback" label="Feedback *" placeholder="Write your feedback here..." class="form-field" fill="outline" labelPlacement="floating"></ion-textarea>
+        <ion-grid class="ion-text-center">
+          <ion-button class="main-btn">Submit</ion-button>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

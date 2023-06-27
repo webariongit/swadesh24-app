@@ -1,0 +1,55 @@
+.form-field{
+    margin-bottom: 10px;
+}
+
+.profile-card{
+    border-radius: 15px;
+    box-shadow: 0px 3px 8px #ebebeb1f;
+}
+
+.profile-card ion-card-content{
+    padding: 15px 10px;
+}
+
+.profile-img{
+    width: 100px;
+    height: 100px;
+    margin: 0px auto 20px;
+    position: relative;
+}
+
+.profile-img ion-button{
+    position: absolute;
+    right:0;
+    bottom:0;
+    --padding-start: 0;
+    --padding-end: 0;
+    --background:#fff;
+    color: #334155;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    border: 1px solid #EBEBEB;
+    margin: 0;
+    --box-shadow: none;
+    overflow: hidden;
+    ion-icon{
+        width: 20px;
+    }
+}
+
+.profile-img ion-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: 50% top;
+}
+
+.mobile-code-field{
+    min-height:46px;
+}
+
+.form-field{
+    min-height:46px;
+}

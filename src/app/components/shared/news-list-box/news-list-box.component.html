@@ -1,9 +1,23 @@
-<ion-card class="news-list-box">
+<ion-card class="news-list-box"  (click)="gotoDetails()">
   <ion-row class="ion-align-items-center">
     <ion-col size="8">
       <ion-grid class="news-list-content">
         <ion-badge class="news-tag">Lifestyle</ion-badge>
         <h4>Microsoft announces a five-year commitment</h4>
+        <ion-row class="ion-align-items-center author-profile">
+          <ion-col size="2" class="ion-no-padding">
+            <ion-img
+              src="./assets/img/avatar.png"
+              alt=""
+            ></ion-img>
+          </ion-col>
+          <ion-col size="10" class="ion-no-padding">
+            <ion-row class="ion-align-items-center">
+              <ion-text class="text-h4">Falconar Agnes </ion-text> <span class="dot"></span>
+              <ion-text class="text-h6">May 20, 2021</ion-text>
+            </ion-row>
+          </ion-col>
+        </ion-row>
       </ion-grid>
       <ion-grid class="news-action-btn">
         <ion-row>
