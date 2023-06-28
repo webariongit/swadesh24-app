@@ -13,6 +13,10 @@ const routes: Routes = [
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
       },
       {
+        path: 'articles/:value',
+        loadChildren: () => import('../articles/articles.module').then( m => m.ArticlesPageModule)
+      },
+      {
         path: '',
         redirectTo: 'all',
         pathMatch: 'full'

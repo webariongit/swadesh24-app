@@ -1,0 +1,39 @@
+.search-card{
+    border-radius: 10px;
+    box-shadow: none;
+    border: 1px solid #EBEBEB;
+    ion-card-content{
+        padding: 10px;
+    }
+}
+
+.section-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h4{
+        font-size: 14px;
+        font-weight: 600;
+        color: #111827;
+        padding-bottom: 10px;
+        position: relative;
+        margin-bottom: 0px;
+        width: 100%;
+        border-bottom: 1px solid #EBEBEB;
+    }
+}
+
+ion-item{
+    font-size: 14px;
+    --inner-border-width:0;
+    --padding-start:10px;
+    --inner-padding-end:10px;
+    ion-icon{
+        margin-right: 15px;
+    }
+    ion-label{
+        font-size: 14px;
+        color: #334155;
+        font-weight:500;
+    }
+}

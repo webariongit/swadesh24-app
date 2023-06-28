@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
 export class ArticleDetailsPage implements OnInit {
 
   constructor(
-    private router:Router
+    private router:Router,
   ) { }
 
   ngOnInit() {
+ 
   }
 
   gotoAuthorDetails(){

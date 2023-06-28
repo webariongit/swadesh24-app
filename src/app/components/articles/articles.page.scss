@@ -55,7 +55,9 @@ ion-menu-button{
 
 .sub-category-menu{
     grid-auto-columns: auto;
+    padding-top: 10px;
     ion-segment-button{
+        margin: 2px 5px;
         min-width: auto;
         min-height: auto;
         font-size: 13px;

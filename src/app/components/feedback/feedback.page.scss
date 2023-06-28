@@ -1,12 +1,38 @@
 .form-field{
-    margin-top: 20px;
+    min-height: 46px;
+    margin-bottom: 10px;
 }
 
 .profile-card{
-    border-radius: 15px;
-    box-shadow: 0px 3px 8px #ebebeb1f;
+    border-radius: 10px;
+    box-shadow: none;
+    border: 1px solid #EBEBEB;
+    padding: 10px;
+    ion-card-content{
+        padding: 0;
+    }
 }
 
-.profile-card ion-card-content{
-    padding: 15px;
+
+.section-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h4{
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        padding-bottom: 5px;
+        position: relative;
+        margin-bottom: 15px;
+        &::before{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 36px;
+            content: '';
+            height: 2px;
+            background-color: #FF6501;
+        }
+    }
 }

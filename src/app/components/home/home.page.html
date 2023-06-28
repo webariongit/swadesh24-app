@@ -1,7 +1,5 @@
-<app-header></app-header>
-
-<ion-content [fullscreen]="true">
-  <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="true" [pagination]="true" pagination-clickable="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+<ion-content [fullscreen]="true" class="header-padding-top">
+  <swiper-container class="home-carousel" [slidesPerView]="1" [watchSlidesProgress]="true" [loop]="false" [pagination]="true" pagination-clickable="true" autoplay-delay="2500" autoplay-disable-on-interaction="true">
     <swiper-slide  *ngFor="let data of sliderData">
       <app-news-box></app-news-box>
     </swiper-slide>
@@ -69,7 +67,7 @@
     <app-news-list-box></app-news-list-box>
     <app-news-list-box></app-news-list-box>
   </ion-grid>
-  <ion-grid class="raffel-draw-banner">
+  <!-- <ion-grid class="raffel-draw-banner">
     <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" [pagination]="true" autoplay-disable-on-interaction="false" pagination-clickable="true" >
       <swiper-slide *ngFor="let data of sliderData">
         <div class="raffle-banner">
@@ -78,5 +76,5 @@
         </div>
       </swiper-slide>
     </swiper-container>
-  </ion-grid>
+  </ion-grid> -->
 </ion-content>

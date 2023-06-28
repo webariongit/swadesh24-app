@@ -28,7 +28,11 @@ export class HeaderComponent  implements OnInit {
   ngOnInit() {}
 
   gotoPage(value:any){
-    this.router.navigate(['articles',value])
+    this.router.navigate(['home/articles',value])
+  }
+
+  gotoSearch(){
+    this.router.navigate(['search'])
   }
 
 }

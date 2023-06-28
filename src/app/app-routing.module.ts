@@ -31,10 +31,10 @@ const routes: Routes = [
     path: 'stories',
     loadChildren: () => import('./components/stories/stories.module').then( m => m.StoriesPageModule)
   },
-  {
-    path: 'articles/:value',
-    loadChildren: () => import('./components/articles/articles.module').then( m => m.ArticlesPageModule)
-  },
+  // {
+  //   path: 'articles/:value',
+  //   loadChildren: () => import('./components/articles/articles.module').then( m => m.ArticlesPageModule)
+  // },
   {
     path: 'article-details',
     loadChildren: () => import('./components/article-details/article-details.module').then( m => m.ArticleDetailsPageModule)
@@ -70,6 +70,10 @@ const routes: Routes = [
   {
     path: 'author-details',
     loadChildren: () => import('./components/author-details/author-details.module').then( m => m.AuthorDetailsPageModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('./components/search/search.module').then( m => m.SearchPageModule)
   },
 ];
 

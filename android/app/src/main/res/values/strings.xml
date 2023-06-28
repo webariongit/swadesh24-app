@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Swadesh24</string>
+    <string name="title_activity_main">Swadesh24</string>
+    <string name="package_name">com.swadesh24.app</string>
+    <string name="custom_url_scheme">com.swadesh24.app</string>
+</resources>
