@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" class="header-padding-top">
-  <swiper-container class="home-carousel" [slidesPerView]="1" [watchSlidesProgress]="true" [loop]="false" [pagination]="true" pagination-clickable="true" autoplay-delay="2500" autoplay-disable-on-interaction="true">
+  <swiper-container class="home-carousel" [slidesPerView]="1" [watchSlidesProgress]="true" [loop]="true" [pagination]="true" pagination-clickable="true" autoplay-delay="2500" autoplay-disable-on-interaction="true">
     <swiper-slide  *ngFor="let data of sliderData">
       <app-news-box></app-news-box>
     </swiper-slide>

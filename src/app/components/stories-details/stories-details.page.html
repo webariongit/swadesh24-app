@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+  <ion-button class="close-btn" (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">stories-details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- [slidesPerView]="1" [watch-slides-progress]="true" [loop]="false" [pagination]="false" [pagination-clickable]="false" [autoplay-delay]="2500" [autoplay-disable-on-interaction]="true" -->
+  <swiper-container [watchSlidesProgress]="true" [slidesPerView]="1">
+    <swiper-slide>
+      <video controls class="slider-video">
+        <source src="./assets/img/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </swiper-slide>
+    <swiper-slide>
+      <video controls class="slider-video">
+        <source src="./assets/img/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </swiper-slide>
+    <swiper-slide>
+      <video controls class="slider-video">
+        <source src="./assets/img/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </swiper-slide>
+    <swiper-slide>
+      <video controls class="slider-video">
+        <source src="./assets/img/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

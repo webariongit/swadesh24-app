@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { StoriesDetailsPage } from '../../stories-details/stories-details.page';
 
 @Component({
   selector: 'app-stories-box',
@@ -7,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoriesBoxComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalCtrl:ModalController
+  ) { }
 
   ngOnInit() {}
+
+  async showStories(){
+    let contactModal = this.modalCtrl.create({
+      component: StoriesDetailsPage,
+      cssClass: 'my-custom-class',
+    });
+    (await contactModal).present();
+  }
 
 }
