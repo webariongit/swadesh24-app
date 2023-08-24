@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import Swiper from 'swiper';
 
@@ -8,37 +8,30 @@ import Swiper from 'swiper';
   styleUrls: ['./stories-details.page.scss'],
 })
 export class StoriesDetailsPage implements OnInit {
-  carouselOptions:any={
-    watchSlidesProgress:true,
-    autoplayDelay:2500
-  }
+  progressTime:any;
+  swiperEl:any = document.querySelector("swiper-container");
+  
   constructor(
     private modalCtrl:ModalController
   ) { }
 
   ngOnInit() {
+
   }
 
   swiper: Swiper;
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      const swiperContainer = document.querySelector('.swiper-container');
-      if (swiperContainer) {
-        const swiper = new Swiper('.swiper-container', {
-          watchSlidesProgress: true,
-          on: {
-            progress: () => {
-              console.log(swiper.slides[0]); // Example: Output the progress of the first slide
-            },
-          },
-        });
-      }
-    }, 500); // Adjust the delay as needed
+    this.swiperEl.addEventListener("autoplaytimeleft", (e:any) => {
+      const [swiper, time, progress] = e.detail;
+      this.progressTime = `${Math.ceil(time / 1000)}s`
+    });
   }
 
   closeModal(){
     this.modalCtrl.dismiss()
   }
+
+  
 
 }

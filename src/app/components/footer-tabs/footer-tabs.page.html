@@ -2,26 +2,22 @@
 
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="all">
+    <ion-tab-button  routerLink="all" routerLinkActive="tab-selected">
       <ion-icon name="home-outline"></ion-icon>
       All
     </ion-tab-button>
-    <ion-tab-button tab="articles/read" routerLinkActive="tab-selected">
+    <ion-tab-button routerLink="articles/read" routerLinkActive="tab-selected">
       <ion-icon name="book-outline"></ion-icon>
       Read
     </ion-tab-button>
-    <ion-tab-button tab="articles/shows">
+    <ion-tab-button routerLink="articles/shows" routerLinkActive="tab-selected">
       <ion-icon name="play-circle-outline"></ion-icon>
       Shows
     </ion-tab-button>
-    <ion-tab-button tab="articles/listen">
+    <ion-tab-button routerLink="articles/listen" routerLinkActive="tab-selected">
       <ion-icon name="musical-notes-outline"></ion-icon>
       Listen
     </ion-tab-button>
-    <!-- <ion-tab-button tab="search">
-      <ion-icon name="ticket-outline"></ion-icon>
-      Raffle
-    </ion-tab-button> -->
   </ion-tab-bar>
 </ion-tabs>
 
