@@ -1,5 +1,5 @@
 <ion-card class="stories-box">
-  <ion-badge class="news-tag">Lifestyle</ion-badge>
+  <ion-badge class="news-tag">{{story?.category}}</ion-badge>
   <ion-buttons href="#" class="play-btn" (click)="showStories()">
     <ion-img
       src="./assets/img/video-icon.svg"
@@ -7,13 +7,13 @@
     ></ion-img>
   </ion-buttons>
     <ion-img class="news-img"
-    src="./assets/img/stories.png"
+    [src]="story?.base_url + story?.cover_image"
     alt=""
   ></ion-img>
   <ion-card-content class="stories-box-content">
-    <h4>Microsoft announces a five-year commitment</h4>
+    <h4>{{story?.title}}</h4>
     <ion-row class="ion-align-items-center">
-      <ion-text class="text-h4">Falconar Agnes </ion-text> <span class="dot"></span> <ion-text class="text-h6">May 20, 2021</ion-text>
+      <ion-text class="text-h4">{{story?.first_name || '--'}} {{story?.last_name || '--'}} </ion-text> <span class="dot"></span> <ion-text class="text-h6">{{story?.updated_at | date}}</ion-text>
     </ion-row>
   </ion-card-content>
 </ion-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./news-list-box.component.scss'],
 })
 export class NewsListBoxComponent  implements OnInit {
-
+  @Input() news:any;
+  @Input() baseUrl:any;
+  
   constructor(
     private router:Router
   ) { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-trending-topics',
@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trending-topics.component.scss'],
 })
 export class TrendingTopicsComponent  implements OnInit {
-
+  @Input() category:any
+  @Input() index:any;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("category", this.category)
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { StoriesDetailsPage } from '../../stories-details/stories-details.page';
 
@@ -8,7 +8,7 @@ import { StoriesDetailsPage } from '../../stories-details/stories-details.page';
   styleUrls: ['./stories-box.component.scss'],
 })
 export class StoriesBoxComponent  implements OnInit {
-
+  @Input() story:any;
   constructor(
     private modalCtrl:ModalController
   ) { }

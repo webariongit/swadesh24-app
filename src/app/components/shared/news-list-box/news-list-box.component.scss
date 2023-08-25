@@ -21,6 +21,11 @@
     position: relative;
 }
 
+.avatar-sm-img{
+    width:24px;
+    height:24px;
+}
+
 .news-tag{
     padding: 5px 10px;
     --background: #D0D2FB;
@@ -38,6 +43,13 @@
         font-weight: 500;
         color:#2d2d2d;
         margin-bottom: 10px;
+        height: 45px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 24px;
     }
 }
 

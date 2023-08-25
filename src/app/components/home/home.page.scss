@@ -29,13 +29,9 @@
     padding-top: 10px;
 }
 
-.home-carousel{
-    padding-bottom: 15px;
-}
-
 .trending-carousel{
     margin:0px 10px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .view-all-btn{
@@ -74,4 +70,65 @@
 
 .raffle-banner ion-img img{
     width: 100%;
+}
+
+.skeleton-card{
+    border: 1px solid #EBEBEB;
+    background-color: #fff;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 10px;
+    .news-box-img-skel{
+        height: 180px;
+    }
+    .news-box-avatar-skel{
+        width: 30px;
+        height:30px;
+        border-radius: 100%;
+    }
+    .news-author-name-skel{
+        height: 20px;
+    }
+    .news-title-skel{
+        height: 24px;
+    }
+    .news-sub-title-skel{
+        height: 18px;
+    }
+    .news-button-skel{
+        height: 30px;
+        border-radius: 25px;
+    }
+    .skel-list-thumb-img{
+        height: 140px;
+        border-radius: 6px;
+    }
+    .skel-bandage{
+        height:30px;
+        border-radius: 25px;
+    }
+}
+
+.category-title{
+    height:20px
+}
+
+.category-skel{
+    .category-img-skel{
+        height: 100px;
+        border-radius: 10px;
+    }
+    .category-button-skel{
+        width: 24px;
+        height:24px;
+        border-radius: 100%;
+    }
+    .category-text-md-skel{
+        height: 18px;
+    }
+}
+
+.skel-stroy{
+    height: 200px;
+    border-radius: 10px;
 }

@@ -1,32 +1,53 @@
 <ion-card class="news-card" (click)="gotoDetails()">
   <ion-grid class="news-card-img">
-    <ion-img class="news-img"
-        src="./assets/img/new-img.png"
-        alt=""
-      ></ion-img>
-    <ion-badge class="news-tag">Lifestyle</ion-badge>
-    <ion-img class="news-type-tag"
+    <ion-img class="news-img" [src]="news?.base_url + news?.cover_image" alt=""></ion-img>
+    <!-- <ng-container *ngIf="news?.contents_type == 'text' || news?.contents_type == 'audio'">
+      <ion-img class="news-img" [src]="news?.base_url + news?.cover_image" alt=""></ion-img>
+    </ng-container>
+    <ng-container *ngIf="news?.contents_type != 'text' &&  news?.contents_type != 'audio'">
+      <ng-container *ngIf="news?.contents_type == 'image'">
+        <ion-img class="news-img" [src]="news?.base_url + news?.contents" alt=""></ion-img>
+      </ng-container>
+      <ng-container *ngIf="news?.contents_type == 'video'">
+        <video class="news-img" controls>
+          <source  [src]="news?.base_url + news?.contents" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </ng-container>
+      <ng-container *ngIf="news?.contents_type == 'youtube'">
+        <iframe width="100%" height="180" [src]="news?.contents" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </ng-container>
+    </ng-container> -->
+    <ion-badge class="news-tag">{{news?.category_name || '--'}}</ion-badge>
+    <ion-img *ngIf="news?.contents_type == 'video' || news?.contents_type == 'youtube'" class="news-type-tag"
       src="./assets/img/video-icon.svg"
+      alt=""
+    ></ion-img>
+    <ion-img *ngIf="news?.contents_type == 'audio'" class="news-type-tag"
+      src="./assets/img/listen-icon.svg"
+      alt=""
+    ></ion-img>
+    <ion-img *ngIf="news?.contents_type == 'text'" class="news-type-tag"
+      src="./assets/img/read-icon.svg"
       alt=""
     ></ion-img>
   </ion-grid>
   <ion-grid class="news-card-content">
     <ion-row class="ion-align-items-center">
       <ion-col size="1.5">
-        <ion-img
-          src="./assets/img/avatar.png"
-          alt=""
-        ></ion-img>
+        <ion-avatar class="author-avatar-img">
+          <img [src]="news?.base_url + news?.profile_image" alt="" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" />
+        </ion-avatar>
       </ion-col>
       <ion-col size="10.5">
         <ion-row class="ion-align-items-center">
-          <ion-text class="text-h4">Falconar Agnes </ion-text> <span class="dot"></span> <ion-text class="text-h6">May 20, 2021</ion-text>
+          <ion-text class="text-h4">{{news?.first_name || '--'}} {{news?.last_name || '--'}} </ion-text> <span class="dot"></span> <ion-text class="text-h6">{{news?.updated_at | date }}</ion-text>
         </ion-row>
       </ion-col>
     </ion-row>
     <ion-grid class="news-content">
-      <h4>Microsoft announces a five-year commitment</h4>
-      <!-- <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p> -->
+      <h4>{{news?.title}}</h4>
+      <p>{{news?.sub_title}}</p>
     </ion-grid>
     <ion-grid class="news-action-btn">
       <ion-row>

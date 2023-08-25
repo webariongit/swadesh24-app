@@ -53,6 +53,10 @@ ion-content{
     bottom: 0;
 }
 
+::ng-deep .swiper-pagination-bullet{
+    width: 20px;
+}
+
 .inner-page-header ion-toolbar{
     --background:#3f3f97;
     color: #fff;
@@ -123,4 +127,9 @@ ion-content{
 
 .header-padding-top{
     --padding-top: 79px;
+}
+
+.author-avatar-img{
+    width: 30px;
+    height: 30px;
 }

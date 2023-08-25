@@ -7,7 +7,7 @@
       ></ion-img>
     </a>
       <ion-img class="news-img"
-      src="./assets/img/entertainment.png"
+      [src]="entertainment?.base_url + entertainment?.cover_image"
       alt=""
     ></ion-img>
     <div class="save-btn">
@@ -19,14 +19,13 @@
       <ion-col size="6" class="ion-no-padding">
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-no-padding">
-            <ion-img
-              src="./assets/img/avatar.png"
-              alt=""
-            ></ion-img>
+            <ion-avatar class="author-avatar-img">
+              <img [src]="entertainment?.base_url + entertainment?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+            </ion-avatar>
           </ion-col>
           <ion-col size="9" class="ion-no-padding">
-            <ion-text class="text-h4">Falconar Agnes </ion-text>
-            <ion-text class="text-h6">May 20, 2021</ion-text>
+            <ion-text class="text-h4">{{entertainment?.first_name}} {{entertainment?.last_name}} </ion-text>
+            <ion-text class="text-h6">{{entertainment?.updated_at | date}}</ion-text>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -35,6 +34,6 @@
         <app-comment-btn></app-comment-btn>
       </ion-col>
     </ion-row>
-    <h4>Microsoft announces a five-year commitment</h4>
+    <h4>{{entertainment?.title}}</h4>
   </ion-card-content>
 </ion-card>

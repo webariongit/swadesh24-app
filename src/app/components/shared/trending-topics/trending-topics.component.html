@@ -1,18 +1,19 @@
 <ion-card class="trend-topic-card">
   <ion-grid class="trending-top-img">
-    <ion-img class="trending-img"
-        src="./assets/img/trend-topic-img.png"
-        alt=""
-      ></ion-img>
-    <ion-badge class="trending-tag">#1</ion-badge>
+    <img class="trending-img" [src]="category?.base_url + category?.category_image" alt="" />
+    <ion-badge class="trending-tag" *ngIf="index < 3">#{{index+1}}</ion-badge>
   </ion-grid>
   <ion-grid class="trend-top-content ion-no-padding">
     <ion-row class="ion-align-items-center">
-      <span class="dot"></span>
-      <div>
-        <h4>Sports</h4>
-        <p>12 Articles</p>
-      </div>
+      <ion-col size="2">
+        <span class="dot"></span>
+      </ion-col>
+      <ion-col size="10">
+        <div>
+          <h4>{{category?.category}}</h4>
+          <p>{{category?.news.total}} Article</p>
+        </div>
+      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-card>

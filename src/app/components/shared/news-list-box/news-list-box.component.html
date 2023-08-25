@@ -2,19 +2,18 @@
   <ion-row class="ion-align-items-center">
     <ion-col size="8">
       <ion-grid class="news-list-content">
-        <ion-badge class="news-tag">Lifestyle</ion-badge>
-        <h4>Microsoft announces a five-year commitment</h4>
+        <ion-badge class="news-tag">{{news?.subcategory}}</ion-badge>
+        <h4>{{news?.title}}</h4>
         <ion-row class="ion-align-items-center author-profile">
           <ion-col size="2" class="ion-no-padding">
-            <ion-img
-              src="./assets/img/avatar.png"
-              alt=""
-            ></ion-img>
+            <ion-avatar class="avatar-sm-img">
+              <img [src]="baseUrl + news?.profile_image"  onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+            </ion-avatar>
           </ion-col>
           <ion-col size="10" class="ion-no-padding">
             <ion-row class="ion-align-items-center">
-              <ion-text class="text-h4">Falconar Agnes </ion-text> <span class="dot"></span>
-              <ion-text class="text-h6">May 20, 2021</ion-text>
+              <ion-text class="text-h4">{{news?.first_name || '--'}} {{news?.last_name || '--'}}</ion-text> <span class="dot"></span>
+              <ion-text class="text-h6">{{news?.updated_at | date}}</ion-text>
             </ion-row>
           </ion-col>
         </ion-row>
@@ -36,11 +35,19 @@
     <ion-col size="4">
       <ion-grid class="news-list-img">
         <ion-img class="news-thumbs-img"
-          src="./assets/img/news-list-img.png"
+          [src]="baseUrl + news?.cover_image"
           alt=""
         ></ion-img>
-        <ion-img class="news-type-tag"
+        <ion-img *ngIf="news?.contents_type == 'video' || news?.contents_type == 'youtube'" class="news-type-tag"
           src="./assets/img/video-icon.svg"
+          alt=""
+        ></ion-img>
+        <ion-img *ngIf="news?.contents_type == 'audio'" class="news-type-tag"
+          src="./assets/img/listen-icon.svg"
+          alt=""
+        ></ion-img>
+        <ion-img *ngIf="news?.contents_type == 'text'" class="news-type-tag"
+          src="./assets/img/read-icon.svg"
           alt=""
         ></ion-img>
       </ion-grid>
