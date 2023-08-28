@@ -11,7 +11,7 @@ export class TrendingTopicsComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("category", this.category)
+
   }
 
 }

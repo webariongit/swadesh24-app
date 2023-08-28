@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { apiRoutes } from 'src/app/constant/config';
+import { HttpService } from 'src/app/service/http-service/http.service';
 
 @Component({
   selector: 'app-header',
@@ -7,32 +9,35 @@ import { NavigationStart, Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent  implements OnInit {
-  public pageLink = [
-    { title: 'News', value: 'news'},
-    { title: 'Sports', value: 'sports'},
-    { title: 'Entertainment', value: 'entertaiment'},
-    { title: 'Swadeshikash', value: 'swadeshikash'},
-    { title: 'Technology', value: 'technology'},
-    { title: 'Business', value: 'business'},
-    { title: 'Health&Lifestyle', value: 'health'},
-    { title: 'Investigation', value: 'investigation'},
-    { title: 'Recruitment', value: 'recruitment'},
-    { title: 'Politics', value: 'politics'},
-  ];
+  categoryList:any;
 
   constructor(
-    private router:Router
+    private router:Router,
+    private httpService:HttpService
   ) { 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCategoryList();
+  }
 
-  gotoPage(value:any){
-    this.router.navigate(['home/articles',value])
+  gotoPage(id:any){
+    this.router.navigate(['home/articles',id,'all'])
   }
 
   gotoSearch(){
     this.router.navigate(['search'])
+  }
+
+  getCategoryList(){
+    this.httpService.get(apiRoutes.category).subscribe({
+      next:(v:any) =>{
+        this.categoryList = v?.message
+      },
+      error:(e:any)=>{
+
+      }
+    })
   }
 
 }

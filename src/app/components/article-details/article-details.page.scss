@@ -39,6 +39,13 @@ ion-button + ion-button{
     margin-bottom: 10px;
 }
 
+.news-content h5{
+    font-size: 16px;
+    font-weight: 300;
+    color: #2b2b2b;
+    margin-bottom: 10px;
+}
+
 .news-content p{
     font-size: 13px;
     margin-bottom: 10px;
@@ -46,14 +53,24 @@ ion-button + ion-button{
     color: #6C6C6C;
 }
 
+.para-desc{
+    font-size: 14px;
+    color: #8a8a8a;
+    line-height: 24px;
+}
+
 .comment-card{
     border-radius: 10px;
     box-shadow: 0px 3px 8px #ebebeb1f;
 }
 
+.news-img{
+    width: 100%;
+}
+
 .add-comment-box{
     position: relative;
-    margin-bottom: 10px;
+    margin-top: 10px;
     ion-img{
         width: 35px;
         height: 35px;
@@ -62,14 +79,14 @@ ion-button + ion-button{
         object-position: 50% top;
         position: absolute;
         left: 5px;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 10px;
         z-index: 9;
     }
     .form-field{
-        --border-radius: 35px;
+        --border-radius: 12px;
         --padding-start: 45px;
         --padding-end: 45px;
+        --padding-top:10px;
         min-height: 46px;
     }
     ion-button{
@@ -81,18 +98,33 @@ ion-button + ion-button{
     }
 }
 
+.editcomment{
+    --padding-top:10px;
+}
+
+.comments-avatar-img{
+    width:42px;
+    height: 42px;
+}
+
 .comment-card-content{
     padding: 10px;
 }
 
+ion-title{
+    padding-left: 16px;
+}
 
 .send-btn{
     position: absolute;
-    top: 50%;
+    bottom: 10px;
     right: 5px;
-    transform: translateY(-50%);
     z-index: 9;
     margin: 0;
+}
+
+.edit-form-field{
+    --padding-top:10px;
 }
 
 .comments-box{
@@ -128,11 +160,21 @@ ion-button + ion-button{
             color: #838383;
         }
     }
-    a{
+    ion-buttons{
         font-weight: 400;
         font-size: 13px;
-        margin-top: 10px;
+        margin-top: 5px;
         display: inline-block;
+        margin-right: 10px;
+        &.reply{
+            color: #3F3F97;
+        }
+        &.edit{
+            color: #444;
+        }
+        &.delete{
+            color: red;
+        }
     }
     p{
         font-size: 13px;
@@ -149,12 +191,20 @@ ion-button + ion-button{
     margin: 0;
 }
 
-.comment-action-btn{
-    height: 120px;
+.commet-btn{
+    --border-radius: 12px;
+    --padding-start: 45px;
+    --padding-end: 45px;
+    min-height: 46px;
+    --box-shadow: none;
+    --background: #cacaca44;
+    border: 1px solid #e0e0e0;
+    color: #444;
 }
 
-ion-modal {
-    --height: auto;
+.comments-avatar-sm-img{
+    width:30px;
+    height: 30px;
 }
 
 ion-item{

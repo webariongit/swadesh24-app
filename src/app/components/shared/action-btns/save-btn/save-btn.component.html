@@ -1,1 +1,1 @@
-<ion-button><ion-icon name="bookmark-outline"></ion-icon></ion-button>
+<ion-button (click)="newsSave(newsDetails?.id)"><ion-icon *ngIf="!active" name="bookmark-outline"></ion-icon> <ion-icon *ngIf="active" name="bookmark"></ion-icon></ion-button>

@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 export class CommonService {
   userProfileDetail:any;
   @Output() userLoggedIn: EventEmitter<any> = new EventEmitter();
+  @Output() userLoggedOut: EventEmitter<any> = new EventEmitter();
 
 
   constructor(
@@ -19,8 +20,11 @@ export class CommonService {
 
   getUserToken() {
     let userToken = localStorage.getItem('token');
-    console.log("User Token", userToken)
     return userToken;
+  }
+
+  clearLocalStorage() {
+    localStorage.clear();
   }
 
   setUserDetail(userDetail:any) {

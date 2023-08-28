@@ -53,7 +53,6 @@ export class HomePage implements OnInit {
     this.loader = true;
     this.httpService.get(apiRoutes.home).subscribe({
       next: (v: any) => {
-        console.log("Home Data",v);
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id
@@ -74,8 +73,12 @@ export class HomePage implements OnInit {
         }
       },
       error: (e) => {
-        console.log(e)
+        console.log("error",e)
         this.loader = false;
+        if (e.status == 401) {
+          localStorage.clear();
+          this.router.navigate(['login']); 
+        }
       },
       
     })
@@ -84,11 +87,13 @@ export class HomePage implements OnInit {
   getStoryList(){
     this.httpService.get(apiRoutes.story).subscribe({
       next:(v:any) =>{
-        console.log("storylist", v)
         this.storyList = v?.response?.data
       },
       error:(e:any)=>{
-
+        if (e.status == 401) {
+          localStorage.clear();
+          this.router.navigate(['login']); 
+        }
       }
     })
   }

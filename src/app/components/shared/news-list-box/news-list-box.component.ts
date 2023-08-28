@@ -16,8 +16,8 @@ export class NewsListBoxComponent  implements OnInit {
 
   ngOnInit() {}
 
-  gotoDetails(){
-    this.router.navigate(['article-details'])
+  gotoDetails(id:any){
+    this.router.navigate(['article-details', id])
   }
 
 }

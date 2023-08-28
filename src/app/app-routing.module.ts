@@ -31,12 +31,8 @@ const routes: Routes = [
     path: 'stories',
     loadChildren: () => import('./components/stories/stories.module').then( m => m.StoriesPageModule)
   },
-  // {
-  //   path: 'articles/:value',
-  //   loadChildren: () => import('./components/articles/articles.module').then( m => m.ArticlesPageModule)
-  // },
   {
-    path: 'article-details',
+    path: 'article-details/:id',
     loadChildren: () => import('./components/article-details/article-details.module').then( m => m.ArticleDetailsPageModule)
   },
   {
@@ -65,7 +61,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./components/auth/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./components/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'author-details',

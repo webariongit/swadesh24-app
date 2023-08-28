@@ -1,28 +1,103 @@
 <ion-content [fullscreen]="true" class="header-padding-top">
-  <ion-segment class="sub-category-menu" [scrollable]="true" value="latest" [(ngModel)]="selectedCategoryTab">
-    <ion-segment-button value="latest">
-      <ion-label>Latest</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="social">
-      <ion-label>Social Media</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="top">
-      <ion-label>Top News</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  <ng-container *ngIf="selectedCategoryTab == 'latest'">
-    <app-news-box></app-news-box>
-    <app-news-box></app-news-box>
-    <app-news-box></app-news-box>
+  <ng-container *ngIf="!loader2">
+    <ion-segment class="sub-category-menu" [scrollable]="true" (ionChange)="tabChange()" [(ngModel)]="selectedCategoryTab">
+      <ng-container *ngFor="let subcat of subcategoryList">
+        <ion-segment-button [value]="subcat?.id">
+          <ion-label>{{subcat?.subcategory}}</ion-label>
+        </ion-segment-button>
+      </ng-container>
+    </ion-segment>
   </ng-container>
-  <ng-container *ngIf="selectedCategoryTab == 'social'">
-    <app-news-box></app-news-box>
-    <app-news-box></app-news-box>
-    <app-news-box></app-news-box>
+  <ng-container *ngIf="loader2">
+    <ion-row>
+      <ion-col size="3">
+        <ion-skeleton-text class="tab-btn-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-skeleton-text class="tab-btn-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-skeleton-text class="tab-btn-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+      <ion-col size="3">
+        <ion-skeleton-text class="tab-btn-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
   </ng-container>
-  <ng-container *ngIf="selectedCategoryTab == 'top'">
-    <app-news-box></app-news-box>
-    <app-news-box></app-news-box>
-    <app-news-box></app-news-box>
+  <ng-container *ngIf="!loader">
+    <ng-container *ngIf="newsList?.length > 0">
+      <ng-container *ngFor="let news of newsList">
+        <app-news-box  [news]="news"></app-news-box>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="contentTypeNews?.length > 0">
+      <ng-container *ngFor="let newsType of contentTypeNews">
+        <ion-grid class="section-header">
+          <h4>{{newsType?.category}}</h4>
+        </ion-grid>
+        <ng-container *ngFor="let news of newsType?.data">
+          <app-news-box  [news]="news"></app-news-box>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ion-grid class="no-data-found" *ngIf="newsList?.length == 0 && contentTypeNews?.length == 0">
+      <h4>No Data Found</h4>
+    </ion-grid>
+  </ng-container>
+  <ng-container *ngIf="loader">
+    <ion-card class="skeleton-card" >
+      <ion-skeleton-text class="news-box-img-skel" [animated]="true"></ion-skeleton-text>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-skeleton-text class="news-box-avatar-skel"  [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="10">
+          <ion-skeleton-text class="news-author-name-skel" style="width:70%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+      </ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+        <ion-col size="3" class="ion-text-right">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card class="skeleton-card" >
+      <ion-skeleton-text class="news-box-img-skel" [animated]="true"></ion-skeleton-text>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-skeleton-text class="news-box-avatar-skel"  [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="10">
+          <ion-skeleton-text class="news-author-name-skel" style="width:70%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+      </ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+        <ion-col size="3" class="ion-text-right">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
   </ng-container>
 </ion-content>

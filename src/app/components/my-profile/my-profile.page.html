@@ -14,31 +14,49 @@
     </ion-toolbar>
   </ion-header>
   <ion-card class="profile-card">
-    <ion-card-content>
-      <form action="">
+    <ion-card-content *ngIf="validationForm">
+      <form [formGroup]="validationForm">
         <div class="profile-img">
-          <ion-img src="./assets/img/avatar.png"
-          alt=""></ion-img>
-          <ion-button class="camera-btn"><ion-icon name="camera-outline"></ion-icon></ion-button>
+          <img [src]="profileImage" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" />
+          <ion-button class="camera-btn" (click)="openImages()"><ion-icon name="camera-outline"></ion-icon></ion-button>
         </div>
-        <ion-input aria-label="First Name" label="First Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
-        <ion-input aria-label="Last Name" label="Last Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
-        <ion-input aria-label="Email" label="Email *" fill="outline" class="form-field" labelPlacement="floating"></ion-input>
-        <ion-row class="ion-align-items mobile-number-field">
-          <ion-col size="3" class="ion-no-padding padding-right">
-            <ion-select fill="outline" class="mobile-code-field" [(ngModel)]="countryCode" [ngModelOptions]="{standalone: true}">
-              <ion-select-option value="+91">+91</ion-select-option>
-              <ion-select-option value="+92">+91</ion-select-option>
-              <ion-select-option value="+93">+91</ion-select-option>
-              <ion-select-option value="+94">+91</ion-select-option>
-            </ion-select>
-          </ion-col>
-          <ion-col size="9" class="ion-no-padding">
-            <ion-input aria-label="Mobile Number" placeholder="Mobile Number" class="form-field" fill="outline"></ion-input>
-          </ion-col>
-        </ion-row>
+        <ion-grid class="form-field">
+          <ion-input aria-label="First Name" label="First Name" formControlName="first_name" fill="outline" labelPlacement="floating"></ion-input>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-input aria-label="Last Name" label="Last Name" formControlName="last_name" fill="outline" labelPlacement="floating"></ion-input>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-input aria-label="Email" label="Email *" fill="outline" formControlName="email" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.email">
+            <ion-label color="danger"  *ngIf="validationForm.get('email').hasError(validation.type) &&
+                     (validationForm.get('email').dirty || validationForm.get('email').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-row class="ion-align-items mobile-number-field">
+            <ion-col size="3" class="ion-no-padding padding-right">
+              <ion-select fill="outline" class="mobile-code-field" formControlName="countryCode">
+                <ng-container *ngFor="let code of mobileCountryCode">
+                  <ion-select-option [value]="code?.code">{{code?.code}} ({{code?.name}})</ion-select-option>
+                </ng-container>
+              </ion-select>
+            </ion-col>
+            <ion-col size="9" class="ion-no-padding">
+              <ion-input aria-label="Mobile Number" placeholder="Mobile Number" formControlName="contact" fill="outline"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ng-container *ngFor="let validation of validationMessages.contact">
+            <ion-label color="danger"  *ngIf="validationForm.get('contact').hasError(validation.type) &&
+                     (validationForm.get('contact').dirty || validationForm.get('contact').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
         <ion-grid class="ion-text-center">
-          <ion-button class="main-btn">Update</ion-button>
+          <ion-button class="main-btn" (click)="submitForm()">Update</ion-button>
         </ion-grid>
       </form>
     </ion-card-content>

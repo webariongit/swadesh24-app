@@ -2,12 +2,12 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content class="side-nav-content">
-        <ion-grid class="side-nav-header">
+        <ion-grid class="side-nav-header" *ngIf="userDetails">
           <ion-avatar>
-            <img src="../assets/img/avatar.png" alt="">
+            <img [src]="userDetails?.base_url + userDetails?.profile_image" alt="">
           </ion-avatar>
-          <h4>Walter Scott</h4>
-          <ion-note>hi@ionicframework.com</ion-note>
+          <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
+          <ion-note>{{userDetails?.email}}</ion-note>
         </ion-grid>
         <ion-list id="inbox-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
@@ -19,7 +19,7 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle>
-            <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false" routerLinkActive="selected" (click)="userLogout()">
               <div class="list-icon">
                 <ion-icon aria-hidden="true" name="log-out-outline" slot="start"></ion-icon>
               </div>

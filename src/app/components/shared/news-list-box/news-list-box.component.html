@@ -1,9 +1,9 @@
-<ion-card class="news-list-box"  (click)="gotoDetails()">
+<ion-card class="news-list-box">
   <ion-row class="ion-align-items-center">
     <ion-col size="8">
       <ion-grid class="news-list-content">
         <ion-badge class="news-tag">{{news?.subcategory}}</ion-badge>
-        <h4>{{news?.title}}</h4>
+        <h4 (click)="gotoDetails(news?.id)">{{news?.title}}</h4>
         <ion-row class="ion-align-items-center author-profile">
           <ion-col size="2" class="ion-no-padding">
             <ion-avatar class="avatar-sm-img">
@@ -22,18 +22,18 @@
         <ion-row>
           <ion-col size="8" class="ion-no-padding">
             <ion-row>
-              <app-like-btn></app-like-btn>
+              <app-like-btn [newsDetails]="news"></app-like-btn>
               <app-comment-btn></app-comment-btn>
             </ion-row>
           </ion-col>
           <ion-col size="4" class="ion-text-end ion-no-padding">
-            <app-save-btn></app-save-btn>
+            <app-save-btn [newsDetails]="news"></app-save-btn>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-col>
     <ion-col size="4">
-      <ion-grid class="news-list-img">
+      <ion-grid class="news-list-img" (click)="gotoDetails(news?.id)">
         <ion-img class="news-thumbs-img"
           [src]="baseUrl + news?.cover_image"
           alt=""

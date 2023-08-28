@@ -8,6 +8,7 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  userDetails:any
   public appPages = [
     { title: 'Home', url: '/home/all', icon: 'home' },
     { title: 'Stories', url: '/stories', icon: 'play' },
@@ -18,9 +19,17 @@ export class AppComponent implements OnInit {
   ];
   constructor(
     private httpService:HttpService
-  ) {}
+  ) {
+    let userData:any = localStorage.getItem('userDetails')
+    this.userDetails = JSON.parse(userData)
+  }
 
   ngOnInit(): void {
     this.httpService.setHeader();
   }
+  
+  userLogout(){
+    this.httpService.logOut()
+  }
+
 }

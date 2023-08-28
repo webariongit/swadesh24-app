@@ -4,8 +4,8 @@
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <div slot="end">
-      <ion-button><ion-icon name="bookmark-outline"></ion-icon></ion-button>
-      <ion-button><ion-icon name="heart-outline"></ion-icon></ion-button>
+      <ion-button (click)="newsSave(newsDetails?.id)"><ion-icon name="bookmark" *ngIf="newsDetails?.bookmark == 1"></ion-icon> <ion-icon *ngIf="newsDetails?.bookmark == 0" name="bookmark-outline"></ion-icon></ion-button>
+      <ion-button (click)="newsLike(newsDetails?.id)"><ion-icon *ngIf="newsDetails?.likes == 1" name="heart"></ion-icon> <ion-icon *ngIf="newsDetails?.likes == 0" name="heart-outline"></ion-icon></ion-button>
       <ion-button><ion-icon name="share-social-outline"></ion-icon></ion-button>
     </div>
   </ion-toolbar>
@@ -18,77 +18,129 @@
     </ion-toolbar>
   </ion-header>
   <div class="aritcle-img">
-    <ion-img class="news-img"
-      src="./assets/img/new-img.png"
-      alt=""
-    ></ion-img>
-    <!-- <video controls>
-      <source src="./assets/img/video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video> -->
-    <!-- <audio controls>
-      <source src="./assets/img/summer-walk-152722.mp3" type="audio/mp3">
-      Your browser does not support the audio tag.
-    </audio> -->
+    <ng-container *ngIf="newsDetails?.contents_type == 'text' || newsDetails?.contents_type == 'audio'">
+      <ion-img class="news-img" [src]="newsDetails?.base_url + newsDetails?.cover_image" alt=""></ion-img>
+      <ion-grid *ngIf="newsDetails?.contents_type == 'audio'">
+        <audio controls class="news-img">
+          <source [src]="newsDetails?.base_url + newsDetails?.contents" type="audio/mp3">
+          Your browser does not support the audio tag.
+        </audio>
+      </ion-grid>
+    </ng-container>
+    <ng-container *ngIf="newsDetails?.contents_type != 'text' &&  newsDetails?.contents_type != 'audio'">
+      <ng-container *ngIf="newsDetails?.contents_type == 'image'">
+        <ion-img class="news-img" [src]="newsDetails?.base_url + newsDetails?.contents" alt=""></ion-img>
+      </ng-container>
+      <ng-container *ngIf="newsDetails?.contents_type == 'video'">
+        <video class="news-img" controls>
+          <source  [src]="newsDetails?.base_url + newsDetails?.contents" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </ng-container>
+      <ng-container *ngIf="newsDetails?.contents_type == 'youtube'">
+        <iframe width="100%" height="180" [src]="newsDetails?.contents" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </ng-container>
+    </ng-container>
   </div>
   <ion-row class="ion-align-items-center" (click)="gotoAuthorDetails()">
     <ion-col size="1.5">
-      <ion-img
-        src="./assets/img/avatar.png"
-        alt=""
-      ></ion-img>
+      <ion-avatar class="author-avatar-img">
+        <img
+          [src]="newsDetails?.profile_image"
+          alt=""
+          onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'"
+        />
+      </ion-avatar>
     </ion-col>
     <ion-col size="10.5">
       <ion-row class="ion-align-items-center">
-        <ion-text class="text-h4">Falconar Agnes </ion-text> <span class="dot"></span> <ion-text class="text-h6">May 20, 2021</ion-text>
+        <ion-text class="text-h4">{{newsDetails?.first_name}} {{newsDetails?.last_name}}</ion-text> <span class="dot"></span> <ion-text class="text-h6">{{newsDetails?.updated_at | date }}</ion-text>
       </ion-row>
     </ion-col>
   </ion-row>
   <ion-grid class="news-content">
-    <h4>Microsoft announces a five-year commitment</h4>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+    <h4>{{newsDetails?.title}}</h4>
+    <h5>{{newsDetails?.sub_title}}</h5>
+    <ng-container *ngIf="newsDetails?.contents_type == 'text'">
+      <div class="para-desc" [innerHtml]="newsDetails?.contents"></div>
+    </ng-container>
+    <ng-container *ngIf="newsDetails?.description">
+      <div class="para-desc" [innerHtml]="newsDetails?.description"></div>
+    </ng-container>
   </ion-grid>
   <ion-card class="comment-card">
     <ion-card-content class="comment-card-content">
-      <div class="add-comment-box">
-        <form action="">
-          <ion-img src="./assets/img/avatar.png"></ion-img>
-          <ion-input aria-label="Add Comment" label="Add Comment" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
-          <ion-button class="send-btn"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
-        </form>
-      </div>
-      <div class="comments-box">
-        <h4><ion-icon name="chatbubble-ellipses-outline"></ion-icon> Comments</h4>
-        <ion-row class="user-comments-box">
-          <ion-col size="2">
+        <div class="comments-box">
+          <h4><ion-icon name="chatbubble-ellipses-outline"></ion-icon> Comments</h4>
+          <ng-container *ngFor="let comments of commentList">
+            <ion-row class="user-comments-box">
+              <ion-col size="2">
+                <ion-avatar class="comments-avatar-img">
+                  <img [src]="comments?.base_url + comments?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="10">
+                <h5>{{comments?.first_name || '--'}} {{comments?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{comments?.created_at | date}}</span> </h5>
+                <p>{{comments?.comment}}</p>
+                <ion-row>
+                  <ion-buttons class="reply" *ngIf="comments?.user_id != userDetails?.user_id && !userInfoIncomplete" (click)="openEditComment(true, comments, 'Reply')">Reply</ion-buttons>
+                  <ion-buttons class="edit" *ngIf="comments?.user_id == userDetails?.user_id" (click)="openEditComment(true,comments, 'Edit')">Edit</ion-buttons>
+                  <ion-buttons class="delete" *ngIf="comments?.user_id == userDetails?.user_id" (click)="deleteComment(comments?.id)">Delete</ion-buttons>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-end" *ngIf="comments?.replies?.length > 0">
+              <ion-col size="10">
+                <ng-container *ngFor="let reply of comments?.replies">
+                  <ion-row class="user-comments-box">
+                    <ion-col size="2">
+                      <ion-avatar class="comments-avatar-sm-img">
+                        <img [src]="reply?.base_url + reply?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+                      </ion-avatar>
+                    </ion-col>
+                    <ion-col size="10">
+                      <h5>{{reply?.first_name || '--'}} {{reply?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{reply?.created_at | date}}</span> </h5>
+                      <p>{{reply?.comment}}</p>
+                      <ion-row>
+                        <ion-buttons class="edit" *ngIf="reply?.user_id == userDetails?.user_id" (click)="openEditComment(true,reply, 'Edit')">Edit</ion-buttons>
+                        <ion-buttons class="delete" *ngIf="reply?.user_id == userDetails?.user_id" (click)="deleteComment(reply?.id)">Delete</ion-buttons>
+                      </ion-row>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+        </div>
+        <div class="add-comment-box" *ngIf="!userInfoIncomplete">
+          <form action="">
             <ion-img src="./assets/img/avatar.png"></ion-img>
-          </ion-col>
-          <ion-col size="10">
-            <ion-button id="action-modal" expand="block" class="ion-no-padding action-btn"><ion-icon name="ellipsis-vertical"></ion-icon></ion-button>
-            <h5>Walter Scott <span class="dot"></span> <span class="text-h6">May 20, 2021</span> </h5>
-            <p>this is test</p>
-            <a href="#">Reply</a>
-          </ion-col>
-        </ion-row>
-      </div>
+            <ion-textarea #hvUserPost type="text" placeholder="Add Your Comment" class="form-field" fill="outline" autoGrow="true" [(ngModel)]="comment" [ngModelOptions]="{standalone: true}" (input)="adjustDesc()"></ion-textarea>
+            <ion-button class="send-btn" [disabled]="!this.comment" (click)="addComment()"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+          </form>
+        </div>
+        <ng-container *ngIf="userInfoIncomplete">
+          <ion-button expand="full"  class="commet-btn" (click)="redirectToProfile()">Add Your Comment</ion-button>
+        </ng-container>
     </ion-card-content>
   </ion-card>
-  <ion-modal trigger="action-modal" class="bottom-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ion-modal [isOpen]="isModalOpen">
     <ng-template>
-      <div class="comment-action-btn">
-        <ion-list>
-          <ion-item>
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-label>Edit</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-icon name="trash-outline"></ion-icon>
-            <ion-label>Delete</ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
+      <ion-header  class="inner-page-header">
+        <ion-toolbar>
+          <ion-title>{{modalTitle}} Comment</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="openEditComment(false, '')">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-textarea type="text" placeholder="Add Your Comment" class="edit-form-field" fill="outline" autoGrow="true" [(ngModel)]="editcomment" [ngModelOptions]="{standalone: true}"></ion-textarea>
+      </ion-content>
+      <ion-footer class="ion-padding ion-text-center">
+        <ion-button class="main-btn" (click)="submitEditComment()" *ngIf="modalTitle == 'Edit'">Save</ion-button>
+        <ion-button class="main-btn" (click)="submitReplyComment()" *ngIf="modalTitle == 'Reply'">Reply</ion-button>
+      </ion-footer>
     </ng-template>
   </ion-modal>
 </ion-content>

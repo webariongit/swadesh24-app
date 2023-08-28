@@ -1,17 +1,21 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonService } from '../common-service/common.service';
 import { apiRoutes } from 'src/app/constant/config';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+  @Output() userDetail: EventEmitter<any> = new EventEmitter();
   header: any;
+
   constructor(
     private http: HttpClient,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router:Router
   ) { }
 
   setHeader() {
@@ -24,7 +28,6 @@ export class HttpService {
   get(url: any){
     let apiRoute = environment.apiUrl + url;
     return new Observable((observer) => {
-      console.log("Header", this.header)
       this.http.get(apiRoute, { headers: this.header }).subscribe(
         (data) => {
           observer.next(data);
@@ -88,59 +91,25 @@ export class HttpService {
 
   logOut(){
     console.log("triggered")
-    // this.post(apiRoutes.LOGOUT, {})
-    //   .subscribe((response:any) => {
-    //     console.log(response);
-    //     this.commonService.clearLocalStorage();
-    //     this.commonService.setUserDetail(null);
-    //     this.commonService.setUserWishlistDetail(null);
-    //     this.commonService.setUserCartDetails(null);
-    //     this.userDetail.emit(null);
-    //     this.cart.emit(null)
-    //     this.commonService.userLoggedOut.emit();
-       
-    //   });
+    this.get(apiRoutes.userlogout)
+      .subscribe((response:any) => {
+        console.log(response);
+        this.commonService.clearLocalStorage();
+        this.commonService.setUserDetail(null);
+        this.commonService.userLoggedOut.emit()
+        this.userDetail.emit(null);
+        this.router.navigate(['login'])
+      });
   }
 
-  promisePost(route:any, form_data:any) {
-    return new Promise((resolve, reject) => {
-      console.log("check route", route)
-      this.post(route, form_data).subscribe(
-        (data) => {
-          resolve(data);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
+  public updateUserDetails() {
+    this.get(apiRoutes.profile_details)
+      .subscribe((response: any) => {
+        if(response && response.status !== 500) {
+          this.commonService.setUserDetail(response);
+          this.userDetail.emit(response);
+        } 
+      })
   }
-  
-  promiseGet(route:any) {
-    return new Promise((resolve, reject) => {
-      this.get(route).subscribe(
-        (data) => {
-          resolve(data);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
-  
-  promiseDelete(route:any) {
-    return new Promise((resolve, reject) => {
-      this.delete(route).subscribe(
-        (data) => {
-          resolve(data);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
-
 
 }

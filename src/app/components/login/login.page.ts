@@ -984,7 +984,15 @@ export class LoginPage implements OnInit {
     private httpService:HttpService,
     private commonService:CommonService,
     private router:Router
-  ) { }
+  ) { 
+    this.commonService.userLoggedOut.subscribe(()=>{
+      for(var i=0; i < this.mobileCountryCode?.length; i++){
+        if(this.mobileCountryCode[i].name === 'India'){
+          this.validationForm.controls['countryCode'].setValue(this.mobileCountryCode[i].code)
+        }
+      }
+    })
+  }
 
   ngOnInit() {
     this.validationForm = this.formBuilder.group({
@@ -1052,10 +1060,12 @@ export class LoginPage implements OnInit {
           this.httpService.setHeader();
           this.commonService.presentSuccessToast(v.message)
           this.commonService.userLoggedIn.emit();
+          this.httpService.updateUserDetails()
           this.validationForm.reset();
           this.navigateToHomePage();
+          this.isLogin = true
         }else{
-          this.commonService.presentFailureToast(v.error.error)
+          this.commonService.presentFailureToast(v.error.message)
         }
       },
       error: (e) => {
