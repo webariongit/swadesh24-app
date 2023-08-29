@@ -15,28 +15,43 @@
   </ion-header>
   <ion-segment class="bookmark-list" [(ngModel)]="segmentButton">
     <ion-segment-button value="news">
-      <ion-label><ion-icon name="reader-outline"></ion-icon> News <span class="count-badge">3</span></ion-label>
+      <ion-label><ion-icon name="reader-outline"></ion-icon> News <span class="count-badge">{{readNews?.length || '0'}}</span></ion-label>
     </ion-segment-button>
     <ion-segment-button value="shows">
-      <ion-label><ion-icon name="play-outline"></ion-icon> Shows <span class="count-badge">4</span></ion-label>
+      <ion-label><ion-icon name="play-outline"></ion-icon> Shows <span class="count-badge">{{videoNews?.length || '0'}}</span></ion-label>
     </ion-segment-button>
     <ion-segment-button value="listen">
-      <ion-label><ion-icon name="musical-notes-outline"></ion-icon> Listen <span class="count-badge">2</span></ion-label>
+      <ion-label><ion-icon name="musical-notes-outline"></ion-icon> Listen <span class="count-badge">{{audioNews?.length || '0'}}</span></ion-label>
     </ion-segment-button>
   </ion-segment>
   <div *ngIf="segmentButton == 'news'">
-    <app-articles-box></app-articles-box>
-    <app-articles-box></app-articles-box>
-    <app-articles-box></app-articles-box>
+    <ng-container *ngFor="let news of readNews">
+      <app-articles-box [news]="news"></app-articles-box>
+    </ng-container>
+    <ion-grid class="no-list-found" *ngIf="readNews?.length == 0">
+      <ion-text class="ion-text-center">
+        <h4>No Data Found</h4>
+      </ion-text>
+    </ion-grid>
   </div>
   <div *ngIf="segmentButton == 'shows'">
-    <app-articles-box></app-articles-box>
-    <app-articles-box></app-articles-box>
-    <app-articles-box></app-articles-box>
-    <app-articles-box></app-articles-box>
+    <ng-container *ngFor="let news of videoNews">
+      <app-articles-box [news]="news"></app-articles-box>
+    </ng-container>
+    <ion-grid class="no-list-found" *ngIf="videoNews?.length == 0">
+      <ion-text class="ion-text-center">
+        <h4>No Data Found</h4>
+      </ion-text>
+    </ion-grid>
   </div>
   <div *ngIf="segmentButton == 'listen'">
-    <app-articles-box></app-articles-box>
-    <app-articles-box></app-articles-box>
+    <ng-container *ngFor="let news of audioNews">
+      <app-articles-box [news]="news"></app-articles-box>
+    </ng-container>
+    <ion-grid class="no-list-found" *ngIf="audioNews?.length == 0">
+      <ion-text class="ion-text-center">
+        <h4>No Data Found</h4>
+      </ion-text>
+    </ion-grid>
   </div>
 </ion-content>

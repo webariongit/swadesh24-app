@@ -16,35 +16,45 @@
   <ion-card class="hastag-box">
     <ion-grid class="section-header">
       <h4>Followed Hastags</h4>
-      <a href="#" class="view-all-btn">
+      <a class="view-all-btn" *ngIf="followedHastagList?.length > 0" (click)="viewAllList(followedHastagList?.length, 'followed')">
         View All
       </a>
     </ion-grid>
-    <ion-list>
-      <ion-item (click)="gotoPage('#swadesh24')">
-        #swadesh24
-        <ion-button class="btn-outline" slot="end">Unfollow</ion-button>
-      </ion-item>
-      <ion-item (click)="gotoPage('#swadeshTR24')">
-        #swadeshTR24
-        <ion-button class="btn-outline" slot="end">Unfollow</ion-button>
-      </ion-item>
+    <ion-list *ngIf="followedHastagList?.length > 0">
+      <ng-container *ngFor="let hastag of followedHastagList; let i = index ">
+        <ng-container *ngIf="i < listFollowed">
+          <ion-item (click)="gotoPage(hastag?.id)">
+            #{{hastag?.hashtags}}
+            <ion-button class="btn-outline" slot="end" (click)="followHastag(hastag)">Unfollow</ion-button>
+          </ion-item>
+        </ng-container>
+      </ng-container>
     </ion-list>
+    <ion-grid class="no-list-found" *ngIf="followedHastagList?.length == 0">
+      <ion-text class="ion-text-center">
+        <h4>No Data Found</h4>
+      </ion-text>
+    </ion-grid>
     <ion-grid class="section-header">
       <h4>Popular Hastags</h4>
-      <a href="#" class="view-all-btn">
+      <a class="view-all-btn"  *ngIf="unfollowedHastagList?.length > 0" (click)="viewAllList(unfollowedHastagList?.length, 'follow')">
         View All
       </a>
     </ion-grid>
-    <ion-list>
-      <ion-item>
-        #swadesh24
-        <ion-button class="main-btn" slot="end">Follow</ion-button>
-      </ion-item>
-      <ion-item>
-        #swadeshTR24
-        <ion-button class="main-btn" slot="end">Follow</ion-button>
-      </ion-item>
+    <ion-list *ngIf="unfollowedHastagList?.length > 0" >
+      <ng-container *ngFor="let hastag of unfollowedHastagList; let i = index">
+        <ng-container *ngIf="i < listfollow">
+          <ion-item (click)="gotoPage(hastag?.id)">
+            #{{hastag?.hashtags}}
+            <ion-button class="main-btn" slot="end" (click)="followHastag(hastag)">Follow</ion-button>
+          </ion-item>
+        </ng-container>
+      </ng-container>
     </ion-list>
+    <ion-grid class="no-list-found" *ngIf="unfollowedHastagList?.length == 0">
+      <ion-text class="ion-text-center">
+        <h4>No Data Found</h4>
+      </ion-text>
+    </ion-grid>
   </ion-card>
 </ion-content>

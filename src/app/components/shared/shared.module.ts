@@ -11,6 +11,9 @@ import { StoriesBoxComponent } from './stories-box/stories-box.component';
 import { EntertainmentBoxComponent } from './entertainment-box/entertainment-box.component';
 import { ArticlesBoxComponent } from './articles-box/articles-box.component';
 import { ShareBtnComponent } from './action-btns/share-btn/share-btn.component';
+import { CommentComponent } from './comment/comment.component';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,12 @@ import { ShareBtnComponent } from './action-btns/share-btn/share-btn.component';
     EntertainmentBoxComponent,
     ArticlesBoxComponent,
     ShareBtnComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    IonicModule
   ],
   exports:[
     HeaderComponent,

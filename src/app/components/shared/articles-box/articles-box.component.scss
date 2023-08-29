@@ -31,6 +31,11 @@
     color: #3F3F97;
 }
 
+.author-avatar-sm-img{
+    width: 30px;
+    height: 30px;
+}
+
 .news-list-content{
     padding: 0;
     h4{
@@ -38,6 +43,13 @@
         font-weight: 500;
         color:#2d2d2d;
         margin-bottom: 10px;
+        height: 45px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 24px;
     }
 }
 
@@ -49,6 +61,9 @@
 .news-thumbs-img{
     border-radius: 6px;
     overflow: hidden;
+    height: 130px;
+    object-fit: cover;
+    object-position: 50% top;
 }
 
 .author-profile ion-img{

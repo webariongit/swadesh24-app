@@ -48,6 +48,9 @@ export class HomePage implements OnInit {
     this.getStoryList();
   }
   
+  gotoPage(id:any){
+    this.router.navigate(['home/articles',id,'all'])
+  }
 
   getHomeData(){
     this.loader = true;
@@ -62,13 +65,13 @@ export class HomePage implements OnInit {
             this.category[i].colorCode = this.colorArray[i]
           }
           if(this.category[i]?.category == 'News'){
-            this.newsCategory = this.category[i]?.news.data
+            this.newsCategory = this.category[i]
           }else if(this.category[i]?.category == 'Sports'){
-            this.sportsCategory = this.category[i]?.news.data
+            this.sportsCategory = this.category[i]
           }else if(this.category[i]?.category == 'Bussiness'){
-            this.businessCategory = this.category[i]?.news.data
+            this.businessCategory = this.category[i]
           }else if(this.category[i]?.category == 'Entertainment'){
-            this.entertainmentList = this.category[i]?.news.data
+            this.entertainmentList = this.category[i]
           }
         }
       },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { HttpService } from './service/http-service/http.service';
+import { CommonService } from './service/common-service/common.service';
 register();
 @Component({
   selector: 'app-root',
@@ -18,8 +19,13 @@ export class AppComponent implements OnInit {
     { title: 'Setting', url: '/settings', icon: 'settings' },
   ];
   constructor(
-    private httpService:HttpService
+    private httpService:HttpService,
+    private commonService:CommonService
   ) {
+    this.commonService.userLoggedIn.subscribe(()=>{
+      let userData:any = localStorage.getItem('userDetails')
+      this.userDetails = JSON.parse(userData)
+    })
     let userData:any = localStorage.getItem('userDetails')
     this.userDetails = JSON.parse(userData)
   }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 @Component({
   selector: 'app-login',
@@ -1007,7 +1008,13 @@ export class LoginPage implements OnInit {
     }
   }
 
-  
+
+  async doLogin() {
+    // const user = await GoogleAuth.signIn();
+    // if (user){
+    //   console.log("user", user)
+    // }
+  }
 
   setOpen(isOpen: boolean, type:any) {
     this.isModalOpen = isOpen;

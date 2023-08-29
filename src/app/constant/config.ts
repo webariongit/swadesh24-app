@@ -18,7 +18,11 @@ export const apiRoutes = {
     news_like:'news-like',
     news_share:'news-share',
     news_bookmark:'news-bookmark',
+    story_list:'story-list',
     story_view:'story-view',
     story_like:'story-like',
     story_share:'story-share',
+    hastag_list:'hashtags-list',
+    hastag_follow_unfollow:'hashtag-follow-unfollow',
+    saved_bookmark:'saved-bookmarks'
 }

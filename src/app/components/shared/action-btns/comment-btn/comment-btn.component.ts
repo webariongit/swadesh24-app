@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { CommentComponent } from '../../comment/comment.component';
 
 @Component({
   selector: 'app-comment-btn',
@@ -7,8 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentBtnComponent  implements OnInit {
 
-  constructor() { }
+  @Input() newsDetails:any;
 
-  ngOnInit() {}
+  constructor(
+    private modalCtrl: ModalController
+  ) { }
 
+  ngOnInit() {
+    
+  }
+
+  async openModal(news:any) {
+    const modal = await this.modalCtrl.create({
+      component: CommentComponent,
+      componentProps: {
+        news
+      }
+    });
+    modal.present();
+  }
+
+  
 }

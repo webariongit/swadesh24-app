@@ -1,6 +1,6 @@
 <ion-card class="stories-box">
   <ion-badge class="news-tag">{{story?.category}}</ion-badge>
-  <ion-buttons href="#" class="play-btn" (click)="showStories()">
+  <ion-buttons href="#" class="play-btn" (click)="showStories(story?.id)">
     <ion-img
       src="./assets/img/video-icon.svg"
       alt=""

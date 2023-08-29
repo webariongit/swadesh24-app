@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-articles-box',
@@ -6,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./articles-box.component.scss'],
 })
 export class ArticlesBoxComponent  implements OnInit {
-
-  constructor() { }
+  @Input() news:any;
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit() {}
+
+  gotoDetails(id:any){
+    this.router.navigate(['article-details', id])
+  }
+
 
 }

@@ -15,10 +15,13 @@ export class StoriesBoxComponent  implements OnInit {
 
   ngOnInit() {}
 
-  async showStories(){
+  async showStories(id:any){
     let contactModal = this.modalCtrl.create({
       component: StoriesDetailsPage,
       cssClass: 'my-custom-class',
+      componentProps: {
+        id
+      }
     });
     (await contactModal).present();
   }

@@ -1,34 +1,24 @@
 <ion-content [fullscreen]="true">
-  <ion-button class="close-btn" (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
+  <ion-grid class="action-btn">
+    <ion-button class="btn" (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
+    <ion-button class="btn" (click)="shareStory(storyDetails)"><ion-icon name="share-social-outline"></ion-icon></ion-button>
+    <ion-button class="btn" (click)="storyLike(storyDetails?.id)"><ion-icon *ngIf="storyDetails?.likes == 1" name="heart"></ion-icon> <ion-icon *ngIf="storyDetails?.likes == 0" name="heart-outline"></ion-icon></ion-button>
+  </ion-grid>
+  
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">stories-details</ion-title>
     </ion-toolbar>
   </ion-header>
-  <swiper-container pagination="true" watchSlidesProgress="true" pagination-clickable="true" navigation="true" space-between="30" centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-    <swiper-slide>
-      <video controls class="slider-video">
-        <source src="./assets/img/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </swiper-slide>
-    <swiper-slide>
-      <video controls class="slider-video">
-        <source src="./assets/img/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </swiper-slide>
-    <swiper-slide>
-      <video controls class="slider-video">
-        <source src="./assets/img/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </swiper-slide>
-    <swiper-slide>
-      <video controls class="slider-video">
-        <source src="./assets/img/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </swiper-slide>
-  </swiper-container>
+  <ng-container *ngIf="storyDetails">
+    <swiper-container watchSlidesProgress="true" space-between="30" centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+      <swiper-slide>
+        <video controls autoplay class="slider-video" *ngIf="storyDetails.contentType == 'video'">
+          <source [src]="storyDetails?.base_url + storyDetails?.media_file" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <ion-img class="slider-video" *ngIf="storyDetails.contentType == 'image'" [src]="storyDetails?.base_url + storyDetails?.media_file" ></ion-img>
+      </swiper-slide>
+    </swiper-container>
+  </ng-container>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trending-topics',
@@ -8,10 +9,16 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TrendingTopicsComponent  implements OnInit {
   @Input() category:any
   @Input() index:any;
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit() {
 
+  }
+
+  gotoPage(id:any){
+    this.router.navigate(['home/articles',id,'all'])
   }
 
 }

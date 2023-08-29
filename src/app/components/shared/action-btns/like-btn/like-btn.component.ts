@@ -20,7 +20,6 @@ export class LikeBtnComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("News Details",this.newsDetails)
     if(this.newsDetails?.likes == 1){
       this.active = true;
     }else{

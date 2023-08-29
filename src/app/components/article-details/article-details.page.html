@@ -6,7 +6,7 @@
     <div slot="end">
       <ion-button (click)="newsSave(newsDetails?.id)"><ion-icon name="bookmark" *ngIf="newsDetails?.bookmark == 1"></ion-icon> <ion-icon *ngIf="newsDetails?.bookmark == 0" name="bookmark-outline"></ion-icon></ion-button>
       <ion-button (click)="newsLike(newsDetails?.id)"><ion-icon *ngIf="newsDetails?.likes == 1" name="heart"></ion-icon> <ion-icon *ngIf="newsDetails?.likes == 0" name="heart-outline"></ion-icon></ion-button>
-      <ion-button><ion-icon name="share-social-outline"></ion-icon></ion-button>
+      <ion-button (click)="shareNews(newsDetails)"><ion-icon name="share-social-outline"></ion-icon></ion-button>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -114,7 +114,9 @@
         </div>
         <div class="add-comment-box" *ngIf="!userInfoIncomplete">
           <form action="">
-            <ion-img src="./assets/img/avatar.png"></ion-img>
+            <ion-avatar>
+              <img [src]="userDetails?.base_url + userDetails?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+            </ion-avatar>
             <ion-textarea #hvUserPost type="text" placeholder="Add Your Comment" class="form-field" fill="outline" autoGrow="true" [(ngModel)]="comment" [ngModelOptions]="{standalone: true}" (input)="adjustDesc()"></ion-textarea>
             <ion-button class="send-btn" [disabled]="!this.comment" (click)="addComment()"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
           </form>

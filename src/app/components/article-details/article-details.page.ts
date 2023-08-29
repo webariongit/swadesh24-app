@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
+import { Share, ShareOptions } from '@capacitor/share';
 
 @Component({
   selector: 'app-article-details',
@@ -13,7 +14,6 @@ import { HttpService } from 'src/app/service/http-service/http.service';
 })
 export class ArticleDetailsPage implements OnInit {
   @ViewChild('hvUserPost') hvUserPost: ElementRef | any;
-  @ViewChild('hvUserPost2') hvUserPost2: ElementRef | any;
   
   loader:any;
   newsId:any;
@@ -33,7 +33,7 @@ export class ArticleDetailsPage implements OnInit {
     private activatedRoute:ActivatedRoute,
     private commonService:CommonService,
     private alertController:AlertController,
-    private domsanitizer:DomSanitizer
+    private domsanitizer:DomSanitizer,
   ) {
     this.activatedRoute.params.subscribe((params)=>{
       this.newsId = params['id'];
@@ -49,11 +49,39 @@ export class ArticleDetailsPage implements OnInit {
    }
 
   ngOnInit() {
- 
+    this.newsViews();
   }
 
   gotoAuthorDetails(){
     this.router.navigate(['author-details'])
+  }
+
+  async shareNews(news:any){
+    const options:ShareOptions={
+      title: news?.title,
+      text: news?.sub_title,
+      dialogTitle: 'Share with friends',
+      url:'https://swadesh24.com/article-details?news_id=' + news?.id,
+    }
+    await Share.share(options).then((res:any)=>{
+      this.newsShared(news?.id)
+    }).catch((error)=>{
+      console.log("error",error)
+    })
+  }
+  
+  newsShared(id:any){
+    let formData = new FormData();
+    formData.append("news_id", id)
+    let apiUrl = apiRoutes.news_share;
+    this.httpService.post(apiUrl, formData).subscribe({
+      next:(v:any) =>{
+        console.log(v)
+      },
+      error:(e:any)=>{
+        console.log(e)
+      }
+    })
   }
 
   getNewsDetails(id:any){
@@ -89,7 +117,6 @@ export class ArticleDetailsPage implements OnInit {
   adjustDesc() {
       let textArea;
       textArea = this.hvUserPost['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
-      textArea = this.hvUserPost2['_elementRef'].nativeElement.getElementsByClassName("text-input")[0];
       textArea.style.overflow = 'hidden';
       textArea.style.height = 'auto';
       var scrollHeight = textArea.scrollHeight;
@@ -107,7 +134,8 @@ export class ArticleDetailsPage implements OnInit {
       next:(v:any) =>{
         this.commentList = v?.response;
         this.commonService.presentSuccessToast(v.message)
-        this.getNewsComments(this.newsId)
+        this.getNewsComments(this.newsId);
+        this.comment = '';
       },
       error:(e:any)=>{
         this.commonService.presentFailureToast(e.message)
@@ -146,7 +174,7 @@ export class ArticleDetailsPage implements OnInit {
     this.httpService.delete(apiUrl).subscribe({
       next: (v: any) => {
         console.log(v)
-        if (v.status == 201) {
+        if (v.status == 200) {
           this.getNewsComments(this.newsId)
           this.commonService.presentSuccessToast(v.message)
         }
@@ -300,6 +328,20 @@ export class ArticleDetailsPage implements OnInit {
       },
       error:(e:any)=>{
         this.commonService.presentFailureToast(e.message)
+      }
+    })
+  }
+
+  newsViews(){
+    let formData = new FormData();
+    formData.append("news_id", this.newsId);
+    let apiUrl = apiRoutes.news_view;
+    this.httpService.post(apiUrl, formData).subscribe({
+      next:(v:any) =>{
+        console.log(v)
+      },
+      error:(e:any)=>{
+        console.log(e)
       }
     })
   }

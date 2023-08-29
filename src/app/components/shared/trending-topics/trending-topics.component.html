@@ -1,4 +1,4 @@
-<ion-card class="trend-topic-card">
+<ion-card class="trend-topic-card" (click)="gotoPage(category?.category_id)">
   <ion-grid class="trending-top-img">
     <img class="trending-img" [src]="category?.base_url + category?.category_image" alt="" />
     <ion-badge class="trending-tag" *ngIf="index < 3">#{{index+1}}</ion-badge>

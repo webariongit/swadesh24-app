@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { apiRoutes } from 'src/app/constant/config';
+import { HttpService } from 'src/app/service/http-service/http.service';
 
 @Component({
   selector: 'app-bookmarks',
@@ -7,9 +9,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookmarksPage implements OnInit {
   segmentButton:any = 'news';
-  constructor() { }
+  readNews:any;
+  audioNews:any;
+  videoNews:any;
+  bookMarkDetails:any;
+
+  constructor(
+    private httpService:HttpService
+  ) { }
 
   ngOnInit() {
+    this.getBookMarkedData()
   }
+
+  getBookMarkedData(){
+    let apiUrl = apiRoutes.saved_bookmark
+    this.readNews = [];
+    this.videoNews = [];
+    this.audioNews = [];
+    this.httpService.get(apiUrl).subscribe({
+      next:(v:any) =>{
+        this.bookMarkDetails = v?.response
+        for(var i=0; i < this.bookMarkDetails?.length; i++){
+          if(this.bookMarkDetails[i]?.contents_type == 'text' || this.bookMarkDetails[i]?.contents_type == 'image'){
+            this.readNews.push(this.bookMarkDetails[i])
+          }else if(this.bookMarkDetails[i]?.contents_type == 'video' || this.bookMarkDetails[i]?.contents_type == 'youtube'){
+            this.videoNews.push(this.bookMarkDetails[i])
+          }else if(this.bookMarkDetails[i]?.contents_type == 'audio'){
+            this.audioNews.push(this.bookMarkDetails[i])
+          }
+        }
+      },
+      error:(e:any)=>{
+        
+      }
+    })
+  }
+
 
 }

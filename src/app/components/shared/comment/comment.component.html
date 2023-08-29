@@ -1,0 +1,82 @@
+<ion-header  class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>{{commentList?.length || '0'}} Comments</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="comments-box">
+    <ng-container *ngFor="let comments of commentList">
+      <ion-row class="user-comments-box">
+        <ion-col size="2">
+          <ion-avatar class="comments-avatar-img">
+            <img [src]="comments?.base_url + comments?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="10">
+          <h5>{{comments?.first_name || '--'}} {{comments?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{comments?.created_at | date}}</span> </h5>
+          <p>{{comments?.comment}}</p>
+          <ion-row>
+            <ion-buttons class="reply" *ngIf="comments?.user_id != userDetails?.user_id && !userInfoIncomplete" (click)="openEditComment(true, comments, 'Reply')">Reply</ion-buttons>
+            <ion-buttons class="edit" *ngIf="comments?.user_id == userDetails?.user_id" (click)="openEditComment(true,comments, 'Edit')">Edit</ion-buttons>
+            <ion-buttons class="delete" *ngIf="comments?.user_id == userDetails?.user_id" (click)="deleteComment(comments?.id)">Delete</ion-buttons>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-end" *ngIf="comments?.replies?.length > 0">
+        <ion-col size="10">
+          <ng-container *ngFor="let reply of comments?.replies">
+            <ion-row class="user-comments-box">
+              <ion-col size="2">
+                <ion-avatar class="comments-avatar-sm-img">
+                  <img [src]="reply?.base_url + reply?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="10">
+                <h5>{{reply?.first_name || '--'}} {{reply?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{reply?.created_at | date}}</span> </h5>
+                <p>{{reply?.comment}}</p>
+                <ion-row>
+                  <ion-buttons class="edit" *ngIf="reply?.user_id == userDetails?.user_id" (click)="openEditComment(true,reply, 'Edit')">Edit</ion-buttons>
+                  <ion-buttons class="delete" *ngIf="reply?.user_id == userDetails?.user_id" (click)="deleteComment(reply?.id)">Delete</ion-buttons>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </div>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header  class="inner-page-header">
+        <ion-toolbar>
+          <ion-title>{{modalTitle}} Comment</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="openEditComment(false, '')">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-textarea type="text" placeholder="Add Your Comment" class="edit-form-field" fill="outline" autoGrow="true" [(ngModel)]="editcomment" [ngModelOptions]="{standalone: true}"></ion-textarea>
+      </ion-content>
+      <ion-footer class="comment-footer ion-text-center">
+        <ion-button class="main-btn" (click)="submitEditComment()" *ngIf="modalTitle == 'Edit'">Save</ion-button>
+        <ion-button class="main-btn" (click)="submitReplyComment()" *ngIf="modalTitle == 'Reply'">Reply</ion-button>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+<ion-footer>
+  <div class="add-comment-box" *ngIf="!userInfoIncomplete">
+    <ion-avatar>
+      <img [src]="userDetails?.base_url + userDetails?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+    </ion-avatar>
+    <ion-textarea type="text" placeholder="Add Your Comment" class="form-field" fill="outline" autoGrow="true" [(ngModel)]="comment"></ion-textarea>
+    <ion-button class="send-btn" [disabled]="!this.comment" (click)="addComment()"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+  </div>
+  <ng-container *ngIf="userInfoIncomplete">
+    <ion-button expand="full"  class="commet-btn" (click)="redirectToProfile()">Add Your Comment</ion-button>
+  </ng-container>
+</ion-footer>

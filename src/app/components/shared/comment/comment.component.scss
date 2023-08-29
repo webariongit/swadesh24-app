@@ -1,0 +1,126 @@
+ion-title{
+    padding-left: 16px;
+}
+
+.comments-box{
+    h4{
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        border-bottom: 1px solid #EBEBEB;
+        display: flex;
+        align-items: center;
+        ion-icon{
+            margin-right: 10px;
+        }
+    }
+    h5{
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 4px;
+        font-weight: 500;
+        color: #334155;
+        .dot{
+            display: inline-block;
+            height: 4px;
+            width: 4px;
+            border-radius: 100%;
+            margin: 0px 5px;
+            background-color: #cdcdcd;
+        }
+        span{
+            font-size: 12px;
+            font-weight: 300;
+            color: #838383;
+        }
+    }
+    ion-buttons{
+        font-weight: 400;
+        font-size: 13px;
+        margin-top: 5px;
+        display: inline-block;
+        margin-right: 10px;
+        &.reply{
+            color: #3F3F97;
+        }
+        &.edit{
+            color: #444;
+        }
+        &.delete{
+            color: red;
+        }
+    }
+    p{
+        font-size: 13px; 
+        margin-bottom: 4px;
+    }
+}
+
+.user-comments-box{
+    margin-bottom: 10px;
+}
+
+.add-comment-box{
+    position: relative;
+    ion-avatar{
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        object-fit: cover;
+        object-position: 50% top;
+        position: absolute;
+        left: 5px;
+        top: 10px;
+        z-index: 9;
+    }
+    .form-field{
+        --border-radius: 0px;
+        --padding-start: 50px;
+        --padding-end: 50px;
+        --padding-top:10px;
+        min-height: 46px;
+    }
+    ion-button{
+        --background: #3F3F97;
+        --box-shadow: none;
+        --padding-start: 8px;
+        --padding-end: 8px;
+        --border-radius: 100%;
+    }
+}
+
+.editcomment{
+    --padding-top:10px;
+}
+
+.comment-footer{
+    padding: 7px 20px;
+    .main-btn{
+        margin: 0px;
+    }
+}
+
+.comments-avatar-img{
+    width:42px;
+    height: 42px;
+}
+
+.send-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    z-index: 9;
+    margin: 0;
+}
+
+.edit-form-field{
+    --padding-top:10px;
+}
+
+.comments-avatar-sm-img{
+    width:30px;
+    height: 30px;
+}

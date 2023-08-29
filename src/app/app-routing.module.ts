@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/article-details/article-details.module').then( m => m.ArticleDetailsPageModule)
   },
   {
-    path: 'hastags/:page',
+    path: 'hastags/:id',
     loadChildren: () => import('./components/hastags-article/hastags-article.module').then( m => m.HastagsArticlePageModule)
   },
   {

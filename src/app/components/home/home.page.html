@@ -77,11 +77,11 @@
   <ion-grid  class="news-list" *ngIf="newsCategory">
     <ion-grid class="section-header">
       <h4>News</h4>
-      <a href="#" class="view-all-btn">
+      <a (click)="gotoPage(newsCategory?.category_id)" class="view-all-btn">
         View All
       </a>
     </ion-grid>
-    <ng-container *ngFor="let news of newsCategory; let i=index;">
+    <ng-container *ngFor="let news of newsCategory?.news.data; let i=index;">
       <ng-container *ngIf="i < 4">
         <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
       </ng-container>
@@ -185,11 +185,11 @@
   <ion-grid  class="news-list" *ngIf="sportsCategory">
     <ion-grid class="section-header">
       <h4>Sports</h4>
-      <a href="#" class="view-all-btn">
+      <a (click)="gotoPage(sportsCategory?.category_id)" class="view-all-btn">
         View All
       </a>
     </ion-grid>
-    <ng-container *ngFor="let news of sportsCategory; let i=index;">
+    <ng-container *ngFor="let news of sportsCategory?.news.data; let i=index;">
       <ng-container *ngIf="i < 4">
         <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
       </ng-container>
@@ -275,7 +275,7 @@
       <h4>Entertainment</h4>
     </ion-grid>
     <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" autoplay-disable-on-interaction="false">
-      <swiper-slide *ngFor="let entertainment of entertainmentList">
+      <swiper-slide *ngFor="let entertainment of entertainmentList?.news.data">
         <app-entertainment-box [entertainment]="entertainment"></app-entertainment-box>
       </swiper-slide>
     </swiper-container>
@@ -310,11 +310,11 @@
   <ion-grid class="news-list" *ngIf="businessCategory">
     <ion-grid class="section-header">
       <h4>Business</h4>
-      <a href="#" class="view-all-btn">
+      <a (click)="gotoPage(businessCategory?.category_id)" class="view-all-btn">
         View All
       </a>
     </ion-grid>
-    <ng-container *ngFor="let news of businessCategory; let i=index;">
+    <ng-container *ngFor="let news of businessCategory?.news.data; let i=index;">
       <ng-container *ngIf="i < 4">
         <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
       </ng-container>

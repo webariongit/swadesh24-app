@@ -8,6 +8,9 @@ ion-toolbar{
     }
 }
 
+ion-title{
+    padding-left: 16px;
+}
 
 ion-button + ion-button{
     margin-left: 5px;
@@ -71,7 +74,7 @@ ion-button + ion-button{
 .add-comment-box{
     position: relative;
     margin-top: 10px;
-    ion-img{
+    ion-avatar{
         width: 35px;
         height: 35px;
         border-radius: 100%;
@@ -79,7 +82,7 @@ ion-button + ion-button{
         object-position: 50% top;
         position: absolute;
         left: 5px;
-        top: 10px;
+        top: 7px;
         z-index: 9;
     }
     .form-field{
@@ -109,10 +112,6 @@ ion-button + ion-button{
 
 .comment-card-content{
     padding: 10px;
-}
-
-ion-title{
-    padding-left: 16px;
 }
 
 .send-btn{
