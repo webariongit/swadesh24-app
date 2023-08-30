@@ -42,9 +42,16 @@ ion-item{
 }
 
 .form-field{
-    margin-bottom: 10px;
     min-height: 46px;
 }
+
+.mb-4{
+    margin-bottom: 20px;
+    ion-label{
+        font-size: 12px;
+    }
+}
+
 ion-textarea.form-field{
     min-height: auto;
 }

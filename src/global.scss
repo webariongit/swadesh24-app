@@ -134,6 +134,21 @@ ion-content{
     height: 30px;
 }
 
+.no-list-found{
+    text-align: center;
+    padding: 30px 0px;
+    border: 1px solid #EBEBEB;
+    img{
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    h4{
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+    }
+}
+
 .no-data-found{
     min-height: calc(100vh - 180px);
     display: flex;

@@ -24,5 +24,10 @@ export const apiRoutes = {
     story_share:'story-share',
     hastag_list:'hashtags-list',
     hastag_follow_unfollow:'hashtag-follow-unfollow',
-    saved_bookmark:'saved-bookmarks'
+    saved_bookmark:'saved-bookmarks',
+    rating:'rating',
+    feedback:'feedback',
+    about_us:'about-us',
+    contact_details:'contact-detail',
+    enquiry:'enquiry'
 }

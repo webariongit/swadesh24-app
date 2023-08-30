@@ -5,6 +5,17 @@ import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import {
+  FacebookLogin,
+  FacebookLoginResponse,
+} from '@capacitor-community/facebook-login';
+
+const FACEBOOK_PERMISSIONS = [
+  'email',
+  'user_birthday',
+  'user_photos',
+  'user_gender',
+];
 
 @Component({
   selector: 'app-login',
@@ -1009,11 +1020,18 @@ export class LoginPage implements OnInit {
   }
 
 
-  async doLogin() {
-    // const user = await GoogleAuth.signIn();
-    // if (user){
-    //   console.log("user", user)
-    // }
+  async googleSignin() {
+    const user = await GoogleAuth.signIn();
+    if (user){
+      console.log("google user", user)
+    }
+  }
+
+  async facebookLogin(){
+    const loginData = FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS })
+    if (loginData){
+      console.log("facebook user", loginData)
+    }
   }
 
   setOpen(isOpen: boolean, type:any) {

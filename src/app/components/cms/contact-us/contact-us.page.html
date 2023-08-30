@@ -55,26 +55,48 @@
   <ion-card class="contact-card">
     <ion-card-content class="contact-card-content">
       <h4>Get in touch with us</h4>
-      <form action="">
-        <ion-input aria-label="First Name" label="First Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
-        <ion-input aria-label="Last Name" label="Last Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
-        <ion-input aria-label="Email" label="Email *" fill="outline" class="form-field" labelPlacement="floating"></ion-input>
-        <ion-row class="ion-align-items mobile-number-field">
-          <ion-col size="3" class="ion-no-padding padding-right">
-            <ion-select fill="outline" class="mobile-code-field" [(ngModel)]="countryCode" [ngModelOptions]="{standalone: true}">
-              <ion-select-option value="+91">+91</ion-select-option>
-              <ion-select-option value="+92">+91</ion-select-option>
-              <ion-select-option value="+93">+91</ion-select-option>
-              <ion-select-option value="+94">+91</ion-select-option>
-            </ion-select>
-          </ion-col>
-          <ion-col size="9" class="ion-no-padding">
-            <ion-input aria-label="Mobile Number" label="Mobile Number" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
-          </ion-col>
-        </ion-row>
-        <ion-textarea aria-label="Feedback" label="Feedback *" placeholder="Write your feedback here..." class="form-field" fill="outline" labelPlacement="floating"></ion-textarea>
+      <form [formGroup]="validationForm">
+        <div class="mb-4">
+          <ion-input aria-label="First Name" label="First Name" class="form-field" formControlName="first_name" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validation_messages.first_name">
+            <ion-label color="danger" *ngIf="validationForm.get('first_name').hasError(validation.type) &&(validationForm.get('first_name').dirty ||validationForm.get('first_name').touched)">{{ validation.message }}</ion-label>
+          </ng-container>
+        </div>
+        <div class="mb-4">
+          <ion-input aria-label="Last Name" formControlName="last_name" label="Last Name" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validation_messages.last_name">
+            <ion-label color="danger" *ngIf="validationForm.get('last_name').hasError(validation.type) &&(validationForm.get('last_name').dirty ||validationForm.get('last_name').touched)">{{ validation.message }}</ion-label>
+          </ng-container>
+        </div>
+        <div class="mb-4">
+          <ion-input aria-label="Email" label="Email *" formControlName="email" fill="outline" class="form-field" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <ion-label color="danger" *ngIf="validationForm.get('email').hasError(validation.type) &&(validationForm.get('email').dirty ||validationForm.get('email').touched)">{{ validation.message }}</ion-label>
+          </ng-container>
+        </div>
+        <div class="mb-4">
+          <ion-row class="ion-align-items mobile-number-field">
+            <ion-col size="3" class="ion-no-padding padding-right">
+              <ion-select fill="outline" class="mobile-code-field" formControlName="phone_code">
+                <ng-container *ngFor="let code of mobileCountryCode">
+                  <ion-select-option [value]="code?.code">{{code?.code}} ({{code?.name}})</ion-select-option>
+                </ng-container>
+              </ion-select>
+            </ion-col>
+            <ion-col size="9" class="ion-no-padding">
+              <ion-input aria-label="Mobile Number" label="Mobile Number" formControlName="phone_number" class="form-field" fill="outline" labelPlacement="floating"></ion-input>
+            </ion-col>
+          </ion-row>
+          <ng-container *ngFor="let validation of validation_messages.phone_number">
+            <ion-label color="danger" *ngIf="validationForm.get('phone_number').hasError(validation.type) &&(validationForm.get('phone_number').dirty ||validationForm.get('phone_number').touched)">{{ validation.message }}</ion-label>
+          </ng-container>
+        </div>
+        <ion-textarea aria-label="Feedback" label="Feedback *" placeholder="Write your feedback here..." formControlName="message" class="form-field" fill="outline" labelPlacement="floating"></ion-textarea>
+        <ng-container *ngFor="let validation of validation_messages.message">
+          <ion-label color="danger" *ngIf="validationForm.get('message').hasError(validation.type) &&(validationForm.get('message').dirty ||validationForm.get('message').touched)">{{ validation.message }}</ion-label>
+        </ng-container>
         <ion-grid class="ion-text-center">
-          <ion-button class="main-btn">Submit</ion-button>
+          <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submit()">Submit</ion-button>
         </ion-grid>
       </form>
     </ion-card-content>

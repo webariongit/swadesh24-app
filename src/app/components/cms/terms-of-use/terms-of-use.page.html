@@ -13,12 +13,9 @@
       <ion-title size="large">terms-of-use</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card class="about-card">
+  <ion-card class="about-card" *ngIf="pageContent">
     <ion-card-content class="about-card-content">
-      <h4>What is The swadesh24?</h4>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+      <div [innerHtml]="pageContent.description"></div>
     </ion-card-content>
   </ion-card>
 </ion-content>

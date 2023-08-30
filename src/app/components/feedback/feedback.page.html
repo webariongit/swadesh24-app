@@ -18,15 +18,26 @@
       <div class="section-header">
         <h4>Add your feedback</h4>
       </div>
-      <form action="">
-        <ion-select label="Feedback Type *" class="form-field" fill="outline" labelPlacement="floating">
-          <ion-select-option value="apple">Feedback Type</ion-select-option>
-          <ion-select-option value="banana">Feedback Type</ion-select-option>
-          <ion-select-option value="orange">Feedback Type</ion-select-option>
-        </ion-select>    
-        <ion-textarea aria-label="Feedback" label="Feedback *" placeholder="Write your feedback here..." class="form-field" fill="outline" labelPlacement="floating"></ion-textarea>
+      <form [formGroup]="validationForm">
+        <div class="mb-4">
+          <ion-select label="Feedback Type *" class="form-field" fill="outline" formControlName="feedbacktype" labelPlacement="floating">
+            <ion-select-option value="1">General</ion-select-option>
+            <ion-select-option value="2">Suggestions</ion-select-option>
+            <ion-select-option value="3">Technical</ion-select-option>
+            <ion-select-option value="4">UI Experience</ion-select-option>
+          </ion-select>
+          <ng-container *ngFor="let validation of validation_messages.feedbacktype">
+            <ion-label color="danger" *ngIf="validationForm.get('feedbacktype').hasError(validation.type) &&(validationForm.get('feedbacktype').dirty ||validationForm.get('feedbacktype').touched)">{{ validation.message }}</ion-label>
+          </ng-container>
+        </div>
+        <div class="mb-4">
+          <ion-textarea aria-label="Feedback" label="Feedback *" formControlName="feedback" placeholder="Write your feedback here..." class="form-field" fill="outline" labelPlacement="floating"></ion-textarea>
+          <ng-container *ngFor="let validation of validation_messages.feedback">
+            <ion-label color="danger" *ngIf="validationForm.get('feedback').hasError(validation.type) &&(validationForm.get('feedback').dirty ||validationForm.get('feedback').touched)">{{ validation.message }}</ion-label>
+          </ng-container>
+        </div>
         <ion-grid class="ion-text-center">
-          <ion-button class="main-btn">Submit</ion-button>
+          <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submit()">Submit</ion-button>
         </ion-grid>
       </form>
     </ion-card-content>

@@ -1,6 +1,5 @@
 .form-field{
     min-height: 46px;
-    margin-bottom: 10px;
 }
 
 .profile-card{
@@ -13,6 +12,12 @@
     }
 }
 
+.mb-4{
+    margin-bottom: 20px;
+    ion-label{
+        font-size: 12px;
+    }
+}
 
 .section-header{
     display: flex;

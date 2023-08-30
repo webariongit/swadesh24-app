@@ -28,30 +28,33 @@
     <ng-container *ngFor="let news of readNews">
       <app-articles-box [news]="news"></app-articles-box>
     </ng-container>
-    <ion-grid class="no-list-found" *ngIf="readNews?.length == 0">
+    <ion-card class="no-list-found" *ngIf="readNews?.length == 0">
       <ion-text class="ion-text-center">
+        <img src="../../../assets/img/no-data-found.png" alt=""> <br>
         <h4>No Data Found</h4>
       </ion-text>
-    </ion-grid>
+    </ion-card>
   </div>
   <div *ngIf="segmentButton == 'shows'">
     <ng-container *ngFor="let news of videoNews">
       <app-articles-box [news]="news"></app-articles-box>
     </ng-container>
-    <ion-grid class="no-list-found" *ngIf="videoNews?.length == 0">
+    <ion-card class="no-list-found" *ngIf="videoNews?.length == 0">
       <ion-text class="ion-text-center">
+        <img src="../../../assets/img/no-data-found.png" alt=""> <br>
         <h4>No Data Found</h4>
       </ion-text>
-    </ion-grid>
+    </ion-card>
   </div>
   <div *ngIf="segmentButton == 'listen'">
     <ng-container *ngFor="let news of audioNews">
       <app-articles-box [news]="news"></app-articles-box>
     </ng-container>
-    <ion-grid class="no-list-found" *ngIf="audioNews?.length == 0">
+    <ion-card class="no-list-found" *ngIf="audioNews?.length == 0">
       <ion-text class="ion-text-center">
+        <img src="../../../assets/img/no-data-found.png" alt=""> <br>
         <h4>No Data Found</h4>
       </ion-text>
-    </ion-grid>
+    </ion-card>
   </div>
 </ion-content>
