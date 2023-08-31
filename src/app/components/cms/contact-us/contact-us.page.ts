@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-contact-us',
@@ -1005,11 +1006,11 @@ export class ContactUsPage implements OnInit {
     private httpService:HttpService,
     private formBuilder:FormBuilder,
     private commonService:CommonService,
-    private router:Router
+    private router:Router,
   ) { }
 
   ngOnInit() {
-    // this.getContent()
+    this.getContent()
     this.validationForm = this.formBuilder.group({
       first_name:['', Validators.required],
       last_name:['', Validators.required],
@@ -1029,12 +1030,18 @@ export class ContactUsPage implements OnInit {
     let apiUrl = apiRoutes.contact_details
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
-        this.contactDetails = v.response
+        this.contactDetails = v.response[0]
       },
       error:(e:any)=>{
 
       }
     })
+  }
+
+  gotoPage(url:any){
+    const openCapacitorSite = async () => {
+      await Browser.open({ url: url });
+    };
   }
 
   submit(){

@@ -17,7 +17,6 @@ export class MyProfilePage implements OnInit {
   countryCode:any = '+91';
   userDetails:any;
   profileImage:any;
-  isLogin:boolean = false;
   mobileCountryCode:any = [
     {
       code: "+7 840",
@@ -964,6 +963,7 @@ export class MyProfilePage implements OnInit {
       name: "Zimbabwe"
     }
   ]
+  formErrors:any;
   validationMessages = {
     contact: [
       {
@@ -973,6 +973,12 @@ export class MyProfilePage implements OnInit {
       {
         type: 'required',
         message: 'Mobile Number is Required',
+      },
+    ],
+    first_name: [
+      {
+        type: 'required',
+        message: 'Name is a Required Field',
       },
     ],
     email: [
@@ -991,33 +997,31 @@ export class MyProfilePage implements OnInit {
     private actionSheetCtrl:ActionSheetController,
     private httpService:HttpService,
     private commonService:CommonService,
-    private router:Router
-  ) { 
-   this.commonService.userLoggedIn.subscribe(()=>{
-    let userData:any = localStorage.getItem('userDetails')
-    this.userDetails = JSON.parse(userData)
-    this.profileImage = this.userDetails?.base_url +  this.userDetails?.profile_image
-    this.initializeForm(this.userDetails)
-   })
-   let userData:any = localStorage.getItem('userDetails')
-    this.userDetails = JSON.parse(userData)
-    this.profileImage = this.userDetails?.base_url + this.userDetails?.profile_image
-    this.initializeForm(this.userDetails)
+    private router:Router,
+  ) {
+    this.httpService.userDetail.subscribe((response)=>{
+      this.userDetails = response
+      this.initializeForm(this.userDetails)
+    })
   }
 
   ngOnInit() {
-    
+    let userData:any = localStorage.getItem('userDetails');
+    this.userDetails = JSON.parse(userData)
+    if(this.userDetails){
+      this.profileImage = this.userDetails?.base_url + this.userDetails?.profile_image
+      this.initializeForm(this.userDetails)
+    }
   }
 
   initializeForm(userDetail:any){
     if(userDetail != null){
       this.validationForm = this.formBuilder.group({
-        first_name:[userDetail.first_name],
+        first_name:[userDetail.first_name, Validators.required],
         last_name:[userDetail.last_name],
         contact:[userDetail.contact,[Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
         email:[userDetail.email,[ Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
-        profile_image:[''],
-        countryCode:['']
+        countryCode:['', Validators.required]
       })
       for(var i=0; i < this.mobileCountryCode?.length; i++){
         if(this.mobileCountryCode[i].name === 'India'){
@@ -1026,6 +1030,20 @@ export class MyProfilePage implements OnInit {
       }
     }
   }
+
+  toDataURL(url:any, callback:any) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+}
 
   async openImages(){
     const actionSheet = await this.actionSheetCtrl.create({
@@ -1086,18 +1104,20 @@ export class MyProfilePage implements OnInit {
     formData.append('last_name', formValue.last_name)
     formData.append('contact', formValue.contact)
     formData.append('email', formValue.email)
+    formData.append('phone_code', formValue.countryCode)
     if(this.profileImage && this.profileImage != this.userDetails?.base_url + this.userDetails.profile_image) {
       const file = this.DataURIToBlob(this.profileImage);
       console.log(file);
       formData.append('profile_image', file, 'my_img.jpg');
+    }else{
+      this.toDataURL(this.profileImage, function (dataUrl:any) {
+        console.log('image  url', dataUrl)
+      })
     }
-
-    this.isLogin = true;
     let apiUrl = apiRoutes.update_profile
     this.httpService.post(apiUrl, formData).subscribe({
       next: (v: any) => {
         console.log(v);
-        this.isLogin = false;
         if(v.status == 201){
           this.httpService.updateUserDetails();
           this.commonService.userLoggedIn.emit()
@@ -1106,11 +1126,14 @@ export class MyProfilePage implements OnInit {
         }else{
           this.commonService.presentFailureToast(v.message);
         }
+        if(v.errors){
+          this.formErrors = v.errors
+          console.log("errors", this.formErrors)
+        }
       },
       error: (e) => {
         console.log(e)
-        this.isLogin = false;
-        this.commonService.presentFailureToast(e?.error?.error);
+        this.commonService.presentFailureToast(e?.error?.message);
         if (e.status == 401) {
           this.commonService.clearLocalStorage();
         }

@@ -29,5 +29,6 @@ export const apiRoutes = {
     feedback:'feedback',
     about_us:'about-us',
     contact_details:'contact-detail',
-    enquiry:'enquiry'
+    enquiry:'enquiry',
+    social_login:'social-login'
 }

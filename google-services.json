@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "342719033549",
+    "project_id": "swadesh-24",
+    "storage_bucket": "swadesh-24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342719033549:android:38587ff408187123d7f984",
+        "android_client_info": {
+          "package_name": "com.swadesh24.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342719033549-7cqceu5rtbte7ofd5fi3jqpliij9aoah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.swadesh24.app",
+            "certificate_hash": "0979b47578036471a774e55e620b1e6ebbe2293e"
+          }
+        },
+        {
+          "client_id": "342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBywdO-SvgidI4QxL5XPHBI6s7gbilNDA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

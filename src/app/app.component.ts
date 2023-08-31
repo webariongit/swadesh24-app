@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { HttpService } from './service/http-service/http.service';
 import { CommonService } from './service/common-service/common.service';
+import { Platform } from '@ionic/angular';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 register();
 @Component({
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   constructor(
     private httpService:HttpService,
     private commonService:CommonService,
+    private platform:Platform
   ) {
     this.commonService.userLoggedIn.subscribe(()=>{
       let userData:any = localStorage.getItem('userDetails')
@@ -29,6 +32,7 @@ export class AppComponent implements OnInit {
     })
     let userData:any = localStorage.getItem('userDetails')
     this.userDetails = JSON.parse(userData)
+    this.initializeApp();
     // Set the default language
     // translate.setDefaultLang('en');
   }
@@ -42,6 +46,12 @@ export class AppComponent implements OnInit {
   
   userLogout(){
     this.httpService.logOut()
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      GoogleAuth.initialize()
+    })
   }
 
 }

@@ -5,6 +5,7 @@ import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
+import { Plugins } from '@capacitor/core';
 import {
   FacebookLogin,
   FacebookLoginResponse,
@@ -1023,14 +1024,47 @@ export class LoginPage implements OnInit {
   async googleSignin() {
     const user = await GoogleAuth.signIn();
     if (user){
-      console.log("google user", user)
+      this.socialLogin(user, 'GOOGLE');
     }
+  }
+
+  socialLogin(userData:any, provider:any){
+    var formData = new FormData()
+    formData.append("email", userData?.email)
+    formData.append("provider_id", userData?.id)
+    formData.append("provider",  provider)
+    formData.append("first_name", userData?.givenName)
+    formData.append("last_name", userData?.familyName)
+    this.httpService.post(apiRoutes.social_login, formData).subscribe({
+      next: (v: any) => {
+        console.log(v)
+        if(v.status == 201){
+          this.isLoading = !this.isLoading;
+          this.commonService.setUserToken(v['token']);
+          this.httpService.setHeader();
+          this.commonService.presentSuccessToast(v.message)
+          this.commonService.userLoggedIn.emit();
+          this.httpService.updateUserDetails()
+          this.validationForm.reset();
+          this.navigateToHomePage();
+          this.isLogin = true
+        }else{
+          this.commonService.presentFailureToast(v.error.message)
+        }
+      },
+      error: (e) => {
+        console.log(e.error)
+        this.commonService.presentFailureToast(e.error.error)
+        this.isLoading = !this.isLoading;
+      },
+    })
+
   }
 
   async facebookLogin(){
     const loginData = FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS })
     if (loginData){
-      console.log("facebook user", loginData)
+      this.socialLogin(loginData,'FACEBOOK');
     }
   }
 
@@ -1049,11 +1083,16 @@ export class LoginPage implements OnInit {
     const formValue = this.validationForm.value
     var formData = new FormData();
     formData.append('number', formValue.mobileNo);
+    formData.append('phone_code', formValue.countryCode);
     this.httpService.post(apiRoutes.get_otp, formData).subscribe({
       next: (v: any) => {
         console.log(v);
-        this.isLogin = false
-        this.commonService.presentSuccessToast(v.message)
+        if(v.status == 200){
+          this.isLogin = false
+          this.commonService.presentSuccessToast(v.message)
+        }else{
+          this.commonService.presentFailureToast(v.message)
+        }
       },
       error: (e) => {
         console.log(e)
@@ -1072,9 +1111,10 @@ export class LoginPage implements OnInit {
   verifyOtp(otp:any) {
     this.otpErrorMessage = null;
     this.isLoading = !this.isLoading;
-    const mobileNo = this.validationForm.value.mobileNo
+    const formValue = this.validationForm.value
     var formData = new FormData();
-    formData.append('number', mobileNo);
+    formData.append('number', formValue?.mobileNo);
+    formData.append('phone_code', formValue.countryCode);
     formData.append('otp', otp);
     this.httpService.post(apiRoutes.verfiy_otp, formData).subscribe({
       next: (v: any) => {
@@ -1102,7 +1142,7 @@ export class LoginPage implements OnInit {
   }
 
   navigateToHomePage(){
-    this.router.navigate(['home'])
+    this.router.navigate(['my-profile'])
   }
 
 }

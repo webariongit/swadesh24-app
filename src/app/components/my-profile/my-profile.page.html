@@ -13,15 +13,29 @@
       <ion-title size="large">my-profile</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card class="profile-card">
+  <ion-card class="profile-card" *ngIf="validationForm">
     <ion-card-content *ngIf="validationForm">
       <form [formGroup]="validationForm">
-        <div class="profile-img">
-          <img [src]="profileImage" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" />
-          <ion-button class="camera-btn" (click)="openImages()"><ion-icon name="camera-outline"></ion-icon></ion-button>
+        <div class="profile-img-area">
+          <div class="profile-img">
+            <img [src]="profileImage" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" />
+            <ion-button class="camera-btn" (click)="openImages()"><ion-icon name="camera-outline"></ion-icon></ion-button>
+          </div>
+          <ion-label color="danger" *ngIf="!profileImage">Please upload your profile pic *</ion-label>
         </div>
+        <ng-container *ngIf="formErrors?.profile_image">
+          <ion-label color="danger" *ngFor="let validation of formErrors?.profile_image">
+            {{ validation }}
+          </ion-label>
+        </ng-container>
         <ion-grid class="form-field">
-          <ion-input aria-label="First Name" label="First Name" formControlName="first_name" fill="outline" labelPlacement="floating"></ion-input>
+          <ion-input aria-label="First Name" label="First Name *" formControlName="first_name" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.first_name">
+            <ion-label color="danger"  *ngIf="validationForm.get('first_name').hasError(validation.type) &&
+                     (validationForm.get('first_name').dirty || validationForm.get('first_name').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
         </ion-grid>
         <ion-grid class="form-field">
           <ion-input aria-label="Last Name" label="Last Name" formControlName="last_name" fill="outline" labelPlacement="floating"></ion-input>
@@ -32,6 +46,11 @@
             <ion-label color="danger"  *ngIf="validationForm.get('email').hasError(validation.type) &&
                      (validationForm.get('email').dirty || validationForm.get('email').touched)">
               {{ validation.message }}
+            </ion-label>
+          </ng-container>
+          <ng-container *ngIf="formErrors?.email">
+            <ion-label color="danger" *ngFor="let validation of formErrors?.email">
+              {{ validation }}
             </ion-label>
           </ng-container>
         </ion-grid>
@@ -45,7 +64,7 @@
               </ion-select>
             </ion-col>
             <ion-col size="9" class="ion-no-padding">
-              <ion-input aria-label="Mobile Number" type="number" placeholder="Mobile Number" [readonly]="userDetail?.contact != null || userDetail?.contact != ' '" formControlName="contact" fill="outline"></ion-input>
+              <ion-input aria-label="Mobile Number" type="number" placeholder="Mobile Number" formControlName="contact" fill="outline"></ion-input>
             </ion-col>
           </ion-row>
           <ng-container *ngFor="let validation of validationMessages.contact">
@@ -54,11 +73,39 @@
               {{ validation.message }}
             </ion-label>
           </ng-container>
-        </ion-grid>
-        <ion-grid class="ion-text-center">
-          <ion-button class="main-btn" (click)="submitForm()">Update</ion-button>
+          <ng-container *ngIf="formErrors?.contact">
+            <ion-label color="danger" *ngFor="let validation of formErrors?.contact">
+              {{ validation }}
+            </ion-label>
+          </ng-container>
         </ion-grid>
       </form>
     </ion-card-content>
   </ion-card>
+  <ion-card *ngIf="!validationForm">
+    <ion-grid class="ion-text-center">
+      <ion-avatar  class="user-img">
+        <ion-skeleton-text  [animated]="true"></ion-skeleton-text>
+      </ion-avatar>
+    </ion-grid>
+    <ion-grid>
+      <ion-skeleton-text class="product-text-skel" style="width:40%"  [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="product-button-skel"  [animated]="true"></ion-skeleton-text>
+    </ion-grid>
+    <ion-grid>
+      <ion-skeleton-text class="product-text-skel" style="width:40%"  [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="product-button-skel"  [animated]="true"></ion-skeleton-text>
+    </ion-grid>
+    <ion-grid>
+      <ion-skeleton-text class="product-text-skel" style="width:40%"  [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="product-button-skel"  [animated]="true"></ion-skeleton-text>
+    </ion-grid>
+    <ion-grid>
+      <ion-skeleton-text class="product-text-skel" style="width:40%"  [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="product-button-skel"  [animated]="true"></ion-skeleton-text>
+    </ion-grid>
+  </ion-card>
 </ion-content>
+<ion-footer class="ion-text-center">
+  <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">Save and Continue</ion-button>
+</ion-footer>

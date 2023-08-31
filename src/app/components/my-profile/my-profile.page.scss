@@ -10,8 +10,13 @@
 .profile-img{
     width: 100px;
     height: 100px;
-    margin: 0px auto 20px;
+    margin: 0px auto;
     position: relative;
+}
+
+.profile-img-area{
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .profile-img ion-button{
@@ -52,5 +57,29 @@
     margin-bottom: 10px;
     ion-input{
         min-height:46px;  
+    }
+}
+
+.user-img{
+    margin:0px auto 20px;
+    position: relative;
+}
+
+.product-text-skel{
+    border-radius: 2px;
+}
+
+.product-button-skel{
+    height: 35px;
+    border-radius: 2px;
+}
+
+ion-label{
+    font-size: 12px;
+}
+
+ion-footer{
+    .main-btn{
+        margin-bottom: 10px;
     }
 }
