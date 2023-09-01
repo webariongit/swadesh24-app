@@ -1,408 +1,414 @@
 <ion-content [fullscreen]="true" class="header-padding-top">
-  <ng-container *ngIf="latestNews">
-    <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false" autoplay-delay="2500" autoplay-disable-on-interaction="true">
-      <swiper-slide  *ngFor="let news of latestNews">
-        <app-news-box [news]="news"></app-news-box>
-      </swiper-slide>
-    </swiper-container>
+  <ng-container *ngIf="isNetworkAvailable">
+    <ng-container *ngIf="latestNews">
+      <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false" autoplay-delay="2500" autoplay-disable-on-interaction="true">
+        <swiper-slide  *ngFor="let news of latestNews">
+          <app-news-box [news]="news"></app-news-box>
+        </swiper-slide>
+      </swiper-container>
+    </ng-container>
+    <ion-card class="skeleton-card" *ngIf="!latestNews">
+      <ion-skeleton-text class="news-box-img-skel" [animated]="true"></ion-skeleton-text>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-skeleton-text class="news-box-avatar-skel"  [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="10">
+          <ion-skeleton-text class="news-author-name-skel" style="width:70%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+      </ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+        <ion-col size="3" class="ion-text-right">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-grid class="trending-topic-sec" *ngIf="category">
+      <ion-grid class="section-header">
+        <h4>Trending Topics</h4>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+        <swiper-slide  *ngFor="let category of category; let i = index">
+          <app-trending-topics [category]="category" [index]="i"></app-trending-topics>
+        </swiper-slide>
+      </swiper-container>
+    </ion-grid>
+    <ion-grid class="trending-topic-sec" *ngIf="!category">
+      <ion-row>
+        <ion-col size="12">
+          <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="6" class="category-skel">
+          <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2">
+              <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
+              <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6" class="category-skel">
+          <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9">
+              <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
+              <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid  class="news-list" *ngIf="newsCategory">
+      <ion-grid class="section-header">
+        <h4>News</h4>
+        <a (click)="gotoPage(newsCategory?.category_id)" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <ng-container *ngFor="let news of newsCategory?.news.data; let i=index;">
+        <ng-container *ngIf="i < 4">
+          <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
+        </ng-container>
+      </ng-container>
+    </ion-grid>
+    <ion-grid *ngIf="!newsCategory">
+      <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+    </ion-grid>
+    <ion-grid class="trending-topic-sec" *ngIf="storyList">
+      <ion-grid class="section-header">
+        <h4>Visual Stories</h4>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
+        <swiper-slide  *ngFor="let story of storyList">
+          <app-stories-box [story]="story"></app-stories-box>
+        </swiper-slide>
+      </swiper-container>
+    </ion-grid>
+    <ion-grid *ngIf="!storyList">
+      <ion-row>
+        <ion-col size="6">
+          <ion-skeleton-text class="skel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="6">
+          <ion-skeleton-text class="skel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid  class="news-list" *ngIf="sportsCategory">
+      <ion-grid class="section-header">
+        <h4>Sports</h4>
+        <a (click)="gotoPage(sportsCategory?.category_id)" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <ng-container *ngFor="let news of sportsCategory?.news.data; let i=index;">
+        <ng-container *ngIf="i < 4">
+          <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
+        </ng-container>
+      </ng-container>
+    </ion-grid>
+    <ion-grid  *ngIf="!sportsCategory">
+      <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+    </ion-grid>
+    <ion-grid class="entertainment-sec" *ngIf="entertainmentList">
+      <ion-grid class="section-header">
+        <h4>Entertainment</h4>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" autoplay-disable-on-interaction="false">
+        <swiper-slide *ngFor="let entertainment of entertainmentList?.news.data">
+          <app-entertainment-box [entertainment]="entertainment"></app-entertainment-box>
+        </swiper-slide>
+      </swiper-container>
+    </ion-grid>
+    <ion-card class="skeleton-card" *ngIf="!entertainmentList">
+      <ion-skeleton-text class="news-box-img-skel" [animated]="true"></ion-skeleton-text>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-skeleton-text class="news-box-avatar-skel"  [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="10">
+          <ion-skeleton-text class="news-author-name-skel" style="width:70%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+      <ion-grid>
+        <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+        <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+      </ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="3"></ion-col>
+        <ion-col size="3" class="ion-text-right">
+          <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-grid class="news-list" *ngIf="businessCategory">
+      <ion-grid class="section-header">
+        <h4>Business</h4>
+        <a (click)="gotoPage(businessCategory?.category_id)" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <ng-container *ngFor="let news of businessCategory?.news.data; let i=index;">
+        <ng-container *ngIf="i < 4">
+          <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
+        </ng-container>
+      </ng-container>
+    </ion-grid>
+    <ion-grid *ngIf="!businessCategory">
+      <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+      <ion-card class="skeleton-card">
+        <ion-row>
+          <ion-col size="8">
+            <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+            <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            <ion-row>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="3"></ion-col>
+              <ion-col size="3" class="ion-text-right">
+                <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4">
+            <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+          </ion-col>
+        </ion-row> 
+      </ion-card>
+    </ion-grid>
   </ng-container>
-  <ion-card class="skeleton-card" *ngIf="!latestNews">
-    <ion-skeleton-text class="news-box-img-skel" [animated]="true"></ion-skeleton-text>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2">
-        <ion-skeleton-text class="news-box-avatar-skel"  [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="10">
-        <ion-skeleton-text class="news-author-name-skel" style="width:70%" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-    </ion-row>
-    <ion-grid>
-      <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-      <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-    </ion-grid>
-    <ion-row>
-      <ion-col size="3">
-        <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="3">
-        <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="3"></ion-col>
-      <ion-col size="3" class="ion-text-right">
-        <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-  <ion-grid class="trending-topic-sec" *ngIf="category">
-    <ion-grid class="section-header">
-      <h4>Trending Topics</h4>
-    </ion-grid>
-    <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-      <swiper-slide  *ngFor="let category of category; let i = index">
-        <app-trending-topics [category]="category" [index]="i"></app-trending-topics>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid>
-  <ion-grid class="trending-topic-sec" *ngIf="!category">
-    <ion-row>
-      <ion-col size="12">
-        <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="6" class="category-skel">
-        <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="2">
-            <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
-          </ion-col>
-          <ion-col size="10">
-            <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
-            <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-      <ion-col size="6" class="category-skel">
-        <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="3">
-            <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
-          </ion-col>
-          <ion-col size="9">
-            <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
-            <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid  class="news-list" *ngIf="newsCategory">
-    <ion-grid class="section-header">
-      <h4>News</h4>
-      <a (click)="gotoPage(newsCategory?.category_id)" class="view-all-btn">
-        View All
-      </a>
-    </ion-grid>
-    <ng-container *ngFor="let news of newsCategory?.news.data; let i=index;">
-      <ng-container *ngIf="i < 4">
-        <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
-      </ng-container>
-    </ng-container>
-  </ion-grid>
-  <ion-grid *ngIf="!newsCategory">
-    <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
+  <ng-container *ngIf="!isNetworkAvailable">
+    <ion-card class="no-internet">
+      <ion-card-content class="ion-text-center">
+        <ion-img src="./assets/img/no-wifi.png"></ion-img>
+        <ion-text>
+          <h4>Oops...</h4>
+        </ion-text>
+        <ion-text>
+          <p>There is a connection error. Please check your internet and try again.</p>
+        </ion-text>
+      </ion-card-content>
     </ion-card>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-  </ion-grid>
-  <ion-grid class="trending-topic-sec" *ngIf="storyList">
-    <ion-grid class="section-header">
-      <h4>Visual Stories</h4>
-    </ion-grid>
-    <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
-      <swiper-slide  *ngFor="let story of storyList">
-        <app-stories-box [story]="story"></app-stories-box>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid>
-  <ion-grid *ngIf="!storyList">
-    <ion-row>
-      <ion-col size="6">
-        <ion-skeleton-text class="skel-stroy" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="6">
-        <ion-skeleton-text class="skel-stroy" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid  class="news-list" *ngIf="sportsCategory">
-    <ion-grid class="section-header">
-      <h4>Sports</h4>
-      <a (click)="gotoPage(sportsCategory?.category_id)" class="view-all-btn">
-        View All
-      </a>
-    </ion-grid>
-    <ng-container *ngFor="let news of sportsCategory?.news.data; let i=index;">
-      <ng-container *ngIf="i < 4">
-        <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
-      </ng-container>
-    </ng-container>
-  </ion-grid>
-  <ion-grid  *ngIf="!sportsCategory">
-    <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-  </ion-grid>
-  <ion-grid class="entertainment-sec" *ngIf="entertainmentList">
-    <ion-grid class="section-header">
-      <h4>Entertainment</h4>
-    </ion-grid>
-    <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" autoplay-disable-on-interaction="false">
-      <swiper-slide *ngFor="let entertainment of entertainmentList?.news.data">
-        <app-entertainment-box [entertainment]="entertainment"></app-entertainment-box>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid>
-  <ion-card class="skeleton-card" *ngIf="!entertainmentList">
-    <ion-skeleton-text class="news-box-img-skel" [animated]="true"></ion-skeleton-text>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="2">
-        <ion-skeleton-text class="news-box-avatar-skel"  [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="10">
-        <ion-skeleton-text class="news-author-name-skel" style="width:70%" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-    </ion-row>
-    <ion-grid>
-      <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-      <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-    </ion-grid>
-    <ion-row>
-      <ion-col size="3">
-        <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="3">
-        <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-      <ion-col size="3"></ion-col>
-      <ion-col size="3" class="ion-text-right">
-        <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-  <ion-grid class="news-list" *ngIf="businessCategory">
-    <ion-grid class="section-header">
-      <h4>Business</h4>
-      <a (click)="gotoPage(businessCategory?.category_id)" class="view-all-btn">
-        View All
-      </a>
-    </ion-grid>
-    <ng-container *ngFor="let news of businessCategory?.news.data; let i=index;">
-      <ng-container *ngIf="i < 4">
-        <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
-      </ng-container>
-    </ng-container>
-  </ion-grid>
-  <ion-grid *ngIf="!businessCategory">
-    <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-    <ion-card class="skeleton-card">
-      <ion-row>
-        <ion-col size="8">
-          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
-          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
-          <ion-row>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-            <ion-col size="3"></ion-col>
-            <ion-col size="3" class="ion-text-right">
-              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <ion-col size="4">
-          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
-        </ion-col>
-      </ion-row> 
-    </ion-card>
-  </ion-grid>
-  <!-- <ion-grid class="raffel-draw-banner">
-    <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" [pagination]="true" autoplay-disable-on-interaction="false" pagination-clickable="true" >
-      <swiper-slide *ngFor="let data of sliderData">
-        <div class="raffle-banner">
-          <ion-img src="./assets/img/raffle-banner.png"
-          alt=""></ion-img>
-        </div>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid> -->
+  </ng-container>
+
 </ion-content>

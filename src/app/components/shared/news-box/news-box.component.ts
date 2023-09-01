@@ -21,6 +21,6 @@ export class NewsBoxComponent  implements OnInit {
   }
 
   gotoAuthorDetails(id:any){
-
+    this.router.navigate(['author-details', id])
   }
 }

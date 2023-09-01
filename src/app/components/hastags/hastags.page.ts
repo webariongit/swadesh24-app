@@ -11,10 +11,13 @@ import { HttpService } from 'src/app/service/http-service/http.service';
 })
 export class HastagsPage implements OnInit {
   currentPage:number = 1
-  followedHastagList:any
+  followedHastagList:any;
+  loading:boolean  = false;
   unfollowedHastagList:any;
   listFollowed:number = 5;
   listfollow:number = 5;
+  
+
   constructor(
     private router:Router,
     private httpService:HttpService,
@@ -33,8 +36,10 @@ export class HastagsPage implements OnInit {
     this.followedHastagList = [];
     this.unfollowedHastagList = [];
     let apiUrl = apiRoutes.hastag_list + '?page=' + this.currentPage
+    this.loading = true;
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
+        this.loading = false;
         let hastag = v.response;
         for(var i=0; i < hastag?.length; i++){
           if(hastag[i]?.follows === 1){
@@ -45,7 +50,8 @@ export class HastagsPage implements OnInit {
         }
       },
       error:(e:any)=>{
-
+        this.loading = false;
+        console.log(e)
       }
     })
   }

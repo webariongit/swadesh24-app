@@ -15,6 +15,7 @@ export class StoriesPage implements OnInit {
   currentPage: number = 1;
   totalPage:number = 1;
   firstLoad:boolean = true;
+
   constructor(
     private httpService:HttpService
   ) { }
@@ -24,9 +25,9 @@ export class StoriesPage implements OnInit {
   }
 
   getStoryList(){
-    this.loader = true;
     this.storyList = [];
     if((this.currentPage < this.totalPage) ||  this.firstLoad){
+      this.loader = true;
       let apiUrl = apiRoutes.story_list + '?page=' + this.currentPage
       this.httpService.get(apiUrl).subscribe({
         next:(v:any) =>{

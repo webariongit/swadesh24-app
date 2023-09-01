@@ -18,5 +18,7 @@ export class ArticlesBoxComponent  implements OnInit {
     this.router.navigate(['article-details', id])
   }
 
-
+  gotoAuthorDetails(id:any){
+    this.router.navigate(['author-details', id])
+  }
 }

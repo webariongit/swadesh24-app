@@ -30,5 +30,7 @@ export const apiRoutes = {
     about_us:'about-us',
     contact_details:'contact-detail',
     enquiry:'enquiry',
-    social_login:'social-login'
+    social_login:'social-login',
+    search:'search',
+    author_details:'author-details'
 }

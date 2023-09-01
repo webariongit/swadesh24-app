@@ -5,7 +5,7 @@ import { apiRoutes } from 'src/app/constant/config';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { HttpService } from 'src/app/service/http-service/http.service';
 import { CommonService } from 'src/app/service/common-service/common.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -17,6 +17,7 @@ export class MyProfilePage implements OnInit {
   countryCode:any = '+91';
   userDetails:any;
   profileImage:any;
+  mode:any;
   mobileCountryCode:any = [
     {
       code: "+7 840",
@@ -998,10 +999,14 @@ export class MyProfilePage implements OnInit {
     private httpService:HttpService,
     private commonService:CommonService,
     private router:Router,
+    private activatedRoute:ActivatedRoute
   ) {
     this.httpService.userDetail.subscribe((response)=>{
       this.userDetails = response
       this.initializeForm(this.userDetails)
+    })
+    this.activatedRoute.params.subscribe((params:any)=>{
+      this.mode = params['mode']
     })
   }
 
@@ -1030,20 +1035,6 @@ export class MyProfilePage implements OnInit {
       }
     }
   }
-
-  toDataURL(url:any, callback:any) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        var reader = new FileReader();
-        reader.onloadend = function () {
-            callback(reader.result);
-        }
-        reader.readAsDataURL(xhr.response);
-    };
-    xhr.open('GET', url);
-    xhr.responseType = 'blob';
-    xhr.send();
-}
 
   async openImages(){
     const actionSheet = await this.actionSheetCtrl.create({
@@ -1109,10 +1100,6 @@ export class MyProfilePage implements OnInit {
       const file = this.DataURIToBlob(this.profileImage);
       console.log(file);
       formData.append('profile_image', file, 'my_img.jpg');
-    }else{
-      this.toDataURL(this.profileImage, function (dataUrl:any) {
-        console.log('image  url', dataUrl)
-      })
     }
     let apiUrl = apiRoutes.update_profile
     this.httpService.post(apiUrl, formData).subscribe({
@@ -1122,9 +1109,17 @@ export class MyProfilePage implements OnInit {
           this.httpService.updateUserDetails();
           this.commonService.userLoggedIn.emit()
           this.router.navigate(['home'])
-          this.commonService.presentSuccessToast(v.message);
+          if(v.message){
+            this.commonService.presentSuccessToast(v.message);
+          }else if(v.response){
+            this.commonService.presentSuccessToast(v.response);
+          }
         }else{
-          this.commonService.presentFailureToast(v.message);
+          if(v.message){
+            this.commonService.presentFailureToast(v.message);
+          }else if(v.response){
+            this.commonService.presentSuccessToast(v.response);
+          }
         }
         if(v.errors){
           this.formErrors = v.errors

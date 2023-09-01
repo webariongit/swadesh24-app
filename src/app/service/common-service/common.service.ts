@@ -8,7 +8,8 @@ export class CommonService {
   userProfileDetail:any;
   @Output() userLoggedIn: EventEmitter<any> = new EventEmitter();
   @Output() userLoggedOut: EventEmitter<any> = new EventEmitter();
-
+  @Output() networkConnection: EventEmitter<any> = new EventEmitter();
+  isOnline:boolean = false;
 
   constructor(
     private toastController:ToastController

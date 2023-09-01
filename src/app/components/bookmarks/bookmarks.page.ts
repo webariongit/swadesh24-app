@@ -13,6 +13,7 @@ export class BookmarksPage implements OnInit {
   audioNews:any;
   videoNews:any;
   bookMarkDetails:any;
+  loading:boolean = false;
 
   constructor(
     private httpService:HttpService
@@ -27,9 +28,11 @@ export class BookmarksPage implements OnInit {
     this.readNews = [];
     this.videoNews = [];
     this.audioNews = [];
+    this.loading = true;
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
         this.bookMarkDetails = v?.response
+        this.loading = false;
         for(var i=0; i < this.bookMarkDetails?.length; i++){
           if(this.bookMarkDetails[i]?.contents_type == 'text' || this.bookMarkDetails[i]?.contents_type == 'image'){
             this.readNews.push(this.bookMarkDetails[i])
@@ -41,7 +44,8 @@ export class BookmarksPage implements OnInit {
         }
       },
       error:(e:any)=>{
-        
+        console.log(e)
+        this.loading = false;
       }
     })
   }

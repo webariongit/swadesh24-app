@@ -1046,8 +1046,11 @@ export class LoginPage implements OnInit {
           this.commonService.userLoggedIn.emit();
           this.httpService.updateUserDetails()
           this.validationForm.reset();
-          this.navigateToHomePage();
-          this.isLogin = true
+          if(v?.flag==1){
+            this.navigateToProfilePage()
+          }else{
+            this.navigateToHomePage();
+          }
         }else{
           this.commonService.presentFailureToast(v.error.message)
         }
@@ -1127,7 +1130,11 @@ export class LoginPage implements OnInit {
           this.commonService.userLoggedIn.emit();
           this.httpService.updateUserDetails()
           this.validationForm.reset();
-          this.navigateToHomePage();
+          if(v?.flag==1){
+            this.navigateToProfilePage()
+          }else{
+            this.navigateToHomePage();
+          }
           this.isLogin = true
         }else{
           this.commonService.presentFailureToast(v.error.message)
@@ -1142,7 +1149,10 @@ export class LoginPage implements OnInit {
   }
 
   navigateToHomePage(){
-    this.router.navigate(['my-profile'])
+    this.router.navigate(['home'])
   }
 
+  navigateToProfilePage(){
+    this.router.navigate(['my-profile', 'update'])
+  }
 }

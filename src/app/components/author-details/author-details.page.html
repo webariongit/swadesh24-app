@@ -12,66 +12,170 @@
       <ion-title size="large">author-details</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card class="author-card">
+  <ion-card class="author-card" *ngIf="authorDetails">
     <ion-card-content>
       <ion-row class="ion-align-items-center">
         <ion-col size="3">
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="./assets/img/avatar.png" />
+            <img alt="Silhouette of a person's head" [src]="authorDetails?.base_url + authorDetails?.profile_image" />
           </ion-avatar>
         </ion-col>
         <ion-col size="9">
-          <ion-label class="text-h4">Falconar Agnes</ion-label>
-          <ion-label class="text-h6">falconaragnes@gmail.com</ion-label>
+          <ion-label class="text-h4">{{authorDetails?.first_name}} {{authorDetails?.last_name}}</ion-label>
+          <ion-label class="text-h6">{{authorDetails?.email}}</ion-label>
         </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
-  <ion-segment class="bookmark-list" [(ngModel)]="segmentButton" [scrollable]="true">
-    <ion-segment-button value="news">
-      <ion-label><ion-icon name="reader-outline"></ion-icon> News <span class="count-badge">3</span></ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="shows">
-      <ion-label><ion-icon name="play-outline"></ion-icon> Shows <span class="count-badge">4</span></ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="listen">
-      <ion-label><ion-icon name="musical-notes-outline"></ion-icon> Listen <span class="count-badge">2</span></ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="stories">
-      <ion-label><ion-icon name="reader-outline"></ion-icon> Stories <span class="count-badge">2</span></ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  <div *ngIf="segmentButton == 'news'">
-    <app-news-list-box></app-news-list-box>
-    <app-news-list-box></app-news-list-box>
-    <app-news-list-box></app-news-list-box>
-  </div>
-  <div *ngIf="segmentButton == 'shows'">
-    <app-news-list-box></app-news-list-box>
-    <app-news-list-box></app-news-list-box>
-    <app-news-list-box></app-news-list-box>
-    <app-news-list-box></app-news-list-box>
-  </div>
-  <div *ngIf="segmentButton == 'listen'">
-    <app-news-list-box></app-news-list-box>
-    <app-news-list-box></app-news-list-box>
-  </div>
-  <div *ngIf="segmentButton == 'stories'">
-    <ion-grid>
+  <ion-card class="author-card" *ngIf="!authorDetails">
+    <ion-skeleton-text class="suthor-details-skel" [animated]="true"></ion-skeleton-text>
+  </ion-card>
+  <ng-container *ngIf="!loading">
+    <ion-segment class="bookmark-list" [(ngModel)]="segmentButton" [scrollable]="true">
+      <ion-segment-button value="news">
+        <ion-label><ion-icon name="reader-outline"></ion-icon> News <span class="count-badge">{{authorReadNews?.length || 0}}</span></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="shows">
+        <ion-label><ion-icon name="play-outline"></ion-icon> Video <span class="count-badge">{{authorWatchNews?.length || 0}}</span></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="listen">
+        <ion-label><ion-icon name="musical-notes-outline"></ion-icon> Audio <span class="count-badge">{{authoListenNews?.length || 0}}</span></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="stories">
+        <ion-label><ion-icon name="reader-outline"></ion-icon> Stories <span class="count-badge">{{authorStories?.length || 0}}</span></ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <div *ngIf="segmentButton == 'news'">
+      <ng-container *ngFor="let news of authorReadNews">
+        <app-news-list-box [news]="news" [baseUrl]="news?.base_url" [authorNews]="true"></app-news-list-box>
+      </ng-container>
+      <ion-grid class="no-list-found" *ngIf="authorReadNews?.length == 0">
+        <ion-text class="ion-text-center">
+          <h4>No Data Found</h4>
+        </ion-text>
+      </ion-grid>
+    </div>
+    <div *ngIf="segmentButton == 'shows'">
+      <ng-container *ngFor="let news of authorWatchNews">
+        <app-news-list-box [news]="news" [baseUrl]="news?.base_url" [authorNews]="true"></app-news-list-box>
+      </ng-container>
+      <ion-grid class="no-list-found" *ngIf="authorWatchNews?.length == 0">
+        <ion-text class="ion-text-center">
+          <h4>No Data Found</h4>
+        </ion-text>
+      </ion-grid>
+    </div>
+    <div *ngIf="segmentButton == 'listen'">
+      <ng-container *ngFor="let news of authoListenNews">
+        <app-news-list-box [news]="news" [baseUrl]="news?.base_url" [authorNews]="true"></app-news-list-box>
+      </ng-container>
+      <ion-grid class="no-list-found" *ngIf="authoListenNews?.length == 0">
+        <ion-text class="ion-text-center">
+          <h4>No Data Found</h4>
+        </ion-text>
+      </ion-grid>
+    </div>
+    <div *ngIf="segmentButton == 'stories'">
+      <ion-grid>
+        <ion-row> 
+          <ion-col size="6" *ngFor="let story of authorStories">
+            <app-stories-box [story]="story"></app-stories-box>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid class="no-list-found" *ngIf="authorStories?.length == 0">
+        <ion-text class="ion-text-center">
+          <h4>No Data Found</h4>
+        </ion-text>
+      </ion-grid>
+    </div>
+  </ng-container>
+  <ion-grid *ngIf="loading">
+    <ion-row>
+      <ion-col>
+        <ion-skeleton-text class="tab-butoton-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+      <ion-col>
+        <ion-skeleton-text class="tab-butoton-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+      <ion-col>
+        <ion-skeleton-text class="tab-butoton-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+      <ion-col>
+        <ion-skeleton-text class="tab-butoton-skel" [animated]="true"></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+    <ion-card class="skeleton-card">
       <ion-row>
-        <ion-col size="6">
-          <app-stories-box></app-stories-box>
+        <ion-col size="8">
+          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+          <ion-row>
+            <ion-col size="3">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3"></ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
         </ion-col>
-        <ion-col size="6">
-          <app-stories-box></app-stories-box>
+        <ion-col size="4">
+          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
         </ion-col>
-        <ion-col size="6">
-          <app-stories-box></app-stories-box>
+      </ion-row> 
+    </ion-card>
+    <ion-card class="skeleton-card">
+      <ion-row>
+        <ion-col size="8">
+          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+          <ion-row>
+            <ion-col size="3">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3"></ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
         </ion-col>
-        <ion-col size="6">
-          <app-stories-box></app-stories-box>
+        <ion-col size="4">
+          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
         </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+      </ion-row> 
+    </ion-card>
+    <ion-card class="skeleton-card">
+      <ion-row>
+        <ion-col size="8">
+          <ion-skeleton-text class="skel-bandage" style="width:40%" [animated]="true"></ion-skeleton-text>
+          <ion-skeleton-text class="news-title-skel" [animated]="true"></ion-skeleton-text>
+          <ion-skeleton-text class="news-sub-title-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+          <ion-row>
+            <ion-col size="3">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="3"></ion-col>
+            <ion-col size="3" class="ion-text-right">
+              <ion-skeleton-text class="news-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="4">
+          <ion-skeleton-text class="skel-list-thumb-img" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row> 
+    </ion-card>
+  </ion-grid>
 </ion-content>

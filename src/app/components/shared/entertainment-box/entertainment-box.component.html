@@ -1,5 +1,5 @@
 <ion-card class="entertainment-box">
-  <ion-grid class="entertainment-img">
+  <ion-grid class="entertainment-img" (click)="gotoDetails(entertainment?.id)">
     <a href="#" class="play-btn">
       <ion-img
         src="./assets/img/video-icon.svg"
@@ -19,12 +19,12 @@
       <ion-col size="6" class="ion-no-padding">
         <ion-row class="ion-align-items-center">
           <ion-col size="3" class="ion-no-padding">
-            <ion-avatar class="author-avatar-img">
+            <ion-avatar class="author-avatar-img" (click)="gotoAuthorDetails(entertainment?.author_id)">
               <img [src]="entertainment?.base_url + entertainment?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
             </ion-avatar>
           </ion-col>
           <ion-col size="9" class="ion-no-padding">
-            <ion-text class="text-h4">{{entertainment?.first_name}} {{entertainment?.last_name}} </ion-text>
+            <ion-text class="text-h4" (click)="gotoAuthorDetails(entertainment?.author_id)">{{entertainment?.first_name}} {{entertainment?.last_name}} </ion-text>
             <ion-text class="text-h6">{{entertainment?.updated_at | date}}</ion-text>
           </ion-col>
         </ion-row>
@@ -34,6 +34,6 @@
         <app-comment-btn></app-comment-btn>
       </ion-col>
     </ion-row>
-    <h4>{{entertainment?.title}}</h4>
+    <h4 (click)="gotoDetails(entertainment?.id)">{{entertainment?.title}}</h4>
   </ion-card-content>
 </ion-card>

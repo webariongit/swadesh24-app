@@ -15,6 +15,7 @@ export class ContactUsPage implements OnInit {
   countryCode:any = '+91';
   contactDetails:any;
   validationForm:FormGroup;
+  loading:boolean = false;
   mobileCountryCode:any = [
     {
       code: "+7 840",
@@ -1027,13 +1028,19 @@ export class ContactUsPage implements OnInit {
   }
 
   getContent(){
+    this.loading = true;
     let apiUrl = apiRoutes.contact_details
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
-        this.contactDetails = v.response[0]
+        this.contactDetails = v.response[0];
+        this.loading = false;
       },
       error:(e:any)=>{
-
+        this.loading = false;
+        if (e.status == 401) {
+          this.commonService.clearLocalStorage();
+          this.router.navigate(['login']); 
+        }
       }
     })
   }

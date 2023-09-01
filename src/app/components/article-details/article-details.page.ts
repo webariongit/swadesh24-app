@@ -52,8 +52,8 @@ export class ArticleDetailsPage implements OnInit {
     this.newsViews();
   }
 
-  gotoAuthorDetails(){
-    this.router.navigate(['author-details'])
+  gotoAuthorDetails(id:any){
+    this.router.navigate(['author-details', id])
   }
 
   async shareNews(news:any){
@@ -101,6 +101,7 @@ export class ArticleDetailsPage implements OnInit {
       }
     })
   }
+  
 
   getNewsComments(id:any){
     let apiUrl = apiRoutes.comment_list + '?news_id=' + id;

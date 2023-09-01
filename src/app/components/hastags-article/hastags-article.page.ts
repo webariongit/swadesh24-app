@@ -16,6 +16,7 @@ export class HastagsArticlePage implements OnInit {
   readNews:any;
   videoNews:any;
   audioNews:any;
+  loading:boolean  = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -37,9 +38,11 @@ export class HastagsArticlePage implements OnInit {
     this.videoNews = [];
     this.audioNews = [];
     let apiUrl = apiRoutes.hastag_list + '?hashtag_id=' + id
+    this.loading = true;
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
-        this.hastagDetails = v?.response?.data
+        this.loading = false;
+        this.hastagDetails = v?.response?.data;
         for(var i=0; i < this.hastagDetails?.length; i++){
           if(this.hastagDetails[i]?.contents_type == 'text' || this.hastagDetails[i]?.contents_type == 'image'){
             this.readNews.push(this.hastagDetails[i])
@@ -51,7 +54,8 @@ export class HastagsArticlePage implements OnInit {
         }
       },
       error:(e:any)=>{
-        
+        this.loading = false;
+        console.log(e)
       }
     })
   }

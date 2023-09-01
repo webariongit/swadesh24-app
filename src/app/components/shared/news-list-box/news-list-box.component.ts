@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class NewsListBoxComponent  implements OnInit {
   @Input() news:any;
   @Input() baseUrl:any;
+  @Input() authorNews:boolean = false;
   
   constructor(
     private router:Router
@@ -18,6 +19,10 @@ export class NewsListBoxComponent  implements OnInit {
 
   gotoDetails(id:any){
     this.router.navigate(['article-details', id])
+  }
+
+  gotoAuthorDetails(id:any){
+    this.router.navigate(['author-details', id])
   }
 
 }

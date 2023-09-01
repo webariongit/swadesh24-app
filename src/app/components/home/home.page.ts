@@ -36,18 +36,35 @@ export class HomePage implements OnInit {
   businessCategory:any;
   storyList:any;
   entertainmentList:any;
+  isNetworkAvailable:boolean;
 
   constructor(
     private httpService:HttpService,
     private commonService:CommonService,
     private router:Router
-  ) { }
+  ) {
+    this.isNetworkAvailable = this.commonService.isOnline;
+    console.log("isNetworkAvailable", this.isNetworkAvailable)
+    this.commonService.networkConnection.subscribe(() => {
+      this.isNetworkAvailable = this.commonService.isOnline;
+      if (this.isNetworkAvailable) {
+        this.initializeData();
+      }
+    });
+   }
+  
 
   ngOnInit() {
-    this.getHomeData();
-    this.getStoryList();
+    this.initializeData()
   }
   
+  initializeData(){
+    if(this.isNetworkAvailable){
+      this.getHomeData();
+      this.getStoryList();
+    }
+  }
+
   gotoPage(id:any){
     this.router.navigate(['home/articles',id,'all'])
   }

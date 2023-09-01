@@ -13,9 +13,20 @@
       <ion-title size="large">about-us</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card class="about-card" *ngIf="aboutUs">
-    <ion-card-content class="about-card-content">
-      <div [innerHtml]="aboutUs.description"></div>
+  <ng-container *ngIf="!loading">
+    <ion-card class="about-card" *ngIf="aboutUs">
+      <ion-card-content class="about-card-content">
+        <div [innerHtml]="aboutUs.description"></div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ion-card class="about-card" *ngIf="loading">
+    <ion-card-content>
+      <ion-skeleton-text class="cms-heading-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
+      <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
     </ion-card-content>
   </ion-card>
 </ion-content>

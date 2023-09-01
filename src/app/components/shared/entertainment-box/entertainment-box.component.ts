@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entertainment-box',
@@ -8,8 +9,19 @@ import { Component, Input, OnInit } from '@angular/core';
 export class EntertainmentBoxComponent  implements OnInit {
   @Input() entertainment:any
   
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit(
+    
+  ) {}
 
+  gotoDetails(id:any){
+    this.router.navigate(['article-details', id])
+  }
+
+  gotoAuthorDetails(id:any){
+    this.router.navigate(['author-details', id])
+  }
 }

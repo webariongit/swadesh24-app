@@ -20,6 +20,14 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle>
+            <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false" routerLinkActive="selected" >
+              <div class="list-icon">
+                <ion-icon aria-hidden="true" name="log-out-outline" slot="start"></ion-icon>
+              </div>
+              <ion-label>Delete My Account</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle>
             <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false" routerLinkActive="selected" (click)="userLogout()">
               <div class="list-icon">
                 <ion-icon aria-hidden="true" name="log-out-outline" slot="start"></ion-icon>

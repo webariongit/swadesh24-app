@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" class="inner-page-header">
   <ion-toolbar>
     <ion-title>My Profile</ion-title>
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="this.mode == 'edit'">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
@@ -21,7 +21,9 @@
             <img [src]="profileImage" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" />
             <ion-button class="camera-btn" (click)="openImages()"><ion-icon name="camera-outline"></ion-icon></ion-button>
           </div>
-          <ion-label color="danger" *ngIf="!profileImage">Please upload your profile pic *</ion-label>
+          <div>
+            <ion-label color="danger" *ngIf="!profileImage || profileImage == null">Please upload your profile pic *</ion-label>
+          </div>
         </div>
         <ng-container *ngIf="formErrors?.profile_image">
           <ion-label color="danger" *ngFor="let validation of formErrors?.profile_image">
@@ -107,5 +109,5 @@
   </ion-card>
 </ion-content>
 <ion-footer class="ion-text-center">
-  <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">Save and Continue</ion-button>
+  <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">{{this.mode == 'edit' ? 'Update': 'Save and Continue'}}</ion-button>
 </ion-footer>

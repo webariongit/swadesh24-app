@@ -16,40 +16,73 @@
   <ion-grid class="map-img">
     <ion-img src="./assets/img/map-img.png"></ion-img>
   </ion-grid>
-  <ion-card class="contact-card" *ngIf="contactDetails">
-    <ion-card-content class="contact-card-content">
-      <h4>Contact Us</h4>
+  <ion-card class="contact-card">
+    <ng-container  *ngIf="!loading">
+      <ion-card-content class="contact-card-content" *ngIf="contactDetails">
+        <h4>Contact Us</h4>
+        <ion-list>
+          <ion-item >
+            <div class="list-icon">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <ion-label>{{contactDetails?.company_email}}</ion-label>
+          </ion-item>
+          <ion-item >
+            <div class="list-icon">
+              <ion-icon name="call-outline"></ion-icon>
+            </div>
+            <ion-label>{{contactDetails?.phone_code}} {{contactDetails?.company_contact}}</ion-label>
+          </ion-item>
+          <ion-item >
+            <div class="list-icon">
+              <ion-icon name="navigate-outline"></ion-icon>
+            </div>
+            <div>
+              <h5>{{contactDetails?.company_name}}</h5>
+              <ion-label>{{contactDetails?.company_address}}</ion-label>
+            </div>
+          </ion-item>
+        </ion-list>
+        <h4>Follow Us</h4>
+        <div class="follow-us-content">
+          <a *ngIf="contactDetails?.facebook" (click)="gotoPage(contactDetails?.facebook)" tager><ion-img src="./assets/img/follow-us/1.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.google" (click)="gotoPage(contactDetails?.google)"><ion-img src="./assets/img/follow-us/2.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.twitter" (click)="gotoPage(contactDetails?.twitter)"><ion-img src="./assets/img/follow-us/3.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.instagram" (click)="gotoPage(contactDetails?.instagram)"><ion-img src="./assets/img/follow-us/4.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.linkedin" (click)="gotoPage(contactDetails?.linkedin)"><ion-img src="./assets/img/follow-us/5.svg"></ion-img></a>
+        </div>
+      </ion-card-content>
+    </ng-container>
+    <ion-card-content *ngIf="loading">
       <ion-list>
         <ion-item >
-          <div class="list-icon">
-            <ion-icon name="mail-outline"></ion-icon>
-          </div>
-          <ion-label>{{contactDetails?.company_email}}</ion-label>
+          <ion-skeleton-text class="cms-heading-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
         </ion-item>
         <ion-item >
           <div class="list-icon">
-            <ion-icon name="call-outline"></ion-icon>
+            <ion-skeleton-text class="cms-icon-skel" [animated]="true"></ion-skeleton-text>
           </div>
-          <ion-label>{{contactDetails?.phone_code}} {{contactDetails?.company_contact}}</ion-label>
+          <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
         </ion-item>
         <ion-item >
           <div class="list-icon">
-            <ion-icon name="navigate-outline"></ion-icon>
+            <ion-skeleton-text class="cms-icon-skel" [animated]="true"></ion-skeleton-text>
           </div>
-          <div>
-            <h5>{{contactDetails?.company_name}}</h5>
-            <ion-label>{{contactDetails?.company_address}}</ion-label>
+          <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
+        </ion-item>
+        <ion-item >
+          <div class="list-icon">
+            <ion-skeleton-text class="cms-icon-skel" [animated]="true"></ion-skeleton-text>
           </div>
+          <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
+        </ion-item>
+        <ion-item >
+          <div class="list-icon">
+            <ion-skeleton-text class="cms-icon-skel" [animated]="true"></ion-skeleton-text>
+          </div>
+          <ion-skeleton-text class="cms-para-skel" [animated]="true"></ion-skeleton-text>
         </ion-item>
       </ion-list>
-      <h4>Follow Us</h4>
-      <div class="follow-us-content">
-        <a *ngIf="contactDetails?.facebook" (click)="gotoPage(contactDetails?.facebook)" tager><ion-img src="./assets/img/follow-us/1.svg"></ion-img></a>
-        <a *ngIf="contactDetails?.google" (click)="gotoPage(contactDetails?.google)"><ion-img src="./assets/img/follow-us/2.svg"></ion-img></a>
-        <a *ngIf="contactDetails?.twitter" (click)="gotoPage(contactDetails?.twitter)"><ion-img src="./assets/img/follow-us/3.svg"></ion-img></a>
-        <a *ngIf="contactDetails?.instagram" (click)="gotoPage(contactDetails?.instagram)"><ion-img src="./assets/img/follow-us/4.svg"></ion-img></a>
-        <a *ngIf="contactDetails?.linkedin" (click)="gotoPage(contactDetails?.linkedin)"><ion-img src="./assets/img/follow-us/5.svg"></ion-img></a>
-      </div>
     </ion-card-content>
   </ion-card>
   <ion-card class="contact-card">

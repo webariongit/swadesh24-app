@@ -51,6 +51,17 @@
         text-overflow: ellipsis;
         line-height: 24px;
     }
+    p{
+        font-size: 13px;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 20px;
+        height: 39px;
+    }
 }
 
 .news-action-btn{

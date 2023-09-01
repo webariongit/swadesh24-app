@@ -25,13 +25,13 @@
         <h4 (click)="gotoDetails(news?.id)">{{news?.title}}</h4>
         <ion-row class="ion-align-items-center author-profile">
           <ion-col size="2" class="ion-no-padding">
-            <ion-avatar class="author-avatar-sm-img">
+            <ion-avatar class="author-avatar-sm-img" (click)="gotoAuthorDetails(news?.author_id)">
               <img [src]="news?.base_url + news?.profile_image" alt="">
             </ion-avatar>
           </ion-col>
           <ion-col size="10" class="ion-no-padding">
             <ion-row class="ion-align-items-center">
-              <ion-text class="text-h4">{{news?.first_name}} {{news?.last_name}} </ion-text> <span class="dot"></span>
+              <ion-text class="text-h4" (click)="gotoAuthorDetails(news?.author_id)">{{news?.first_name}} {{news?.last_name}} </ion-text> <span class="dot"></span>
               <ion-text class="text-h6">{{news?.updated_at | date}}</ion-text>
             </ion-row>
           </ion-col>

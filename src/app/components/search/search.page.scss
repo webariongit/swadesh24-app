@@ -23,6 +23,10 @@
     }
 }
 
+.search-img-skel{
+    height: 200px;
+}
+
 ion-item{
     font-size: 14px;
     --inner-border-width:0;
@@ -35,5 +39,18 @@ ion-item{
         font-size: 14px;
         color: #334155;
         font-weight:500;
+    }
+}
+
+.no-result-found{
+    ion-img{
+        width: 130px;
+        margin:0px auto 20px;
+    }
+    h4{
+        font-size: 20px;
+        font-weight: 700;
+        color: #000;
+        margin-bottom: 15px;
     }
 }
