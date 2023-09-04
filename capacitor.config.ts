@@ -12,9 +12,13 @@ const config: CapacitorConfig = {
       scopes: ["profile","email"],
       serverClientId: '342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
+    },
+    SplashScreen: {
+      launchShowDuration: 3000,
+      launchAutoHide: false,
+      backgroundColor: "#ffffffff"
     }
   }
-
 };
 
 export default config;

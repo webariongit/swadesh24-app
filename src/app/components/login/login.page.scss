@@ -31,10 +31,18 @@ ion-title{
     }
     .mobile-code-field{
         min-height:46px;
+        --padding-start: 8px;
+        --padding-end: 8px;
     }
     .form-field{
         min-height:46px;
     }
+}
+
+.chang-number{
+    font-size: 12px;
+    font-style: italic;
+    color: #3F3F97;
 }
 
 .social-login-btn{
@@ -58,7 +66,6 @@ ion-title{
 .contact-number{
     margin-bottom: 10px;
     ion-label{
-        color: #0A1026;
         font-size: 14px;
         margin-bottom: 6px;
         display: inline-block;

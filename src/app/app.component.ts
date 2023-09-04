@@ -7,6 +7,7 @@ import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { Location } from '@angular/common';
 import { App } from '@capacitor/app';
 import { Router } from '@angular/router';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 register();
 @Component({
@@ -89,12 +90,19 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      if (this.commonService.getUserToken()) {
-        this.navCtrl.navigateRoot('home');
-      }else{
-        this.navCtrl.navigateRoot('login');
-        // GoogleAuth.initialize()
-      }
+      setTimeout(async()=>{
+        SplashScreen.hide();
+      },500);
+      setTimeout(() => {
+        if (this.commonService.getUserToken()) {
+          this.navCtrl.navigateRoot('home');
+          
+        }else{
+          this.navCtrl.navigateRoot('login');
+          // GoogleAuth.initialize()
+        }
+      }, 3000);
+      
     });
 
   }

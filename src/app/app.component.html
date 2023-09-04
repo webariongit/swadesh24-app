@@ -6,9 +6,15 @@
           <ion-avatar>
             <img [src]="userDetails?.base_url + userDetails?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
           </ion-avatar>
-          <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
-          <ion-note>{{userDetails?.email}}</ion-note>
-          <ion-note>{{userDetails?.contact}}</ion-note>
+          <ion-text>
+            <h4>{{userDetails?.first_name}} {{userDetails?.last_name}}</h4>
+          </ion-text>
+          <ion-text>
+            <p>{{userDetails?.email}}</p>
+          </ion-text>
+          <ion-text>
+            <p>{{userDetails?.contact}}</p>
+          </ion-text>
         </ion-grid>
         <ion-list id="inbox-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
@@ -20,9 +26,9 @@
             </ion-item>
           </ion-menu-toggle>
           <ion-menu-toggle>
-            <ion-item routerDirection="root" routerLink="/login" lines="none" detail="false" routerLinkActive="selected" >
+            <ion-item routerDirection="root" routerLink="/delete-my-account" lines="none" detail="false" routerLinkActive="selected" >
               <div class="list-icon">
-                <ion-icon aria-hidden="true" name="log-out-outline" slot="start"></ion-icon>
+                <ion-icon aria-hidden="true" name="person-circle-outline" slot="start"></ion-icon>
               </div>
               <ion-label>Delete My Account</ion-label>
             </ion-item>

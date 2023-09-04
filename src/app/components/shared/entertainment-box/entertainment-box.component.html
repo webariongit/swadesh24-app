@@ -1,6 +1,6 @@
 <ion-card class="entertainment-box">
   <ion-grid class="entertainment-img" (click)="gotoDetails(entertainment?.id)">
-    <a href="#" class="play-btn">
+    <a (click)="gotoDetails(entertainment?.id)" class="play-btn">
       <ion-img
         src="./assets/img/video-icon.svg"
         alt=""

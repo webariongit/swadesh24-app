@@ -972,23 +972,29 @@ export class LoginPage implements OnInit {
     }
   ]
   isModalOpen = false;
-  checkCheckbox:any;
+  checkCheckbox:boolean = false;
   isLogin:boolean = true;
   otpErrorMessage:any;
   isLoading:boolean = false;
+  loading:boolean = false
   modalTitle:any;
-  
+  validationError:any;
+  pageContent:any;
   validation_messages = {
     mobileNo: [
       {
+        type: 'required',
+        message: 'Mobile Number is Required',
+      },
+      {
         type: 'wrongNumber',
-        message: 'Invalid mobile number.',
+        message: 'Invalid Mobile Number.',
       },
     ],
     countryCode: [
       {
         type: 'required',
-        message: 'Country Code is required',
+        message: 'Country Code is Required',
       },
     ]
   };
@@ -1011,7 +1017,6 @@ export class LoginPage implements OnInit {
     this.validationForm = this.formBuilder.group({
       countryCode:['', Validators.required],
       mobileNo:['',[Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
-      checkboxCheck:['', Validators.required],
     })
     for(var i=0; i < this.mobileCountryCode?.length; i++){
       if(this.mobileCountryCode[i].name === 'India'){
@@ -1019,6 +1024,22 @@ export class LoginPage implements OnInit {
       }
     }
   }
+
+  changeNumber(){
+    this.validationForm.reset();
+    for(var i=0; i < this.mobileCountryCode?.length; i++){
+      if(this.mobileCountryCode[i].name === 'India'){
+        this.validationForm.controls['countryCode'].setValue(this.mobileCountryCode[i].code)
+      }
+    }
+    this.checkCheckbox = false
+    this.isLogin = true
+  }
+
+  checkValidation(){
+    return (!this.validationForm.valid || this.checkCheckbox == false)
+  }
+  
 
 
   async googleSignin() {
@@ -1074,16 +1095,19 @@ export class LoginPage implements OnInit {
   setOpen(isOpen: boolean, type:any) {
     this.isModalOpen = isOpen;
     if(type == 'terms'){
-      this.modalTitle = 'Terms and Conditions'
+      this.modalTitle = 'Terms of Use'
+      this.getContent(this.modalTitle)
     }else {
       this.modalTitle = 'Privacy Policy'
+      this.getContent(this.modalTitle)
     }
     
   }
 
   getOtp(){
     this.isLoading = !this.isLoading;
-    const formValue = this.validationForm.value
+    const formValue = this.validationForm.value;
+    this.validationError = ''
     var formData = new FormData();
     formData.append('number', formValue.mobileNo);
     formData.append('phone_code', formValue.countryCode);
@@ -1093,6 +1117,9 @@ export class LoginPage implements OnInit {
         if(v.status == 200){
           this.isLogin = false
           this.commonService.presentSuccessToast(v.message)
+        }else if(v.status == 400){
+          this.validationError = v.error.errors;
+          console.log("validation error", this.validationError)
         }else{
           this.commonService.presentFailureToast(v.message)
         }
@@ -1137,12 +1164,12 @@ export class LoginPage implements OnInit {
           }
           this.isLogin = true
         }else{
-          this.commonService.presentFailureToast(v.error.message)
+          this.commonService.presentFailureToast(v.error.error)
         }
       },
       error: (e) => {
-        console.log(e.error)
-        this.commonService.presentFailureToast(e.error.error)
+        console.log("error", e.error)
+        this.commonService.presentFailureToast(e.error.errors)
         this.isLoading = !this.isLoading;
       },
     })
@@ -1150,6 +1177,20 @@ export class LoginPage implements OnInit {
 
   navigateToHomePage(){
     this.router.navigate(['home'])
+  }
+
+  getContent(title:any){
+    this.loading = true
+    let apiUrl = apiRoutes.about_us + '?page_name=' + title
+    this.httpService.get(apiUrl).subscribe({
+      next:(v:any) =>{
+        this.loading = false;
+        this.pageContent = v.response
+      },
+      error:(e:any)=>{
+        this.loading = false;
+      }
+    })
   }
 
   navigateToProfilePage(){

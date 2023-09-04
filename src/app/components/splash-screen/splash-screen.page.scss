@@ -1,0 +1,93 @@
+.splash-background{
+    height: 100%;
+    width: 100%;
+    background-image: url(../../../assets/img/splash-bg.webp);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-position: center;
+}
+
+.power {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.power p {
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+}
+
+.banner-content {
+    text-align: center;
+}
+
+.banner-content img {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.banner-content p {
+    color: #3f3f97;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+  
+  @-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-600px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+  }
+  
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-600px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+  }
+  @-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(200px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(300px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+  }

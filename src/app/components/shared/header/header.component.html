@@ -18,11 +18,12 @@
       </ion-col>
     </ion-row>
   </ion-toolbar>
-  <ion-segment [scrollable]="true">
+  <ion-segment [scrollable]="true" *ngIf="!loader">
     <ng-container *ngFor="let link of categoryList">
       <ion-segment-button value="{{link?.category}}" (click)="gotoPage(link?.id)">
         <ion-label>{{link?.category}}</ion-label>
       </ion-segment-button>
     </ng-container>
   </ion-segment>
+  <ion-skeleton-text *ngIf="loader" class="tab-butoton-skel" [animated]="true"></ion-skeleton-text>
 </ion-header>

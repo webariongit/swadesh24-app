@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
 })
 export class HeaderComponent  implements OnInit {
   categoryList:any;
-
+  loader:boolean = false;
   constructor(
     private router:Router,
     private httpService:HttpService
@@ -30,12 +30,14 @@ export class HeaderComponent  implements OnInit {
   }
 
   getCategoryList(){
+    this.loader = true;
     this.httpService.get(apiRoutes.category).subscribe({
       next:(v:any) =>{
+        this.loader = false;
         this.categoryList = v?.message
       },
       error:(e:any)=>{
-
+        this.loader = false;
       }
     })
   }

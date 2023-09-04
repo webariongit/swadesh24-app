@@ -127,6 +127,14 @@
           </ng-container>
       </ion-card-content>
     </ion-card>
+    <ng-container *ngIf="relatedArticles && relatedArticles?.length > 0">
+      <ion-grid class="section-header">
+        <h4>You may also like</h4>
+      </ion-grid>
+      <ng-container *ngFor="let news of relatedArticles">
+        <app-news-list-box [news]="news" [baseUrl]="news.base_url"></app-news-list-box>
+      </ng-container>
+    </ng-container>
   </ng-container>
   <ng-container *ngIf="loader">
     <ion-grid>

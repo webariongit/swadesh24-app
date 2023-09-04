@@ -4,11 +4,6 @@ import { AuthGaurdService } from './service/auth-gaurd/auth-gaurd.service';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
     path: 'home',
     loadChildren: () => import('./components/footer-tabs/footer-tabs.module').then( m => m.FooterTabsPageModule),
     canActivate: [AuthGaurdService],
@@ -74,7 +69,6 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./components/login/login.module').then( m => m.LoginPageModule),
-    canActivate: [AuthGaurdService],
   },
   {
     path: 'author-details/:id',
@@ -90,6 +84,15 @@ const routes: Routes = [
     path: 'stories-details',
     loadChildren: () => import('./components/stories-details/stories-details.module').then( m => m.StoriesDetailsPageModule),
     canActivate: [AuthGaurdService],
+  },
+  {
+    path: 'delete-my-account',
+    loadChildren: () => import('./components/delete-my-account/delete-my-account.module').then( m => m.DeleteMyAccountPageModule),
+    canActivate: [AuthGaurdService],
+  },
+  {
+    path: '',
+    loadChildren: () => import('./components/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
   },
   // {
   //   path: 'delete-my-account',

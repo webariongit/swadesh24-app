@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" class="inner-page-header">
   <ion-toolbar>
-    <ion-title>My Profile</ion-title>
+    <ion-title [ngClass]="this.mode != 'edit'?'pl-2':''">My Profile</ion-title>
     <ion-buttons slot="start" *ngIf="this.mode == 'edit'">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -41,6 +41,12 @@
         </ion-grid>
         <ion-grid class="form-field">
           <ion-input aria-label="Last Name" label="Last Name" formControlName="last_name" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.last_name">
+            <ion-label color="danger"  *ngIf="validationForm.get('last_name').hasError(validation.type) &&
+                     (validationForm.get('last_name').dirty || validationForm.get('last_name').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
         </ion-grid>
         <ion-grid class="form-field">
           <ion-input aria-label="Email" label="Email *" fill="outline" formControlName="email" labelPlacement="floating"></ion-input>
@@ -66,7 +72,7 @@
               </ion-select>
             </ion-col>
             <ion-col size="9" class="ion-no-padding">
-              <ion-input aria-label="Mobile Number" type="number" placeholder="Mobile Number" formControlName="contact" fill="outline"></ion-input>
+              <ion-input aria-label="Mobile Number" type="number" placeholder="Mobile Number" readonly="userDetails?.contact" formControlName="contact" fill="outline"></ion-input>
             </ion-col>
           </ion-row>
           <ng-container *ngFor="let validation of validationMessages.contact">
@@ -109,5 +115,8 @@
   </ion-card>
 </ion-content>
 <ion-footer class="ion-text-center">
-  <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">{{this.mode == 'edit' ? 'Update': 'Save and Continue'}}</ion-button>
+  <ng-container *ngIf="validationForm">
+    <ion-button class="main-btn" [disabled]="!this.validationForm.valid || !profileImage" (click)="submitForm()">{{this.mode == 'edit' ? 'Update': 'Save and Continue'}}</ion-button>
+  </ng-container>
+  <ion-skeleton-text *ngIf="!validationForm" class="product-button-skel" style="width:80%; margin:0px auto"  [animated]="true"></ion-skeleton-text>
 </ion-footer>

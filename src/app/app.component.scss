@@ -123,10 +123,11 @@ ion-item.selected {
   h4{
     font-size: 18px;
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
   }
-  ion-note{
+  p{
     margin: 0;
+    margin-top: 10px;
     color: #fff;
   }
 }

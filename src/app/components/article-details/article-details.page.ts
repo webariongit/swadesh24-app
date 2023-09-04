@@ -26,6 +26,7 @@ export class ArticleDetailsPage implements OnInit {
   editCommentData:any;
   editcomment:any;
   modalTitle:any;
+  relatedArticles:any
   
   constructor(
     private router:Router,
@@ -95,9 +96,22 @@ export class ArticleDetailsPage implements OnInit {
           this.newsDetails.contents = this.domsanitizer.bypassSecurityTrustResourceUrl(this.newsDetails.contents)
         }
         this.getNewsComments(id)
+        this.getRelatedNews(this.newsDetails.category_id)
       },
       error:(e:any)=>{
         this.loader = false;
+      }
+    })
+  }
+
+  getRelatedNews(id:any){
+    let apiUrl = apiRoutes.news_list + '?category_id=' + id;
+    this.httpService.get(apiUrl).subscribe({
+      next:(v:any) =>{
+        this.relatedArticles = v?.response;
+        console.log("related news", this.relatedArticles)
+      },
+      error:(e:any)=>{
       }
     })
   }

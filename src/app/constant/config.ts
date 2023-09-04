@@ -32,5 +32,6 @@ export const apiRoutes = {
     enquiry:'enquiry',
     social_login:'social-login',
     search:'search',
-    author_details:'author-details'
+    author_details:'author-details',
+    delete_account:'delete-account'
 }

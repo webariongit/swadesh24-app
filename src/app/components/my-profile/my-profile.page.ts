@@ -979,7 +979,13 @@ export class MyProfilePage implements OnInit {
     first_name: [
       {
         type: 'required',
-        message: 'Name is a Required Field',
+        message: 'First Name is a Required Field',
+      },
+    ],
+    last_name: [
+      {
+        type: 'required',
+        message: 'Last Name is a Required Field',
       },
     ],
     email: [
@@ -1023,7 +1029,7 @@ export class MyProfilePage implements OnInit {
     if(userDetail != null){
       this.validationForm = this.formBuilder.group({
         first_name:[userDetail.first_name, Validators.required],
-        last_name:[userDetail.last_name],
+        last_name:[userDetail.last_name, Validators.required],
         contact:[userDetail.contact,[Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]],
         email:[userDetail.email,[ Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}')]],
         countryCode:['', Validators.required]
