@@ -19,7 +19,7 @@ export class SaveBtnComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.newsDetails?.likes == 1){
+    if(this.newsDetails?.bookmark == 1){
       this.active = true;
     }else{
       this.active = false;

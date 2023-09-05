@@ -10,6 +10,7 @@ import {
   FacebookLogin,
   FacebookLoginResponse,
 } from '@capacitor-community/facebook-login';
+import { MenuController } from '@ionic/angular';
 
 const FACEBOOK_PERMISSIONS = [
   'email',
@@ -1002,8 +1003,10 @@ export class LoginPage implements OnInit {
     private formBuilder:FormBuilder,
     private httpService:HttpService,
     private commonService:CommonService,
-    private router:Router
-  ) { 
+    private router:Router,
+    public menuCtrl: MenuController
+  ) {
+    this.menuCtrl.enable(false);
     this.commonService.userLoggedOut.subscribe(()=>{
       for(var i=0; i < this.mobileCountryCode?.length; i++){
         if(this.mobileCountryCode[i].name === 'India'){

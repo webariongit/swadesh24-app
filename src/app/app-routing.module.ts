@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGaurdService } from './service/auth-gaurd/auth-gaurd.service';
+import { LoginGaurdService } from './service/login-page/login-gaurd.service';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./components/login/login.module').then( m => m.LoginPageModule),
+    canActivate:[LoginGaurdService]
   },
   {
     path: 'author-details/:id',

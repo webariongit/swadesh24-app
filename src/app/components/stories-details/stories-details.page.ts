@@ -1,9 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Share, ShareOptions } from '@capacitor/share';
 import { ModalController } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
+import { environment } from 'src/environments/environment';
 import Swiper from 'swiper';
 
 @Component({
@@ -17,29 +20,28 @@ export class StoriesDetailsPage implements OnInit {
   loader:boolean = true;
   storyDetails:any;
   swiperEl:any = document.querySelector("swiper-container");
-  
+  ampUrl: SafeUrl | string;
+  baseUrl:any = environment.apiUrl
   constructor(
     private modalCtrl:ModalController,
     private httpService:HttpService,
-    private commonService:CommonService
+    private commonService:CommonService,
+    private router:Router,
+    private sanitizer:DomSanitizer
   ) { }
 
   ngOnInit() {
-    this.getStoryDetails(this.id)
-    this.storyViews(this.id)
+    this.ampUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/amp-story/amp-story.html?apiUrl=${this.baseUrl + apiRoutes.story_list}?story_id=${this.id}`);
+    console.log(this.ampUrl)
+    // this.getStoryDetails(this.id)
+    // this.storyViews(this.id)
   }
 
   swiper: Swiper;
 
-  ngAfterViewInit() {
-    // this.swiperEl.addEventListener("autoplaytimeleft", (e:any) => {
-    //   const [swiper, time, progress] = e.detail;
-    //   this.progressTime = `${Math.ceil(time / 1000)}s`
-    // });
-  }
-
   closeModal(){
-    this.modalCtrl.dismiss()
+    this.modalCtrl.dismiss();
+    this.router.navigate(['stories'])
   }
 
   getStoryDetails(id:any){

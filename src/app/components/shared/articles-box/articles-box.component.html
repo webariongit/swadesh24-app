@@ -2,7 +2,7 @@
   <ion-row class="ion-align-items-center">
     <ion-col size="4">
       <ion-grid class="news-list-img">
-        <ion-img (click)="gotoDetails(news?.id)" class="news-thumbs-img"
+        <ion-img (click)="gotoDetails(news?.news_id)" class="news-thumbs-img"
           [src]="news?.base_url + news?.cover_image"
           alt=""
         ></ion-img>
@@ -22,7 +22,7 @@
     </ion-col>
     <ion-col size="8">
       <ion-grid class="news-list-content">
-        <h4 (click)="gotoDetails(news?.id)">{{news?.title}}</h4>
+        <h4 (click)="gotoDetails(news?.news_id)">{{news?.title}}</h4>
         <ion-row class="ion-align-items-center author-profile">
           <ion-col size="2" class="ion-no-padding">
             <ion-avatar class="author-avatar-sm-img" (click)="gotoAuthorDetails(news?.author_id)">

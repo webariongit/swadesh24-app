@@ -45,11 +45,11 @@
         </ion-list>
         <h4>Follow Us</h4>
         <div class="follow-us-content">
-          <a *ngIf="contactDetails?.facebook" (click)="gotoPage(contactDetails?.facebook)" tager><ion-img src="./assets/img/follow-us/1.svg"></ion-img></a>
-          <a *ngIf="contactDetails?.google" (click)="gotoPage(contactDetails?.google)"><ion-img src="./assets/img/follow-us/2.svg"></ion-img></a>
-          <a *ngIf="contactDetails?.twitter" (click)="gotoPage(contactDetails?.twitter)"><ion-img src="./assets/img/follow-us/3.svg"></ion-img></a>
-          <a *ngIf="contactDetails?.instagram" (click)="gotoPage(contactDetails?.instagram)"><ion-img src="./assets/img/follow-us/4.svg"></ion-img></a>
-          <a *ngIf="contactDetails?.linkedin" (click)="gotoPage(contactDetails?.linkedin)"><ion-img src="./assets/img/follow-us/5.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.facebook" [href]="contactDetails?.facebook" target="_blank"><ion-img src="./assets/img/follow-us/1.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.google" [href]="contactDetails?.google" target="_blank"><ion-img src="./assets/img/follow-us/2.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.twitter" [href]="contactDetails?.twitter" target="_blank"><ion-img src="./assets/img/follow-us/3.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.instagram" [href]="contactDetails?.instagram" target="_blank"><ion-img src="./assets/img/follow-us/4.svg"></ion-img></a>
+          <a *ngIf="contactDetails?.linkedin" [href]="contactDetails?.linkedin" target="_blank"><ion-img src="./assets/img/follow-us/5.svg"></ion-img></a>
         </div>
       </ion-card-content>
     </ng-container>

@@ -1,1 +1,1 @@
-<ion-button (click)="newsLike(newsDetails?.id)"><ion-icon name="heart-outline" *ngIf="!active"></ion-icon> <ion-icon name="heart" *ngIf="active"></ion-icon> {{newsDetails?.total_likes || '0'}}</ion-button>
+<ion-button (click)="newsLike(newsDetails?.id)"><ion-icon name="heart-outline" *ngIf="!active"></ion-icon> <ion-icon color="danger" name="heart" *ngIf="active"></ion-icon> {{newsDetails?.total_likes || '0'}}</ion-button>

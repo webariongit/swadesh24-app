@@ -4,9 +4,9 @@
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <div slot="end">
-      <ion-button (click)="newsSave(newsDetails?.id)"><ion-icon name="bookmark" *ngIf="newsDetails?.bookmark == 1"></ion-icon> <ion-icon *ngIf="newsDetails?.bookmark == 0" name="bookmark-outline"></ion-icon></ion-button>
-      <ion-button (click)="newsLike(newsDetails?.id)"><ion-icon *ngIf="newsDetails?.likes == 1" name="heart"></ion-icon> <ion-icon *ngIf="newsDetails?.likes == 0" name="heart-outline"></ion-icon></ion-button>
-      <ion-button (click)="shareNews(newsDetails)"><ion-icon name="share-social-outline"></ion-icon></ion-button>
+      <ion-button (click)="newsSave(newsDetails?.id)"><ion-icon name="bookmark" *ngIf="newsDetails?.bookmark == 1"></ion-icon> <ion-icon *ngIf="newsDetails?.bookmark == 0" name="bookmark-outline"></ion-icon> {{newsDetails?.total_bookmarks || '0'}}</ion-button>
+      <ion-button (click)="newsLike(newsDetails?.id)"><ion-icon color="danger" *ngIf="newsDetails?.likes == 1" name="heart"></ion-icon> <ion-icon *ngIf="newsDetails?.likes == 0" name="heart-outline"></ion-icon> {{newsDetails?.total_likes || '0'}}</ion-button>
+      <ion-button (click)="shareNews(newsDetails)"><ion-icon name="share-social-outline"></ion-icon> {{newsDetails?.total_shares || '0'}}</ion-button>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -19,6 +19,7 @@
   </ion-header>
   <ng-container *ngIf="!loader">
     <div class="aritcle-img">
+      <ion-label class="views-span"><ion-icon name="eye-outline"></ion-icon> {{newsDetails?.total_views || '0'}}</ion-label>
       <ng-container *ngIf="newsDetails?.contents_type == 'text' || newsDetails?.contents_type == 'audio'">
         <ion-img class="news-img" [src]="newsDetails?.base_url + newsDetails?.cover_image" alt=""></ion-img>
         <ion-grid *ngIf="newsDetails?.contents_type == 'audio'">
@@ -72,7 +73,7 @@
     <ion-card class="comment-card">
       <ion-card-content class="comment-card-content">
           <div class="comments-box">
-            <h4><ion-icon name="chatbubble-ellipses-outline"></ion-icon> Comments</h4>
+            <h4><ion-icon name="chatbubble-ellipses-outline"></ion-icon>{{newsDetails?.total_comments || '0'}} Comments</h4>
             <ng-container *ngFor="let comments of commentList">
               <ion-row class="user-comments-box">
                 <ion-col size="2">

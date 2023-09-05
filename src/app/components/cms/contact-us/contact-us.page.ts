@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
-import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-contact-us',
@@ -1046,9 +1045,7 @@ export class ContactUsPage implements OnInit {
   }
 
   gotoPage(url:any){
-    const openCapacitorSite = async () => {
-      await Browser.open({ url: url });
-    };
+    
   }
 
   submit(){
