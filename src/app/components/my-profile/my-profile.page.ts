@@ -973,19 +973,19 @@ export class MyProfilePage implements OnInit {
       },
       {
         type: 'required',
-        message: 'Mobile Number is Required',
+        message: 'Mobile Number is required',
       },
     ],
     first_name: [
       {
         type: 'required',
-        message: 'First Name is a Required Field',
+        message: 'First Name is required',
       },
     ],
     last_name: [
       {
         type: 'required',
-        message: 'Last Name is a Required Field',
+        message: 'Last Name is required',
       },
     ],
     email: [
@@ -995,7 +995,7 @@ export class MyProfilePage implements OnInit {
       },
       {
         type: 'required',
-        message: 'Email is Required',
+        message: 'Email is required',
       },
     ],
   };
@@ -1129,7 +1129,6 @@ export class MyProfilePage implements OnInit {
         }
         if(v.errors){
           this.formErrors = v.errors
-          console.log("errors", this.formErrors)
         }
       },
       error: (e) => {

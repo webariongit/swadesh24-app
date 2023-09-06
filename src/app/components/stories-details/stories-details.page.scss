@@ -1,19 +1,10 @@
-.action-btn{
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 99;
-    width: 60px;
-    .btn{
-        --background: rgb(0 0 0 / 55%);
-        --box-shadow:none;
-        --padding-start: 0px;
-        --padding-end: 0px;
-        display: block;
-        margin-bottom: 10px;
-        ion-icon{
-            margin-right: 5px;
-        }
+.btn{
+    --background: transparent;
+    --box-shadow:none;
+    display: block;
+    margin-bottom: 10px;
+    ion-icon{
+        margin-right: 5px;
     }
 }
 
@@ -70,4 +61,14 @@
     stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
     stroke-dasharray: 125.6;
     transform: rotate(-90deg);
+}
+
+.external-content-container iframe{
+    height: calc(100vh - 56px);
+    width: 100%;
+    position: fixed;
+    border: none;
+    .i-amphtml-story-outlink-page-attachment-outlink-chip{
+        display: none;
+    }
 }

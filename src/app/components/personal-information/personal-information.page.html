@@ -1,0 +1,103 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>My Personal Information</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">personal-information</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="profile-card" *ngIf="validationForm">
+    <ion-card-content>
+      <form [formGroup]="validationForm">
+        <ion-grid class="form-field">
+          <ion-input  label="First Name *" formControlName="first_name" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.first_name">
+            <ion-label color="danger"  *ngIf="validationForm.get('first_name').hasError(validation.type) &&
+                     (validationForm.get('first_name').dirty || validationForm.get('first_name').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-input  label="Last Name *" formControlName="last_name" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.last_name">
+            <ion-label color="danger"  *ngIf="validationForm.get('last_name').hasError(validation.type) &&
+                     (validationForm.get('last_name').dirty || validationForm.get('last_name').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-input  label="Age *" formControlName="age" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.age">
+            <ion-label color="danger"  *ngIf="validationForm.get('age').hasError(validation.type) &&
+                     (validationForm.get('age').dirty || validationForm.get('age').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-label>Gender *</ion-label>
+          <ion-segment class="bookmark-list" formControlName="gender">
+            <ion-segment-button value="MALE">
+              <ion-label>Male</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="FEMALE">
+              <ion-label>Female</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="OTHER">
+              <ion-label>Other</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+          <ng-container *ngFor="let validation of validationMessages.gender">
+            <ion-label color="danger"  *ngIf="validationForm.get('gender').hasError(validation.type) &&
+                     (validationForm.get('gender').dirty || validationForm.get('gender').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
+        <ion-grid class="form-field dropdown-field">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+          <ion-input  label="Country *" *ngIf="contryList" formControlName="country" (click)="selectCountry(contryList)" readonly="true" fill="outline" labelPlacement="floating"></ion-input>
+          <ion-input  label="Country *" *ngIf="!contryList" formControlName="country"  readonly="true" fill="outline" labelPlacement="floating"></ion-input>
+          <ng-container *ngFor="let validation of validationMessages.country">
+            <ion-label color="danger"  *ngIf="validationForm.get('country').hasError(validation.type) &&
+                     (validationForm.get('country').dirty || validationForm.get('country').touched)">
+              {{ validation.message }}
+            </ion-label>
+          </ng-container>
+        </ion-grid>
+        <ion-grid class="form-field dropdown-field">
+          <ng-container *ngIf="!loading">
+            <ion-icon name="chevron-down-outline"></ion-icon>
+            <ion-input *ngIf="stateList" label="State *" formControlName="state" (click)="selectState(stateList)" readonly="true" fill="outline" labelPlacement="floating"></ion-input>
+            <ion-input *ngIf="!stateList" label="State *" formControlName="state" readonly="true" fill="outline" labelPlacement="floating"></ion-input>
+            <ng-container *ngFor="let validation of validationMessages.state">
+              <ion-label color="danger"  *ngIf="validationForm.get('state').hasError(validation.type) &&
+                      (validationForm.get('state').dirty || validationForm.get('state').touched)">
+                {{ validation.message }}
+              </ion-label>
+            </ng-container>
+          </ng-container>
+          <ion-spinner *ngIf="loading" color="dark"></ion-spinner>
+        </ion-grid>
+        <ion-grid class="form-field">
+          <ion-textarea label="Address" formControlName="address" rows="4" fill="outline" labelPlacement="floating"></ion-textarea>
+        </ion-grid>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
+<ion-footer class="ion-text-center">
+  <ng-container *ngIf="validationForm">
+    <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">Save</ion-button>
+  </ng-container>
+</ion-footer>

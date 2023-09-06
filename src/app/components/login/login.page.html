@@ -55,9 +55,15 @@
             <ion-grid class="ion-text-right">
               <ion-label class="chang-number" (click)="changeNumber()">Change Number</ion-label>
             </ion-grid>
-            <ion-grid class="form-field">
+            <ion-grid class="form-field contact-number">
               <ion-label>Enter OTP</ion-label>
               <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:4, inputClass:'customInputField', allowNumbersOnly:true}"></ng-otp-input>
+            </ion-grid>
+            <ion-grid class="form-field">
+              <ion-text>
+                <ion-label *ngIf="timer > 0">Resend otp in 00:{{ timer }}</ion-label>
+                <ion-label *ngIf="timer == 0" (click)="getOtp()">Didn't get OTP? <span class="resend-otp">RESEND</span> </ion-label>
+              </ion-text>
             </ion-grid>
           </ng-container>
         </form>

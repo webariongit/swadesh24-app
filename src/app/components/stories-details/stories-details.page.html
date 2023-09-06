@@ -1,22 +1,11 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-button slot="end" class="btn" (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true">
-  <ion-grid class="action-btn">
-    <ion-button class="btn" (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
-    <ion-button class="btn" (click)="shareStory(storyDetails)"><ion-icon name="share-social-outline"></ion-icon>  {{storyDetails?.total_shares || '0'}}</ion-button>
-    <ion-button class="btn" (click)="storyLike(storyDetails?.id)"><ion-icon color="danger" *ngIf="storyDetails?.likes == 1" name="heart"></ion-icon> <ion-icon *ngIf="storyDetails?.likes == 0" name="heart-outline"></ion-icon>  {{storyDetails?.total_likes || '0'}}</ion-button>
-  </ion-grid>
   <ion-label class="views-span"><ion-icon name="eye-outline"></ion-icon> {{storyDetails?.total_views || '0'}}</ion-label>
   <div class="external-content-container" *ngIf="ampUrl">
     <iframe [src]="ampUrl"></iframe>
   </div>
-  <!-- <ng-container *ngIf="storyDetails">
-    <swiper-container watchSlidesProgress="true" space-between="30" centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-      <swiper-slide>
-        <video controls autoplay class="slider-video" *ngIf="storyDetails.contentType == 'video'">
-          <source [src]="storyDetails?.base_url + storyDetails?.media_file" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <ion-img class="slider-video" *ngIf="storyDetails.contentType == 'image'" [src]="storyDetails?.base_url + storyDetails?.media_file" ></ion-img>
-      </swiper-slide>
-    </swiper-container>
-  </ng-container> -->
 </ion-content>

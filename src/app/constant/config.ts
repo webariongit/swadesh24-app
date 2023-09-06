@@ -33,5 +33,7 @@ export const apiRoutes = {
     social_login:'social-login',
     search:'search',
     author_details:'author-details',
-    delete_account:'delete-account'
+    delete_account:'delete-account',
+    user_information:'user-information',
+    get_state:'https://countriesnow.space/api/v0.1/countries/states',
 }

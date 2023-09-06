@@ -9,6 +9,11 @@ export class CommonService {
   @Output() userLoggedIn: EventEmitter<any> = new EventEmitter();
   @Output() userLoggedOut: EventEmitter<any> = new EventEmitter();
   @Output() networkConnection: EventEmitter<any> = new EventEmitter();
+  @Output() selectedCountry: EventEmitter<any> = new EventEmitter();
+  @Output() selectedState: EventEmitter<any> = new EventEmitter();
+  @Output() categories: EventEmitter<any> = new EventEmitter();
+  @Output() updateStoryList: EventEmitter<any> = new EventEmitter();
+
   isOnline:boolean = false;
 
   constructor(

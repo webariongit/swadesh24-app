@@ -15,10 +15,10 @@
   </ion-header>
   <ion-grid>
     <ng-container *ngIf="!loader">
-      <ion-row>
+      <ion-row *ngIf="stories">
         <ng-container *ngFor="let story of stories">
           <ion-col size="6">
-            <app-stories-box [story]="story"></app-stories-box>
+            <app-stories-box [story]="story" [storyPage]="true"></app-stories-box>
           </ion-col>
         </ng-container>
       </ion-row>

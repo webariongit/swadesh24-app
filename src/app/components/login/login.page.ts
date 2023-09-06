@@ -980,6 +980,7 @@ export class LoginPage implements OnInit {
   loading:boolean = false
   modalTitle:any;
   validationError:any;
+  timer: number;
   pageContent:any;
   validation_messages = {
     mobileNo: [
@@ -1014,6 +1015,15 @@ export class LoginPage implements OnInit {
         }
       }
     })
+  }
+
+  initializeResendOtpTimer() {
+    this.timer = 30;
+    setInterval(() => {
+      if (this.timer > 0) {
+        this.timer = Number(this.timer) - 1;
+      }
+    }, 1000);
   }
 
   ngOnInit() {
@@ -1120,6 +1130,7 @@ export class LoginPage implements OnInit {
         if(v.status == 200){
           this.isLogin = false
           this.commonService.presentSuccessToast(v.message)
+          this.initializeResendOtpTimer();
         }else if(v.status == 400){
           this.validationError = v.error.errors;
           console.log("validation error", this.validationError)

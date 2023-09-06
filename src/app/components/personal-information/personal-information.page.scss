@@ -1,0 +1,67 @@
+.form-field{
+    margin-bottom: 10px;
+    ion-input{
+        min-height:46px;  
+    }
+}
+
+.profile-card{
+    border-radius: 15px;
+    box-shadow: 0px 3px 8px #ebebeb1f;
+}
+
+.main-btn{
+    margin-bottom: 10px;
+}
+  
+  /* Material Design styles */
+ion-segment-button.md::part(native) {
+    color: #000;
+}
+  
+.segment-button-checked.md::part(native) {
+    color: #fff;
+    background-color: #3f3f97;
+}
+  
+ion-segment-button.md::part(indicator-background) {
+    height: 0px;
+}
+  
+/* iOS styles */
+ion-segment-button.ios::part(native) {
+    color: #08a391;
+}
+  
+.segment-button-checked.ios::part(native) {
+    color: #fff;
+}
+  
+ion-segment-button.ios::part(indicator-background) {
+    border-radius: 20px;
+}
+
+ion-segment{
+    background-color: #e1e1ff;
+    border-radius: 5px;
+}
+
+ion-segment-button{
+    --padding-start: 0px;
+    --padding-end: 0px;
+    min-width: auto;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.dropdown-field{
+    position: relative;
+    ion-icon{
+        position: absolute;
+        bottom: 18px;
+        right: 16px;
+        font-size: 20px;
+        color: #a7a7a7;
+    }
+}

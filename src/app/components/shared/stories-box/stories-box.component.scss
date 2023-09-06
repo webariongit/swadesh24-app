@@ -105,3 +105,31 @@
         margin-right: 5px;
     }
 }
+
+.like-span{
+    position: absolute;
+    right: 3px;
+    top: 25px;
+    padding: 1px 4px;
+    display: flex;
+    z-index: 1;
+    cursor: pointer;
+    align-items: center;
+    ion-icon{
+        margin-right: 5px;
+    }
+}
+
+.share-span{
+    position: absolute;
+    right: 3px;
+    top: 45px;
+    cursor: pointer;
+    padding: 1px 4px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    ion-icon{
+        margin-right: 5px;
+    }
+}

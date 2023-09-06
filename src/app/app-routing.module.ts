@@ -83,7 +83,7 @@ const routes: Routes = [
     canActivate: [AuthGaurdService],
   },
   {
-    path: 'stories-details',
+    path: 'stories-details/:id',
     loadChildren: () => import('./components/stories-details/stories-details.module').then( m => m.StoriesDetailsPageModule),
     canActivate: [AuthGaurdService],
   },
@@ -95,6 +95,18 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./components/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },
+  {
+    path: 'personal-information',
+    loadChildren: () => import('./components/personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
+  },
+  {
+    path: 'country-list',
+    loadChildren: () => import('./components/country-list/country-list.module').then( m => m.CountryListPageModule)
+  },
+  {
+    path: 'state-list',
+    loadChildren: () => import('./components/state-list/state-list.module').then( m => m.StateListPageModule)
   },
   // {
   //   path: 'delete-my-account',

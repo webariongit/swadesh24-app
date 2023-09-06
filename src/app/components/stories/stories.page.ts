@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
+import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
 
 @Component({
@@ -17,8 +18,10 @@ export class StoriesPage implements OnInit {
   firstLoad:boolean = true;
 
   constructor(
-    private httpService:HttpService
-  ) { }
+    private httpService:HttpService,
+  ) { 
+
+  }
 
   ngOnInit() {
     this.getStoryList()
@@ -34,6 +37,7 @@ export class StoriesPage implements OnInit {
           this.firstLoad = false;
           this.loader = false;
           this.storyList = v.response?.data;
+          console.log("story list", this.storyList)
           this.totalPage = v.response?.last_page;
           for(var i=0; i < this.storyList?.length; i++){
             this.stories.push(this.storyList[i])
@@ -44,6 +48,7 @@ export class StoriesPage implements OnInit {
         }
       })
     }
+    
   }
 
   getMoreList(infiniteScroll:any){

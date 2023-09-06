@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Browser } from '@capacitor/browser';
 import { Share, ShareOptions } from '@capacitor/share';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
@@ -14,27 +15,40 @@ import Swiper from 'swiper';
   templateUrl: './stories-details.page.html',
   styleUrls: ['./stories-details.page.scss'],
 })
-export class StoriesDetailsPage implements OnInit {
+export class StoriesDetailsPage implements OnInit, AfterViewInit {
   progressTime:any;
   @Input() id:any;
   loader:boolean = true;
   storyDetails:any;
   swiperEl:any = document.querySelector("swiper-container");
-  ampUrl: SafeUrl | string;
+  ampUrl: any;
   baseUrl:any = environment.apiUrl
   constructor(
     private modalCtrl:ModalController,
     private httpService:HttpService,
     private commonService:CommonService,
     private router:Router,
-    private sanitizer:DomSanitizer
-  ) { }
+    private sanitizer:DomSanitizer,
+    private platform:Platform
+  ) { 
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.modalCtrl.dismiss();
+    });
+  }
+
+
+  ngAfterViewInit(): void {
+    this.getUrl()
+  }
 
   ngOnInit() {
-    this.ampUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/amp-story/amp-story.html?apiUrl=${this.baseUrl + apiRoutes.story_list}?story_id=${this.id}`);
-    console.log(this.ampUrl)
-    // this.getStoryDetails(this.id)
-    // this.storyViews(this.id)
+    this.getStoryDetails(this.id)
+    this.storyViews(this.id)
+  }
+
+  async getUrl(){
+    this.ampUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web-stories.swadesh24.com/?story_id=${this.id}`)
+    console.log("url",this.ampUrl)
   }
 
   swiper: Swiper;
@@ -70,56 +84,6 @@ export class StoriesDetailsPage implements OnInit {
   isVideo(url:any) {
     console.log("video url",url)
     return /\.(mp4|m4s|m4v|m4a)$/.test(url);
-  }
-
-  async shareStory(story:any){
-    const options:ShareOptions={
-      title: story?.title,
-      text: story?.sub_title,
-      dialogTitle: 'Share with friends',
-      url:'https://swadesh24.com/stories-slider?story_id=' + story?.id,
-    }
-    await Share.share(options).then((res:any)=>{
-      // this.storyShared(story?.id)
-    }).catch((error)=>{
-      console.log("error",error)
-    })
-  }
-
-  storyShared(id:any){
-    let formData = new FormData();
-    formData.append("story_id", id)
-    let apiUrl = apiRoutes.story_share;
-    this.httpService.post(apiUrl, formData).subscribe({
-      next:(v:any) =>{
-        console.log(v)
-      },
-      error:(e:any)=>{
-        console.log(e)
-      }
-    })
-  }
-
-
-  storyLike(id:any){
-    let formData = new FormData();
-    formData.append("story_id", id)
-    if(this.storyDetails?.likes == 0){
-      formData.append("likes", '1')
-    }else{
-      formData.append("likes", '0')
-    }
-    let apiUrl = apiRoutes.story_like;
-    this.httpService.post(apiUrl, formData).subscribe({
-      next:(v:any) =>{
-       this.getStoryDetails(this.id)
-       this.commonService.presentSuccessToast(v.message)
-      },
-      error:(e:any)=>{
-        console.log(e)
-        this.commonService.presentFailureToast(e.message)
-      }
-    })
   }
 
   storyViews(id:any){

@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()"><ion-icon name="close-outline"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-searchbar show-clear-button="always" (ionInput)="searchState($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">state-list</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ng-container *ngFor="let state of results">
+      <ion-item lines="none" (click)="selectState(state)">
+        <ion-label >{{state?.name}}</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

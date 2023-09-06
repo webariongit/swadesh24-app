@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { apiRoutes } from 'src/app/constant/config';
+import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
 
 @Component({
@@ -13,12 +14,14 @@ export class HeaderComponent  implements OnInit {
   loader:boolean = false;
   constructor(
     private router:Router,
-    private httpService:HttpService
-  ) { 
+    private commonService:CommonService
+  ) {
+    this.commonService.categories.subscribe((data)=>{
+      this.categoryList = data;
+    }) 
   }
 
   ngOnInit() {
-    this.getCategoryList();
   }
 
   gotoPage(id:any){
@@ -29,17 +32,5 @@ export class HeaderComponent  implements OnInit {
     this.router.navigate(['search'])
   }
 
-  getCategoryList(){
-    this.loader = true;
-    this.httpService.get(apiRoutes.category).subscribe({
-      next:(v:any) =>{
-        this.loader = false;
-        this.categoryList = v?.message
-      },
-      error:(e:any)=>{
-        this.loader = false;
-      }
-    })
-  }
 
 }

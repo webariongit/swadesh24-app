@@ -44,7 +44,6 @@ export class HomePage implements OnInit {
     private router:Router
   ) {
     this.isNetworkAvailable = this.commonService.isOnline;
-    console.log("isNetworkAvailable", this.isNetworkAvailable)
     this.commonService.networkConnection.subscribe(() => {
       this.isNetworkAvailable = this.commonService.isOnline;
       if (this.isNetworkAvailable) {
@@ -56,6 +55,13 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.initializeData()
+  }
+
+  handleRefresh(event:any) {
+    setTimeout(() => {
+      this.initializeData();
+      event.target.complete();
+    }, 500);
   }
   
   initializeData(){
@@ -75,7 +81,8 @@ export class HomePage implements OnInit {
       next: (v: any) => {
         this.loader = false;
         this.latestNews = v?.Latest_news
-        this.category = v?.NewsByCategory_id
+        this.category = v?.NewsByCategory_id;
+        this.commonService.categories.emit(this.category)
         this.base_url = this.category[0].base_url
         for(var i=0; i < this.category.length; i++){
           for(var j=0; j< this.colorArray?.length; j++){

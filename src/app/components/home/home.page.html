@@ -1,6 +1,9 @@
 <ion-content [fullscreen]="true" class="header-padding-top">
   <ng-container *ngIf="isNetworkAvailable">
     <ng-container *ngIf="!loader">
+      <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
       <ng-container *ngIf="latestNews">
         <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false" autoplay-delay="2500" autoplay-disable-on-interaction="true">
           <swiper-slide  *ngFor="let news of latestNews">

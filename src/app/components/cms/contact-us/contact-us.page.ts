@@ -961,6 +961,7 @@ export class ContactUsPage implements OnInit {
       name: "Zimbabwe"
     }
   ]
+  formErrors:any;
   validation_messages = {
     first_name: [
       {
@@ -1059,11 +1060,12 @@ export class ContactUsPage implements OnInit {
 
     this.httpService.post(apiRoutes.enquiry, formData).subscribe({
       next:(v:any) =>{
-        if(v.status == '201'){
+        console.log(v)
+        if(v.status == 201){
           this.commonService.presentSuccessToast(v.message)
           this.router.navigate(['settings'])
         }else{
-          this.commonService.presentFailureToast(v.message)
+          this.formErrors = v.error.errors
         }
       },
       error:(e:any)=>{
