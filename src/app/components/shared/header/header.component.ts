@@ -22,6 +22,8 @@ export class HeaderComponent  implements OnInit {
   }
 
   ngOnInit() {
+    let category:any = localStorage.getItem('category')
+    this.categoryList = JSON.parse(category)
   }
 
   gotoPage(id:any){

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { HttpService } from './service/http-service/http.service';
 import { CommonService } from './service/common-service/common.service';
-import { AlertController, NavController, Platform } from '@ionic/angular';
+import { AlertController, ModalController, NavController, Platform } from '@ionic/angular';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { Location } from '@angular/common';
 import { App } from '@capacitor/app';
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     { title: 'My Personal Information', url: '/personal-information', icon: 'man' },
     { title: 'Hastags', url: '/hastags', icon: 'extension-puzzle' },
     { title: 'Bookmarks', url: '/bookmarks', icon: 'bookmark' },
-    { title: 'Setting', url: '/settings', icon: 'settings' },
+    { title: 'Settings', url: '/settings', icon: 'settings' },
   ];
   constructor(
     private httpService:HttpService,
@@ -35,25 +35,26 @@ export class AppComponent implements OnInit {
     private _location: Location,
     private alertController:AlertController,
     private router:Router,
-    private navCtrl:NavController
+    private navCtrl:NavController,
+    private modalCtrl:ModalController,
   ) {
     this.initializeApp();
     this.checkInternetConnection();
     this.platform.backButton.subscribeWithPriority(
       9999,
       (processNextHandler) => {
-        console.log('Back press handler!');
         if (
-          this._location.isCurrentPathEqualTo('/tabs/home') ||
+          this._location.isCurrentPathEqualTo('/home/all') ||
           this._location.isCurrentPathEqualTo('/login')
         ) {
           // Show Exit Alert!
-          console.log('Show Exit Alert!');
           this.showExitConfirm();
           processNextHandler();
-        } else {
+        } else if(this._location.isCurrentPathEqualTo('/settings')){
+          this.router.navigate(["home/all"])
+        }else {
           // Navigate to back page
-          console.log('Navigate to back page');
+          this.modalCtrl.dismiss();
           this._location.back();
         }
       }

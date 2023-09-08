@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
 })
 export class ArticlesPage implements OnInit {
   selectedCategoryTab:any = 'latest';
-  categoryId:any;
+  categoryId:number = 0;
   subcategoryList:any
   newsList:any;
   loader:boolean = false;
@@ -47,7 +47,6 @@ export class ArticlesPage implements OnInit {
 
   getSubCategories(id:any){
     this.loader2 = true;
-    this.loader = true;
     let apiUrl = apiRoutes.subcategory_list + '?category_id=' + id;
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
@@ -57,6 +56,9 @@ export class ArticlesPage implements OnInit {
         this.getNewsList(this.subcategoryList[0]?.id)
       },
       error:(e:any)=>{
+        this.loader2 = false;
+      },
+      complete:()=>{
         this.loader2 = false;
       }
     })
@@ -71,8 +73,12 @@ export class ArticlesPage implements OnInit {
       next:(v:any) =>{
         this.loader = false;
         this.newsList = v?.response
+        console.log('Loading', this.loader)
       },
       error:(e:any)=>{
+        this.loader = false;
+      },
+      complete:()=>{
         this.loader = false;
       }
     })
@@ -87,9 +93,12 @@ export class ArticlesPage implements OnInit {
       next:(v:any) =>{
         this.loader = false;
         this.contentTypeNews = v?.response
-        console.log('newsList', this.contentTypeNews)
+        console.log('Loading', this.loader)
       },
       error:(e:any)=>{
+        this.loader = false;
+      },
+      complete:()=>{
         this.loader = false;
       }
     })

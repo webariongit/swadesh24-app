@@ -43,7 +43,6 @@ export class HomePage implements OnInit {
     private commonService:CommonService,
     private router:Router
   ) {
-    this.isNetworkAvailable = this.commonService.isOnline;
     this.commonService.networkConnection.subscribe(() => {
       this.isNetworkAvailable = this.commonService.isOnline;
       if (this.isNetworkAvailable) {
@@ -54,6 +53,8 @@ export class HomePage implements OnInit {
   
 
   ngOnInit() {
+    this.isNetworkAvailable = this.commonService.isOnline;
+    console.log("network error",this.isNetworkAvailable)
     this.initializeData()
   }
 
@@ -82,9 +83,16 @@ export class HomePage implements OnInit {
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id;
-        this.commonService.categories.emit(this.category)
+        let category = []
         this.base_url = this.category[0].base_url
         for(var i=0; i < this.category.length; i++){
+          if(this.category[i]){
+            let val = {
+              category_id:this.category[i]?.category_id,
+              category:this.category[i]?.category
+            }
+            category.push(val)
+          }
           for(var j=0; j< this.colorArray?.length; j++){
             this.category[i].colorCode = this.colorArray[i]
           }
@@ -98,6 +106,8 @@ export class HomePage implements OnInit {
             this.entertainmentList = this.category[i]
           }
         }
+        this.commonService.categories.emit(category)
+        localStorage.setItem("category", JSON.stringify(category))
       },
       error: (e) => {
         console.log("error",e)
@@ -107,7 +117,9 @@ export class HomePage implements OnInit {
           this.router.navigate(['login']); 
         }
       },
-      
+      complete:()=>{
+        this.loader = false;
+      }
     })
   }
 

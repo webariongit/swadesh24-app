@@ -22,6 +22,9 @@
           </ion-col>
         </ng-container>
       </ion-row>
+      <ion-grid class="no-data-found" *ngIf="stories?.length == 0">
+        <h4>No Data Found</h4>
+      </ion-grid>
     </ng-container>
     <ion-grid *ngIf="loader">
       <ion-row>

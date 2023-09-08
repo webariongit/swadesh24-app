@@ -29,11 +29,8 @@ export class StoriesDetailsPage implements OnInit, AfterViewInit {
     private commonService:CommonService,
     private router:Router,
     private sanitizer:DomSanitizer,
-    private platform:Platform
-  ) { 
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      this.modalCtrl.dismiss();
-    });
+  ) {
+  
   }
 
 
