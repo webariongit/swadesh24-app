@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
@@ -35,12 +35,13 @@ export class ArticleDetailsPage implements OnInit {
     private commonService:CommonService,
     private alertController:AlertController,
     private domsanitizer:DomSanitizer,
+    private modalCntrl:ModalController
   ) {
     this.activatedRoute.params.subscribe((params)=>{
       this.newsId = params['id'];
       let userData:any = localStorage.getItem('userDetails')
       this.userDetails = JSON.parse(userData)
-      if(this.userDetails?.first_name == null || this.userDetails?.contact == null){
+      if(this.userDetails?.gender == null || this.userDetails?.age == null || this.userDetails?.country == null || this.userDetails?.state == null){
         this.userInfoIncomplete = true
       }else{
         this.userInfoIncomplete = false
@@ -226,7 +227,7 @@ export class ArticleDetailsPage implements OnInit {
           text: 'OK',
           role: 'confirm',
           handler: () => {
-            this.router.navigate(['my-profile'])
+            this.router.navigate(['personal-information', this.newsId])
           },
         },
       ],

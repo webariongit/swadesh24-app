@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
 import { StateListPage } from '../state-list/state-list.page';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-personal-information',
@@ -20,7 +20,7 @@ export class PersonalInformationPage implements OnInit {
   userDetails:any;
   stateList:any;
   contryList:any;
-
+  id:any;
   validationMessages = {
     first_name: [
       {
@@ -67,7 +67,8 @@ export class PersonalInformationPage implements OnInit {
     private httpService:HttpService,
     private modalCtrl:ModalController,
     private commonService:CommonService,
-    private router:Router
+    private router:Router,
+    private activatedRoute:ActivatedRoute
   ) {
     this.commonService.selectedCountry.subscribe((data)=>{
       this.validationForm.controls['country'].setValue(data)
@@ -75,6 +76,9 @@ export class PersonalInformationPage implements OnInit {
     })
     this.commonService.selectedState.subscribe((data)=>{
       this.validationForm.controls['state'].setValue(data)
+    })
+    this.activatedRoute.params.subscribe((params)=>{
+      this.id = params['id']
     })
    }
 
@@ -106,7 +110,9 @@ export class PersonalInformationPage implements OnInit {
     this.validationForm.controls['address'].setValue(userDetails?.address)
     this.validationForm.controls['state'].setValue(userDetails?.state)
     this.validationForm.controls['country'].setValue(userDetails?.country)
-    this.getStateList(userDetails?.country)
+    if(userDetails?.country){
+      this.getStateList(userDetails?.country)
+    }
   }
 
   submitForm(){
@@ -139,6 +145,7 @@ export class PersonalInformationPage implements OnInit {
       },
     })
   }
+
   getCountryList(){
     this.httpClient.get(apiRoutes.get_state).subscribe((res:any)=>{
       this.contryList = res['data']
@@ -174,6 +181,10 @@ export class PersonalInformationPage implements OnInit {
       }
     });
     modal.present();
+  }
+
+  gobackToArticle(){
+    this.router.navigate(['article-details', this.id])
   }
 
 }

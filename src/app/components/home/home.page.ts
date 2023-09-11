@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
@@ -41,8 +42,10 @@ export class HomePage implements OnInit {
   constructor(
     private httpService:HttpService,
     private commonService:CommonService,
-    private router:Router
+    private router:Router,
+    private menuCntrl:MenuController
   ) {
+    this.menuCntrl.enable(true);
     this.commonService.networkConnection.subscribe(() => {
       this.isNetworkAvailable = this.commonService.isOnline;
       if (this.isNetworkAvailable) {

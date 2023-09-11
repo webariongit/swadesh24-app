@@ -59,6 +59,17 @@ ion-title{
     }
 }
 
+.commet-btn{
+    --border-radius: 12px;
+    --padding-start: 45px;
+    --padding-end: 45px;
+    min-height: 46px;
+    --box-shadow: none;
+    --background: #cacaca44;
+    border: 1px solid #e0e0e0;
+    color: #444;
+}
+
 .user-comments-box{
     margin-bottom: 10px;
 }

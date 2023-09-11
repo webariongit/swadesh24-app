@@ -97,7 +97,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
   },
   {
-    path: 'personal-information',
+    path: 'personal-information/:id',
     loadChildren: () => import('./components/personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
   },
   {

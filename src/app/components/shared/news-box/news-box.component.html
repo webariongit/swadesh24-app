@@ -1,7 +1,8 @@
 <ion-card class="news-card">
   <ion-grid class="news-card-img" (click)="gotoDetails(news?.id)">
     <ion-img class="news-img" [src]="news?.base_url + news?.cover_image" alt=""></ion-img>
-    <ion-badge class="news-tag">{{news?.category_name || news?.category || '--'}}</ion-badge>
+    <ion-badge *ngIf="!news?.subcategory" class="news-tag">{{news?.category_name || news?.category || '--'}}</ion-badge>
+    <ion-badge *ngIf="news?.subcategory" class="news-tag">{{news?.subcategory || '--'}}</ion-badge>
     <ion-img *ngIf="news?.contents_type == 'video' || news?.contents_type == 'youtube'" class="news-type-tag"
       src="./assets/img/video-icon.svg"
       alt=""

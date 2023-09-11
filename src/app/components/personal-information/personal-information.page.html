@@ -97,7 +97,14 @@
   
 </ion-content>
 <ion-footer class="ion-text-center">
-  <ng-container *ngIf="validationForm">
-    <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">Save</ion-button>
-  </ng-container>
+  <ion-row>
+    <ion-col>
+      <ng-container *ngIf="validationForm">
+        <ion-button class="main-btn" [disabled]="!this.validationForm.valid" (click)="submitForm()">Save</ion-button>
+      </ng-container>
+    </ion-col>
+    <ion-col *ngIf="id != 0">
+      <ion-button class="main-btn" (click)="gobackToArticle()">Skip For Now</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-footer>

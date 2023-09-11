@@ -39,6 +39,13 @@ export class LikeBtnComponent  implements OnInit {
     this.httpService.post(apiUrl, formData).subscribe({
       next:(v:any) =>{
         this.active = !this.active
+        if(this.newsDetails?.likes == 0){
+          this.newsDetails.total_likes = Number(this.newsDetails.total_likes) + 1;
+          this.newsDetails.likes = 1;
+        }else{
+          this.newsDetails.likes = 0;
+          this.newsDetails.total_likes = Number(this.newsDetails.total_likes) - 1
+        }
         this.commonService.presentSuccessToast(v.message)
       },
       error:(e:any)=>{

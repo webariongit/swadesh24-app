@@ -37,7 +37,6 @@ export class StoriesPage implements OnInit {
           this.firstLoad = false;
           this.loader = false;
           this.storyList = v.response?.data;
-          console.log("story list", this.storyList)
           this.totalPage = v.response?.last_page;
           for(var i=0; i < this.storyList?.length; i++){
             this.stories.push(this.storyList[i])

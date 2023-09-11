@@ -30,7 +30,7 @@ export class CommentComponent  implements OnInit {
   ) {
     let userData:any = localStorage.getItem('userDetails')
     this.userDetails = JSON.parse(userData)
-    if(this.userDetails?.first_name == null || this.userDetails?.contact == null){
+    if(this.userDetails?.gender == null || this.userDetails?.age == null || this.userDetails?.country == null || this.userDetails?.state == null){
       this.userInfoIncomplete = true
     }else{
       this.userInfoIncomplete = false
@@ -84,6 +84,33 @@ export class CommentComponent  implements OnInit {
           this.commonService.presentFailureToast(e.message)
         }
       })
+  }
+
+  async redirectToProfile(){
+    const alert = await this.alertController.create({
+      header: 'Warning',
+      subHeader: 'Your profile is incomplete',
+      message: 'Please update your profile before comment?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('csncel')
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.modalCtrl.dismiss()
+            this.router.navigate(['personal-information', this.news?.id])
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   submitEditComment(){

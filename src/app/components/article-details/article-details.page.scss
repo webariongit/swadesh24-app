@@ -229,6 +229,19 @@ ion-button + ion-button{
     height: 30px;
 }
 
+
+.news-tag{
+    padding: 6px 15px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    --background: #D0D2FB;
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 20px;
+    color: #3F3F97;
+}
+
 ion-item{
     --inner-border-width:0;
     ion-icon{

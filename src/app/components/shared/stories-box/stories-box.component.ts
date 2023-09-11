@@ -78,14 +78,19 @@ export class StoriesBoxComponent  implements OnInit {
     formData.append("story_id", id)
     if(!this.liked){
       formData.append("likes", '1')
-      this.liked = true
     }else{
       formData.append("likes", '0')
-      this.liked = false
     }
     let apiUrl = apiRoutes.story_like;
     this.httpService.post(apiUrl, formData).subscribe({
       next:(v:any) =>{
+        if(!this.liked){
+          this.liked = true
+          this.story.total_likes = Number(this.story.total_likes) + 1
+        }else{
+          this.liked = false
+          this.story.total_likes = Number(this.story.total_likes) - 1
+        }
        this.commonService.presentSuccessToast(v.message)
       },
       error:(e:any)=>{
