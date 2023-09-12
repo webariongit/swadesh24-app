@@ -149,8 +149,12 @@ export class ArticleDetailsPage implements OnInit {
     this.httpService.post(apiurl, formData).subscribe({
       next:(v:any) =>{
         this.commentList = v?.response;
-        this.commonService.presentSuccessToast(v.message)
-        this.getNewsComments(this.newsId);
+        if(this.userInfoIncomplete){
+          this.router.navigate(['personal-information', this.newsId])
+        }else{
+          this.commonService.presentSuccessToast(v.message)
+          this.getNewsComments(this.newsId);
+        }
         this.comment = '';
       },
       error:(e:any)=>{

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
@@ -18,15 +18,15 @@ export class HomePage implements OnInit {
     {img:"../../../assets/img/avatar.png"},
     {img:"../../../assets/img/avatar.png"}
   ]
-  colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
+  colorArray = ['#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6',
 		  '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
+		  '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A',
 		  '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
+		  '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC',
 		  '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
+		  '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680',
 		  '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
+		  '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3',
 		  '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'];
   loader:boolean = false;
   base_url:any;
@@ -52,13 +52,14 @@ export class HomePage implements OnInit {
         this.initializeData();
       }
     });
-   }
+  }
   
 
   ngOnInit() {
     this.isNetworkAvailable = this.commonService.isOnline;
-    console.log("network error",this.isNetworkAvailable)
-    this.initializeData()
+    if(this.isNetworkAvailable){
+      this.initializeData()
+    }
   }
 
   handleRefresh(event:any) {
@@ -109,12 +110,14 @@ export class HomePage implements OnInit {
             this.entertainmentList = this.category[i]
           }
         }
+        console.log("loader1", this.loader)
         this.commonService.categories.emit(category)
         localStorage.setItem("category", JSON.stringify(category))
       },
       error: (e) => {
         console.log("error",e)
         this.loader = false;
+        console.log("loader2", this.loader)
         if (e.status == 401) {
           localStorage.clear();
           this.router.navigate(['login']); 
@@ -124,6 +127,8 @@ export class HomePage implements OnInit {
         this.loader = false;
       }
     })
+
+    console.log("loader3", this.loader)
   }
 
   getStoryList(){

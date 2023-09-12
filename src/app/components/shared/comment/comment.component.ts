@@ -76,8 +76,12 @@ export class CommentComponent  implements OnInit {
       this.httpService.post(apiurl, formData).subscribe({
         next:(v:any) =>{
           this.commentList = v?.response;
-          this.commonService.presentSuccessToast(v.message)
-          this.getNewsComments(this.news?.id)
+          if(this.userInfoIncomplete){
+            this.router.navigate(['personal-information', this.news?.id])
+          }else{
+            this.commonService.presentSuccessToast(v.message)
+            this.getNewsComments(this.news?.id);
+          }
           this.comment = ''
         },
         error:(e:any)=>{

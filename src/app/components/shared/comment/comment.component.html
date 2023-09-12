@@ -69,14 +69,14 @@
   </ion-modal>
 </ion-content>
 <ion-footer>
-  <div class="add-comment-box" *ngIf="!userInfoIncomplete">
+  <div class="add-comment-box">
     <ion-avatar>
       <img [src]="userDetails?.base_url + userDetails?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
     </ion-avatar>
     <ion-textarea type="text" placeholder="Add Your Comment" class="form-field" fill="outline" autoGrow="true" [(ngModel)]="comment"></ion-textarea>
     <ion-button class="send-btn" [disabled]="!this.comment" (click)="addComment()"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
   </div>
-  <ng-container *ngIf="userInfoIncomplete">
+  <!-- <ng-container *ngIf="userInfoIncomplete">
     <ion-button expand="full"  class="commet-btn" (click)="redirectToProfile()">Add Your Comment</ion-button>
-  </ng-container>
+  </ng-container> -->
 </ion-footer>
