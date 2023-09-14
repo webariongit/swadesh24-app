@@ -54,6 +54,7 @@ export class AppComponent implements OnInit {
           this.router.navigate(["home/all"])
         }else {
           // Navigate to back page
+          console.log("MOBILE BACK BUTTON")
           this.modalCtrl.dismiss();
           this._location.back();
         }

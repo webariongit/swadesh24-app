@@ -29,8 +29,12 @@ export class StoriesPage implements OnInit {
 
   getStoryList(){
     this.storyList = [];
-    if((this.currentPage < this.totalPage) ||  this.firstLoad){
-      this.loader = true;
+    if(this.currentPage <= this.totalPage){
+      if(this.firstLoad){
+        this.loader = true;
+      }else{
+        this.currentPage = Number(this.currentPage) + 1;
+      }
       let apiUrl = apiRoutes.story_list + '?page=' + this.currentPage
       this.httpService.get(apiUrl).subscribe({
         next:(v:any) =>{

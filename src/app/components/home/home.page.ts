@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   public sliderData = [
     {img:"../../../assets/img/avatar.png"},
     {img:"../../../assets/img/avatar.png"},
@@ -53,6 +53,9 @@ export class HomePage implements OnInit {
       }
     });
   }
+  ngOnDestroy(): void {
+    this.loader = false;
+  }
   
 
   ngOnInit() {
@@ -81,9 +84,11 @@ export class HomePage implements OnInit {
   }
 
   getHomeData(){
+    console.log("HI TREIGGERED TRUE")
     this.loader = true;
     this.httpService.get(apiRoutes.home).subscribe({
       next: (v: any) => {
+        console.log("HI TREIGGERED 1 FALSE")
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id;
@@ -110,14 +115,12 @@ export class HomePage implements OnInit {
             this.entertainmentList = this.category[i]
           }
         }
-        console.log("loader1", this.loader)
         this.commonService.categories.emit(category)
         localStorage.setItem("category", JSON.stringify(category))
       },
       error: (e) => {
-        console.log("error",e)
+        console.log("HI TREIGGERED 2 FALSE")
         this.loader = false;
-        console.log("loader2", this.loader)
         if (e.status == 401) {
           localStorage.clear();
           this.router.navigate(['login']); 
@@ -125,6 +128,7 @@ export class HomePage implements OnInit {
       },
       complete:()=>{
         this.loader = false;
+        console.log("HI TREIGGERED 3 FALSE")
       }
     })
 
