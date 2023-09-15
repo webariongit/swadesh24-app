@@ -17,7 +17,7 @@
     <ng-container *ngIf="!loading">
       <ion-grid class="section-header">
         <h4>Followed Hastags</h4>
-        <a class="view-all-btn" *ngIf="followedHastagList?.length > 0" (click)="viewAllList(followedHastagList?.length, 'followed')">
+        <a class="view-all-btn" *ngIf="followedHastagList?.length > 5" (click)="viewAllList(followedHastagList?.length, 'followed')">
           View All
         </a>
       </ion-grid>
@@ -38,7 +38,7 @@
       </ion-grid>
       <ion-grid class="section-header">
         <h4>Popular Hastags</h4>
-        <a class="view-all-btn"  *ngIf="unfollowedHastagList?.length > 0" (click)="viewAllList(unfollowedHastagList?.length, 'follow')">
+        <a class="view-all-btn"  *ngIf="unfollowedHastagList?.length > 5" (click)="viewAllList(unfollowedHastagList?.length, 'follow')">
           View All
         </a>
       </ion-grid>

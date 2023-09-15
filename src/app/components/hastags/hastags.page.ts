@@ -59,7 +59,7 @@ export class HastagsPage implements OnInit {
   viewAllList(length:any, listType:any){
     if(listType == 'follow'){
       this.listfollow = Number(length);
-    }else if(listType == 'unfollow'){
+    }else if(listType == 'followed'){
       this.listFollowed = Number(length);
     }
   }
