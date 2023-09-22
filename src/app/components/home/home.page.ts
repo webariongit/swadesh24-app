@@ -57,12 +57,12 @@ export class HomePage implements OnInit, OnDestroy {
     this.loader = false;
   }
   
+  ionViewDidEnter(){
+    this.initializeData();
+  }
 
   ngOnInit() {
     this.isNetworkAvailable = this.commonService.isOnline;
-    if(this.isNetworkAvailable){
-      this.initializeData()
-    }
   }
 
   handleRefresh(event:any) {

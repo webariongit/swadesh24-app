@@ -94,7 +94,8 @@ export class ArticleDetailsPage implements OnInit {
         this.loader = false;
         this.newsDetails = v?.response[0];
         if(this.newsDetails.contents_type == 'youtube'){
-          this.newsDetails.contents = this.domsanitizer.bypassSecurityTrustResourceUrl(this.newsDetails.contents)
+          let youtubeUrl = this.convertToEmbedLink(this.newsDetails.contents)
+          this.newsDetails.contents = this.domsanitizer.bypassSecurityTrustResourceUrl(youtubeUrl)
         }
         this.getNewsComments(id)
         this.getRelatedNews(this.newsDetails.category_id)
@@ -104,6 +105,16 @@ export class ArticleDetailsPage implements OnInit {
       }
     })
   }
+
+  convertToEmbedLink(originalLink:any) {
+    if (originalLink.includes("youtu.be")) {
+        const videoId = originalLink.split("/").pop();
+        const embedLink = `https://www.youtube.com/embed/${videoId}`;
+        return embedLink;
+    }
+    return originalLink;
+  }
+
 
   getRelatedNews(id:any){
     let apiUrl = apiRoutes.news_list + '?category_id=' + id;
