@@ -26,6 +26,9 @@
           </swiper-slide>
         </swiper-container>
       </ion-grid>
+      <ng-container *ngIf="ads?.length > 0">
+        <app-ads-box [adDetails]="ads[0]"></app-ads-box>
+      </ng-container>
       <ion-grid  class="news-list" *ngIf="newsCategory">
         <ion-grid class="section-header">
           <h4>News</h4>
@@ -49,6 +52,9 @@
           </swiper-slide>
         </swiper-container>
       </ion-grid>
+      <ng-container *ngIf="ads?.length > 0">
+        <app-ads-box [adDetails]="ads[1]"></app-ads-box>
+      </ng-container>
       <ion-grid  class="news-list" *ngIf="sportsCategory">
         <ion-grid class="section-header">
           <h4>Sports</h4>
@@ -72,19 +78,30 @@
           </swiper-slide>
         </swiper-container>
       </ion-grid>
-      <ion-grid class="news-list" *ngIf="businessCategory">
-        <ion-grid class="section-header">
-          <h4>Business</h4>
-          <a (click)="gotoPage(businessCategory?.category_id)" class="view-all-btn">
-            View All
-          </a>
-        </ion-grid>
-        <ng-container *ngFor="let news of businessCategory?.news.data; let i=index;">
-          <ng-container *ngIf="i < 4">
-            <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
+      <ng-container *ngIf="ads?.length > 0">
+        <app-ads-box [adDetails]="ads[2]"></app-ads-box>
+      </ng-container>
+      <ng-container *ngFor="let cat of category; let i = index">
+        <ion-grid class="news-list" *ngIf="cat?.category != 'News' && cat?.category != 'Sports'">
+          <ion-grid class="section-header">
+            <h4>{{cat?.category}}</h4>
+            <a (click)="gotoPage(cat?.category_id)" class="view-all-btn">
+              View All
+            </a>
+          </ion-grid>
+          <ng-container *ngFor="let news of cat?.news.data; let i=index;">
+            <ng-container *ngIf="i < 4">
+              <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
+            </ng-container>
           </ng-container>
+        </ion-grid>
+        <ng-container *ngIf="ads?.length > 0 && i == category?.length / 2">
+          <app-ads-box [adDetails]="ads[3]"></app-ads-box>
         </ng-container>
-      </ion-grid>
+      </ng-container>
+      <ng-container *ngIf="ads?.length > 0">
+        <app-ads-box [adDetails]="ads[4]"></app-ads-box>
+      </ng-container>
     </ng-container>
     <ng-container *ngIf="loader">
       <ion-card class="skeleton-card" >

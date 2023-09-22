@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdmobAds } from 'capacitor-admob-ads';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
@@ -18,7 +19,7 @@ export class ArticlesPage implements OnInit {
   loader2:boolean = false;
   contentType:any;
   contentTypeNews:any;
-
+  ads:any;
   constructor(
     private router:Router,
     private httpService:HttpService,
@@ -38,7 +39,15 @@ export class ArticlesPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getNativeAds()
+  }
 
+  getNativeAds(){
+    AdmobAds.loadNativeAd({ adId: "ca-app-pub-3940256099942544/2247696110", isTesting: true, adsCount: 5 }).then((res) => {
+      this.ads = res.ads;
+   }).catch((error) => {
+      console.log("Native Error",error.message);
+   });
   }
 
   gotoSearch(){

@@ -14,6 +14,7 @@ import { ShareBtnComponent } from './action-btns/share-btn/share-btn.component';
 import { CommentComponent } from './comment/comment.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { AdsBoxComponent } from './ads-box/ads-box.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { IonicModule } from '@ionic/angular';
     EntertainmentBoxComponent,
     ArticlesBoxComponent,
     ShareBtnComponent,
-    CommentComponent
+    CommentComponent,
+    AdsBoxComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +49,7 @@ import { IonicModule } from '@ionic/angular';
     EntertainmentBoxComponent,
     ArticlesBoxComponent,
     ShareBtnComponent,
+    AdsBoxComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

@@ -6,6 +6,7 @@ import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
 import { Share, ShareOptions } from '@capacitor/share';
+import { AdmobAds } from 'capacitor-admob-ads';
 
 @Component({
   selector: 'app-article-details',
@@ -14,7 +15,7 @@ import { Share, ShareOptions } from '@capacitor/share';
 })
 export class ArticleDetailsPage implements OnInit {
   @ViewChild('hvUserPost') hvUserPost: ElementRef | any;
-  
+  ads:any;
   loader:any;
   newsId:any;
   newsDetails:any;
@@ -52,7 +53,17 @@ export class ArticleDetailsPage implements OnInit {
 
   ngOnInit() {
     this.newsViews();
+    this.getNativeAds();
   }
+
+  getNativeAds(){
+    AdmobAds.loadNativeAd({ adId: "ca-app-pub-3940256099942544/2247696110", isTesting: true, adsCount: 5 }).then((res) => {
+      this.ads = res.ads;
+   }).catch((error) => {
+      console.log("Native Error",error.message);
+   });
+  }
+
 
   gotoAuthorDetails(id:any){
     this.router.navigate(['author-details', id])

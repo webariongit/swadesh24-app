@@ -26,8 +26,13 @@
   </ng-container>
   <ng-container *ngIf="!loader">
     <ng-container *ngIf="newsList?.length > 0">
-      <ng-container *ngFor="let news of newsList">
+      <ng-container *ngFor="let news of newsList; let i = index;">
         <app-news-box  [news]="news"></app-news-box>
+        <ng-container *ngFor="let ad of ads; let j = index;">
+          <ng-container *ngIf="i == j*3">
+            <app-ads-box [adDetails]="ad"></app-ads-box>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </ng-container>
     <ng-container *ngIf="contentTypeNews?.length > 0">
@@ -35,8 +40,13 @@
         <ion-grid class="section-header">
           <h4>{{newsType?.category}}</h4>
         </ion-grid>
-        <ng-container *ngFor="let news of newsType?.data">
+        <ng-container *ngFor="let news of newsType?.data; let i = index;">
           <app-news-box  [news]="news"></app-news-box>
+          <ng-container *ngFor="let ad of ads; let j = index;">
+            <ng-container *ngIf="i == j*3">
+              <app-ads-box [adDetails]="ad"></app-ads-box>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </ng-container>
     </ng-container>

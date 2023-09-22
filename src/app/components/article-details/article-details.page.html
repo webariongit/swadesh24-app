@@ -45,6 +45,9 @@
         </ng-container>
       </ng-container>
     </div>
+    <ng-container *ngIf="ads?.length > 0">
+      <app-ads-box [adDetails]="ads[0]"></app-ads-box>
+    </ng-container>
     <ion-row class="ion-align-items-center" (click)="gotoAuthorDetails(newsDetails?.author_id)">
       <ion-col size="1.5">
         <ion-avatar class="author-avatar-img">
@@ -66,6 +69,9 @@
       <h5>{{newsDetails?.sub_title}}</h5>
       <ng-container *ngIf="newsDetails?.contents_type == 'text'">
         <div class="para-desc" [innerHtml]="newsDetails?.contents"></div>
+      </ng-container>
+      <ng-container *ngIf="ads?.length > 0">
+        <app-ads-box [adDetails]="ads[1]"></app-ads-box>
       </ng-container>
       <ng-container *ngIf="newsDetails?.description">
         <div class="para-desc" [innerHtml]="newsDetails?.description"></div>
@@ -129,12 +135,21 @@
           </ng-container> -->
       </ion-card-content>
     </ion-card>
+    <ng-container *ngIf="ads?.length > 0">
+      <app-ads-box [adDetails]="ads[2]"></app-ads-box>
+    </ng-container>
     <ng-container *ngIf="relatedArticles && relatedArticles?.length > 0">
       <ion-grid class="section-header">
         <h4>You may also like</h4>
       </ion-grid>
-      <ng-container *ngFor="let news of relatedArticles">
+      <ng-container *ngFor="let news of relatedArticles; let i = index">
         <app-news-list-box [news]="news" [baseUrl]="news.base_url"></app-news-list-box>
+        <ng-container *ngIf="ads?.length > 0 && i == relatedArticles?.length / 2">
+          <app-ads-box [adDetails]="ads[3]"></app-ads-box>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="ads?.length > 0">
+        <app-ads-box [adDetails]="ads[4]"></app-ads-box>
       </ng-container>
     </ng-container>
   </ng-container>

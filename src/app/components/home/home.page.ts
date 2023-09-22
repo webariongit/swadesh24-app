@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AdmobAds } from 'capacitor-admob-ads';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
+
+
 
 @Component({
   selector: 'app-home',
@@ -11,6 +14,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy {
+  ads:any;
   public sliderData = [
     {img:"../../../assets/img/avatar.png"},
     {img:"../../../assets/img/avatar.png"},
@@ -43,7 +47,7 @@ export class HomePage implements OnInit, OnDestroy {
     private httpService:HttpService,
     private commonService:CommonService,
     private router:Router,
-    private menuCntrl:MenuController
+    private menuCntrl:MenuController,
   ) {
     this.menuCntrl.enable(true);
     this.commonService.networkConnection.subscribe(() => {
@@ -63,6 +67,15 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isNetworkAvailable = this.commonService.isOnline;
+    this.getNativeAds();
+  }
+
+  getNativeAds(){
+    AdmobAds.loadNativeAd({ adId: "ca-app-pub-3940256099942544/2247696110", isTesting: true, adsCount: 5 }).then((res) => {
+      this.ads = res.ads;
+   }).catch((error) => {
+      console.log("Native Error",error.message);
+   });
   }
 
   handleRefresh(event:any) {
@@ -92,6 +105,7 @@ export class HomePage implements OnInit, OnDestroy {
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id;
+        console.log(this.category)
         let category = []
         this.base_url = this.category[0].base_url
         for(var i=0; i < this.category.length; i++){
