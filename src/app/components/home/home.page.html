@@ -82,7 +82,7 @@
         <app-ads-box [adDetails]="ads[2]"></app-ads-box>
       </ng-container>
       <ng-container *ngFor="let cat of category; let i = index">
-        <ion-grid class="news-list" *ngIf="cat?.category != 'News' && cat?.category != 'Sports'">
+        <ion-grid class="news-list" *ngIf="cat?.category != 'News' && cat?.category != 'Sports' && cat?.category != 'Entertainment'">
           <ion-grid class="section-header">
             <h4>{{cat?.category}}</h4>
             <a (click)="gotoPage(cat?.category_id)" class="view-all-btn">
