@@ -1,6 +1,7 @@
 .icon-btns{
     width: 36px;
     height: 36px;
+    --color:#3c409b;
     --background: transparent;
     --box-shadow: none;
     --padding-start: 5px;
@@ -9,12 +10,11 @@
 }
 
 ion-toolbar{
-    --background: #3f3f97;
     --min-height: 40px;
 }
 
 ion-menu-button{
-    --color:#fff;
+    --color:#3c409b;
 }
 
 .tab-butoton-skel{
@@ -22,7 +22,7 @@ ion-menu-button{
 }
 
 ion-segment{
-    background-color: #7777f3;
+    background-color: #3c4098;
     border-top: 1px solid #fff;
     ion-segment-button{
         min-width: auto;
