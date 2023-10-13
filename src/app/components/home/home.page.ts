@@ -71,7 +71,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   getNativeAds(){
-    AdmobAds.loadNativeAd({ adId: "ca-app-pub-3940256099942544/2247696110", isTesting: true, adsCount: 5 }).then((res) => {
+    AdmobAds.loadNativeAd({ adId: "ca-app-pub-1685638422839004/5105703667", isTesting: true, adsCount: 5 }).then((res) => {
       this.ads = res.ads;
    }).catch((error) => {
       console.log("Native Error",error.message);
@@ -97,11 +97,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   getHomeData(){
-    console.log("HI TREIGGERED TRUE")
     this.loader = true;
     this.httpService.get(apiRoutes.home).subscribe({
       next: (v: any) => {
-        console.log("HI TREIGGERED 1 FALSE")
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id;
@@ -133,7 +131,6 @@ export class HomePage implements OnInit, OnDestroy {
         localStorage.setItem("category", JSON.stringify(category))
       },
       error: (e) => {
-        console.log("HI TREIGGERED 2 FALSE")
         this.loader = false;
         if (e.status == 401) {
           localStorage.clear();
@@ -142,11 +139,8 @@ export class HomePage implements OnInit, OnDestroy {
       },
       complete:()=>{
         this.loader = false;
-        console.log("HI TREIGGERED 3 FALSE")
       }
     })
-
-    console.log("loader3", this.loader)
   }
 
   getStoryList(){

@@ -1071,7 +1071,6 @@ export class LoginPage implements OnInit {
     formData.append("last_name", userData?.familyName)
     this.httpService.post(apiRoutes.social_login, formData).subscribe({
       next: (v: any) => {
-        console.log(v)
         if(v.status == 201){
           this.isLoading = !this.isLoading;
           this.commonService.setUserToken(v['token']);
@@ -1090,7 +1089,6 @@ export class LoginPage implements OnInit {
         }
       },
       error: (e) => {
-        console.log(e.error)
         this.commonService.presentFailureToast(e.error.error)
         this.isLoading = !this.isLoading;
       },
@@ -1126,7 +1124,6 @@ export class LoginPage implements OnInit {
     formData.append('phone_code', formValue.countryCode);
     this.httpService.post(apiRoutes.get_otp, formData).subscribe({
       next: (v: any) => {
-        console.log(v);
         if(v.status == 200){
           this.isLogin = false
           this.commonService.presentSuccessToast(v.message)
@@ -1139,7 +1136,6 @@ export class LoginPage implements OnInit {
         }
       },
       error: (e) => {
-        console.log(e)
         this.isLoading = !this.isLoading;
       },
     })
@@ -1162,7 +1158,6 @@ export class LoginPage implements OnInit {
     formData.append('otp', otp);
     this.httpService.post(apiRoutes.verfiy_otp, formData).subscribe({
       next: (v: any) => {
-        console.log(v)
         if(v.status == 201){
           this.isLoading = !this.isLoading;
           this.commonService.setUserToken(v['token']);
@@ -1178,11 +1173,10 @@ export class LoginPage implements OnInit {
           }
           this.isLogin = true
         }else{
-          this.commonService.presentFailureToast(v.error.error)
+          this.commonService.presentFailureToast(v.error.message)
         }
       },
       error: (e) => {
-        console.log("error", e.error)
         this.commonService.presentFailureToast(e.error.errors)
         this.isLoading = !this.isLoading;
       },
