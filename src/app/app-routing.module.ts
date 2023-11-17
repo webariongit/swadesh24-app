@@ -106,8 +106,20 @@ const routes: Routes = [
   },
   {
     path: 'state-list',
-    loadChildren: () => import('./components/state-list/state-list.module').then( m => m.StateListPageModule)
+    loadChildren: () => import('./components/state-list/state-list.module').then( m => m.StateListPageModule),
+    canActivate: [AuthGaurdService]
   },
+  {
+    path: 'shorts-details/:id',
+    loadChildren: () => import('./components/shorts-details/shorts-details.module').then( m => m.ShortsDetailsPageModule),
+    canActivate: [AuthGaurdService],
+  },  {
+    path: 'request-for-author',
+    loadChildren: () => import('./components/request-for-author/request-for-author.module').then( m => m.RequestForAuthorPageModule)
+  },
+
+
+
   // {
   //   path: 'delete-my-account',
   //   loadChildren: () => import('./components/delete-my-account/delete-my-account.module').then( m => m.DeleteMyAccountPageModule),

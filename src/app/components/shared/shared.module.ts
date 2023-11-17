@@ -15,6 +15,8 @@ import { CommentComponent } from './comment/comment.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AdsBoxComponent } from './ads-box/ads-box.component';
+import { ShortsBoxComponent } from './shorts-box/shorts-box.component';
+import { TeamBoxComponent } from './team-box/team-box.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AdsBoxComponent } from './ads-box/ads-box.component';
     ArticlesBoxComponent,
     ShareBtnComponent,
     CommentComponent,
-    AdsBoxComponent
+    AdsBoxComponent,
+    ShortsBoxComponent,
+    TeamBoxComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +53,9 @@ import { AdsBoxComponent } from './ads-box/ads-box.component';
     EntertainmentBoxComponent,
     ArticlesBoxComponent,
     ShareBtnComponent,
-    AdsBoxComponent
+    AdsBoxComponent,
+    ShortsBoxComponent,
+    TeamBoxComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

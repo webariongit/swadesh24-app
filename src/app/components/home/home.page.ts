@@ -15,6 +15,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
 })
 export class HomePage implements OnInit, OnDestroy {
   ads:any;
+  shortList:any;
   public sliderData = [
     {img:"../../../assets/img/avatar.png"},
     {img:"../../../assets/img/avatar.png"},
@@ -42,6 +43,7 @@ export class HomePage implements OnInit, OnDestroy {
   storyList:any;
   entertainmentList:any;
   isNetworkAvailable:boolean;
+  teamList:any;
 
   constructor(
     private httpService:HttpService,
@@ -89,6 +91,8 @@ export class HomePage implements OnInit, OnDestroy {
     if(this.isNetworkAvailable){
       this.getHomeData();
       this.getStoryList();
+      this.getShortList();
+      this.getTeamList();
     }
   }
 
@@ -97,11 +101,9 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   getHomeData(){
-    console.log("HI TREIGGERED TRUE")
     this.loader = true;
     this.httpService.get(apiRoutes.home).subscribe({
       next: (v: any) => {
-        console.log("HI TREIGGERED 1 FALSE")
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id;
@@ -133,7 +135,6 @@ export class HomePage implements OnInit, OnDestroy {
         localStorage.setItem("category", JSON.stringify(category))
       },
       error: (e) => {
-        console.log("HI TREIGGERED 2 FALSE")
         this.loader = false;
         if (e.status == 401) {
           localStorage.clear();
@@ -153,6 +154,34 @@ export class HomePage implements OnInit, OnDestroy {
     this.httpService.get(apiRoutes.story).subscribe({
       next:(v:any) =>{
         this.storyList = v?.response?.data
+      },
+      error:(e:any)=>{
+        if (e.status == 401) {
+          localStorage.clear();
+          this.router.navigate(['login']); 
+        }
+      }
+    })
+  }
+
+  getShortList(){
+    this.httpService.get(apiRoutes.shorts).subscribe({
+      next:(v:any) =>{
+        this.shortList = v?.response?.data
+      },
+      error:(e:any)=>{
+        if (e.status == 401) {
+          localStorage.clear();
+          this.router.navigate(['login']); 
+        }
+      }
+    })
+  }
+
+  getTeamList(){
+    this.httpService.get(apiRoutes.team).subscribe({
+      next:(v:any) =>{
+        this.teamList = v?.response
       },
       error:(e:any)=>{
         if (e.status == 401) {

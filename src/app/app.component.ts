@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
     { title: 'Hastags', url: '/hastags', icon: 'extension-puzzle' },
     { title: 'Bookmarks', url: '/bookmarks', icon: 'bookmark' },
     { title: 'Settings', url: '/settings', icon: 'settings' },
+    { title: 'Delete My Account', url: '/delete-my-account', icon: 'person-circle' },
+    { title: 'Request For Author', url: '/request-for-author', icon: 'people' },
   ];
   constructor(
     private httpService:HttpService,
@@ -54,7 +56,6 @@ export class AppComponent implements OnInit {
           this.router.navigate(["home/all"])
         }else {
           // Navigate to back page
-          console.log("MOBILE BACK BUTTON")
           this.modalCtrl.dismiss();
           this._location.back();
         }
@@ -81,6 +82,9 @@ export class AppComponent implements OnInit {
     this.httpService.userDetail.subscribe((userProfile) => {
       this.userDetails = userProfile;
     });
+  }
+
+  ionViewDidEnter(){
     this.initializeApp();
   }
 
@@ -99,7 +103,6 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         if (this.commonService.getUserToken()) {
           this.navCtrl.navigateRoot('home');
-          
         }else{
           this.navCtrl.navigateRoot('login');
           // GoogleAuth.initialize()

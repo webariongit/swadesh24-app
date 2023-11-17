@@ -16,6 +16,25 @@
           </swiper-slide>
         </swiper-container>
       </ng-container>
+      <ion-grid class="trending-topic-sec">
+        <ion-grid class="section-header">
+          <h4>Shorts</h4>
+        </ion-grid>
+        <swiper-container class="trending-carousel" [slidesPerView]="2.6" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
+          <swiper-slide>
+            <app-shorts-box></app-shorts-box>
+          </swiper-slide>
+          <swiper-slide>
+            <app-shorts-box></app-shorts-box>
+          </swiper-slide>
+          <swiper-slide>
+            <app-shorts-box></app-shorts-box>
+          </swiper-slide>
+          <swiper-slide>
+            <app-shorts-box></app-shorts-box>
+          </swiper-slide>
+        </swiper-container>
+      </ion-grid>
       <ion-grid class="trending-topic-sec" *ngIf="category">
         <ion-grid class="section-header">
           <h4>Top Trending Topics</h4>
@@ -67,6 +86,16 @@
             <app-news-list-box [news]="news" [baseUrl]="base_url"></app-news-list-box>
           </ng-container>
         </ng-container>
+      </ion-grid>
+      <ion-grid class="trending-topic-sec">
+        <ion-grid class="section-header">
+          <h4>Our Team</h4>
+        </ion-grid>
+        <swiper-container class="trending-carousel" [slidesPerView]="2" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
+          <swiper-slide *ngFor="let team of teamList">
+            <app-team-box [team]="team" [baseUrl]="base_url"></app-team-box>
+          </swiper-slide>
+        </swiper-container>
       </ion-grid>
       <ion-grid class="entertainment-sec" *ngIf="entertainmentList">
         <ion-grid class="section-header">

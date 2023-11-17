@@ -10,3 +10,15 @@ ion-tab-button{
         margin-bottom: 5px;
     }
 }
+
+.tab-selected .short-icon-01{
+    display: none;
+}
+
+.short-icon-02{
+    display: none;
+}
+
+.tab-selected .short-icon-02{
+    display: block;
+}

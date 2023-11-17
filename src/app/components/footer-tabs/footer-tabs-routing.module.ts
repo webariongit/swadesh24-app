@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('../articles/articles.module').then( m => m.ArticlesPageModule)
       },
       {
+        path: 'shorts',
+        loadChildren: () => import('../shorts/shorts.module').then( m => m.ShortsPageModule)
+      },
+      {
         path: '',
         redirectTo: 'all',
         pathMatch: 'full'
