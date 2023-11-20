@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>explore</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="explore-padding-top">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">explore</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid class="shore-sec">
+    <ion-grid class="section-header">
+      <h4>Top Shows</h4>
+    </ion-grid>
+    <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+      <swiper-slide>
+        <app-top-shows-box></app-top-shows-box>
+      </swiper-slide>
+      <swiper-slide >
+        <app-top-shows-box></app-top-shows-box>
+      </swiper-slide>
+      <swiper-slide >
+        <app-top-shows-box></app-top-shows-box>
+      </swiper-slide>
+      <swiper-slide >
+        <app-top-shows-box></app-top-shows-box>
+      </swiper-slide>
+      <swiper-slide >
+        <app-top-shows-box></app-top-shows-box>
+      </swiper-slide>
+    </swiper-container>
+  </ion-grid>
+  <ion-grid class="trending-topic-sec">
+    <ion-grid class="section-header">
+      <h4>Play Games</h4>
+    </ion-grid>
+    <ion-row>
+      <ion-col size="4">
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

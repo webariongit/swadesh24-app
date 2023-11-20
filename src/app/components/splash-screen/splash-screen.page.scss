@@ -1,13 +1,13 @@
 .splash-background{
     height: 100%;
     width: 100%;
-    background-image: url(../../../assets/img/splash-bg.webp);
-    background-size: cover;
+    // background-image: url(../../../assets/img/splash-bg.webp);
+    // background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background-position: center;
+    // background-position: center;
 }
 
 .power {
@@ -26,8 +26,8 @@
     text-align: center;
 }
 
-.banner-content img {
-    width: 200px;
+.banner-content video {
+    width: 300px;
     margin-bottom: 20px;
 }
 
@@ -36,6 +36,10 @@
     font-size: 24px;
     font-weight: 600;
     margin: 0;
+}
+
+.bg-white{
+  --background:#fff;
 }
   
   @-webkit-keyframes fadeInDown {

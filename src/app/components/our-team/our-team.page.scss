@@ -1,0 +1,39 @@
+.sub-category-menu{
+    grid-auto-columns: auto;
+    padding-top: 10px;
+    ion-segment-button{
+        margin: 2px 5px;
+        min-width: auto;
+        min-height: auto;
+        font-size: 13px;
+        text-transform: capitalize;
+        --padding-end: 10px;
+        --padding-start: 10px;
+        border:1px solid rgb(176 176 176);
+        --border-radius:4px;
+        margin: 5px 10px;
+        &.segment-button-checked{
+            color:#3F3F97;
+            --color-checked:transparent;
+            border: 1px solid #3F3F97;
+            background-color: #eaeaff;
+        }
+        ion-label{
+            margin: 0;
+        }
+    }
+}
+
+.bg-white{
+    --background: #fff;
+}
+
+.heading-text{
+    h4{
+        font-size: 16px;
+        color: #3f3f97;
+        text-transform: capitalize;
+        margin-bottom: 0px;
+        margin-left: 5px;
+    }
+}

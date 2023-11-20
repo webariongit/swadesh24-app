@@ -6,15 +6,18 @@
     --padding-start: 5px;
     --padding-end: 5px;
     --border-radius: 100%;
+    ion-icon{
+        color:#3950d4;
+    }
 }
 
 ion-toolbar{
-    --background: #3f3f97;
+    --background: #ffffff;
     --min-height: 40px;
 }
 
 ion-menu-button{
-    --color:#fff;
+    --color: #3950d4;
 }
 
 .tab-butoton-skel{
@@ -44,6 +47,7 @@ ion-segment{
         }
     }
 }
+
 
 ion-menu-button{
     height: 40px;

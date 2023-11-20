@@ -1,7 +1,15 @@
 .shorts-list{
-    margin-top: 25px;
     padding: 0px 2px;
     .ion-no-padding{
         padding: 2px;
     }
+}
+
+.skel-stroy{
+    height: 200px;
+    border-radius: 10px;
+}
+
+.short-padding-top{
+    --padding-top: 25px;
 }

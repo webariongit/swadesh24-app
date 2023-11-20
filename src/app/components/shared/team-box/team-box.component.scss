@@ -1,8 +1,9 @@
 .team-box{
     box-shadow: none;
     padding: 0;
-    margin: 6px;
+    margin: 4px;
     text-align: center;
+    --background: transparent;
     ion-card-content{
         padding: 25px 5px 5px;
         border: 1px solid #EBEBEB;
@@ -15,10 +16,11 @@
         height: 45px;
         position: relative;
         z-index: 1;
+        background-color: #fff;
     }
     h4{
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         margin: 0;
     }
     p{
@@ -26,3 +28,4 @@
         font-size: 14px;
     }
 }
+

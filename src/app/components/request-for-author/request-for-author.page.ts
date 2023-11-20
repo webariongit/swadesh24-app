@@ -59,6 +59,8 @@ export class RequestForAuthorPage implements OnInit {
         if (v.status == 200) {
           this.commonService.presentSuccessToast(v.message);
           this.router.navigate(['home']); 
+        }else{
+          this.commonService.presentFailureToast(v.error.message)
         }
       },
       error: (e) => {

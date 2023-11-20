@@ -38,5 +38,6 @@ export const apiRoutes = {
     shorts:'shorts',
     requestForAuthor:'request-for-author',
     team:'teams',
+    team_category_wise:'teams-category-wise',
     get_state:'https://countriesnow.space/api/v0.1/countries/states',
 }

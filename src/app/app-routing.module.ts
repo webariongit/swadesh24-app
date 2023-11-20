@@ -113,9 +113,26 @@ const routes: Routes = [
     path: 'shorts-details/:id',
     loadChildren: () => import('./components/shorts-details/shorts-details.module').then( m => m.ShortsDetailsPageModule),
     canActivate: [AuthGaurdService],
-  },  {
+  },
+  {
     path: 'request-for-author',
     loadChildren: () => import('./components/request-for-author/request-for-author.module').then( m => m.RequestForAuthorPageModule)
+  },
+  {
+    path: 'our-team',
+    loadChildren: () => import('./components/our-team/our-team.module').then( m => m.OurTeamPageModule)
+  },
+  {
+    path: 'top-shows',
+    loadChildren: () => import('./components/top-shows/top-shows.module').then( m => m.TopShowsPageModule)
+  },
+  {
+    path: 'polls',
+    loadChildren: () => import('./components/polls/polls.module').then( m => m.PollsPageModule)
+  },
+  {
+    path: 'games',
+    loadChildren: () => import('./components/games/games.module').then( m => m.GamesPageModule)
   },
 
 

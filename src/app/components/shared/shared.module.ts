@@ -17,6 +17,8 @@ import { IonicModule } from '@ionic/angular';
 import { AdsBoxComponent } from './ads-box/ads-box.component';
 import { ShortsBoxComponent } from './shorts-box/shorts-box.component';
 import { TeamBoxComponent } from './team-box/team-box.component';
+import { TopShowsBoxComponent } from './top-shows-box/top-shows-box.component';
+import { PollsBoxComponent } from './polls-box/polls-box.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { TeamBoxComponent } from './team-box/team-box.component';
     CommentComponent,
     AdsBoxComponent,
     ShortsBoxComponent,
-    TeamBoxComponent
+    TeamBoxComponent,
+    TopShowsBoxComponent,
+    PollsBoxComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,9 @@ import { TeamBoxComponent } from './team-box/team-box.component';
     ShareBtnComponent,
     AdsBoxComponent,
     ShortsBoxComponent,
-    TeamBoxComponent
+    TeamBoxComponent,
+    TopShowsBoxComponent,
+    PollsBoxComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

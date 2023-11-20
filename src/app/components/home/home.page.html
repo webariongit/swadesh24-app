@@ -16,22 +16,13 @@
           </swiper-slide>
         </swiper-container>
       </ng-container>
-      <ion-grid class="trending-topic-sec">
+      <ion-grid class="shorts-sec">
         <ion-grid class="section-header">
           <h4>Shorts</h4>
         </ion-grid>
         <swiper-container class="trending-carousel" [slidesPerView]="2.6" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
-          <swiper-slide>
-            <app-shorts-box></app-shorts-box>
-          </swiper-slide>
-          <swiper-slide>
-            <app-shorts-box></app-shorts-box>
-          </swiper-slide>
-          <swiper-slide>
-            <app-shorts-box></app-shorts-box>
-          </swiper-slide>
-          <swiper-slide>
-            <app-shorts-box></app-shorts-box>
+          <swiper-slide *ngFor="let short of shortList">
+            <app-shorts-box [shorts]="short" [baseUrl]="base_url"></app-shorts-box>
           </swiper-slide>
         </swiper-container>
       </ion-grid>

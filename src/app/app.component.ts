@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
     { title: 'My Personal Information', url: '/personal-information/0', icon: 'man' },
     { title: 'Hastags', url: '/hastags', icon: 'extension-puzzle' },
     { title: 'Bookmarks', url: '/bookmarks', icon: 'bookmark' },
-    { title: 'Settings', url: '/settings', icon: 'settings' },
+    { title: 'Our Team', url: '/our-team', icon: 'people-circle'},
+    { title: 'Settings', url: '/settings', icon: 'settings'},
     { title: 'Delete My Account', url: '/delete-my-account', icon: 'person-circle' },
     { title: 'Request For Author', url: '/request-for-author', icon: 'people' },
   ];
@@ -99,7 +100,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       setTimeout(async()=>{
         SplashScreen.hide();
-      },500);
+      },10000);
       setTimeout(() => {
         if (this.commonService.getUserToken()) {
           this.navCtrl.navigateRoot('home');

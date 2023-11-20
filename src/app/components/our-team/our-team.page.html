@@ -1,0 +1,37 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-title>Our Team</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-white">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">our-team</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-segment class="sub-category-menu" [scrollable]="true" [(ngModel)]="selectedCategoryTab">
+    <ng-container *ngFor="let cat of teamCategory">
+      <ion-segment-button [value]="cat?.name">
+        <ion-label>{{cat?.name}}</ion-label>
+      </ion-segment-button>
+    </ng-container>
+  </ion-segment>
+  <ng-container *ngFor="let cat of teamCategory">
+    <ng-container *ngIf="selectedCategoryTab == cat?.name">
+      <ion-grid *ngFor="let subcat of cat?.sub_category">
+        <ion-text class="heading-text">
+          <h4>{{subcat?.name}}</h4>
+        </ion-text>
+        <ion-row>
+          <ion-col class="ion-no-padding" size="6" *ngFor="let member of subcat?.members">
+            <app-team-box [team]="member" [baseUrl]="base_url"></app-team-box>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+  </ng-container>
+</ion-content>

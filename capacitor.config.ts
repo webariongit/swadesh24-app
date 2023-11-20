@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.swadesh24.app',
-  appName: 'Swadesh24',
+  appId: 'com.AajTakBharat.app',
+  appName: 'AajTak Bharat',
   webDir: 'www',
   server: {
     androidScheme: 'https'

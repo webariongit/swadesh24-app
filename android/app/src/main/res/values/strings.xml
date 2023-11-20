@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Swadesh24</string>
-    <string name="title_activity_main">Swadesh24</string>
-    <string name="package_name">com.swadesh24.app</string>
-    <string name="custom_url_scheme">com.swadesh24.app</string>
+    <string name="app_name">AajTak Bharat</string>
+    <string name="title_activity_main">AajTak Bharat</string>
+    <string name="package_name">com.AajTakBharat.app</string>
+    <string name="custom_url_scheme">com.AajTakBharat.app</string>
     <string name="server_client_id">342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">com.swadesh24.app</string>
+    <string name="facebook_app_id">com.AajTakBharat.app</string>
     <string name="facebook_client_token">158391760586519</string>
     <string name="admob_app_id">ca-app-pub-1685638422839004~3000171694</string>
 </resources>
