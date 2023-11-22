@@ -14,6 +14,8 @@ export class BookmarksPage implements OnInit {
   videoNews:any;
   bookMarkDetails:any;
   loading:boolean = false;
+  savedShows:any
+  baseUrl:any;
 
   constructor(
     private httpService:HttpService
@@ -28,10 +30,13 @@ export class BookmarksPage implements OnInit {
     this.readNews = [];
     this.videoNews = [];
     this.audioNews = [];
+    this.savedShows = [];
     this.loading = true;
     this.httpService.get(apiUrl).subscribe({
       next:(v:any) =>{
+        this.baseUrl = v.base_url
         this.bookMarkDetails = v?.response
+        this.savedShows = v?.episodes
         this.loading = false;
         for(var i=0; i < this.bookMarkDetails?.length; i++){
           if(this.bookMarkDetails[i]?.contents_type == 'text' || this.bookMarkDetails[i]?.contents_type == 'image'){

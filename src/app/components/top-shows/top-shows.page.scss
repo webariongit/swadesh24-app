@@ -1,0 +1,31 @@
+.top-show{
+    margin: 0;
+    box-shadow: none;
+    ion-card-content{
+        padding: 10px;
+    }
+    h4{
+        font-size: 17px;
+        font-weight: 500;
+        color: #000;
+        margin: 0;
+    }
+    p{
+        font-size: 13px;
+    }
+    .main-btn{
+        margin-top: 0px;
+        width: 100%;
+        --padding-start: 15px;
+        --padding-end: 15px;
+        font-size: 12px;
+    }
+}
+
+.label-heading{
+    ion-label{
+        font-size: 16px;
+        font-weight: 500;
+        color: #3f3f97;
+    }
+}

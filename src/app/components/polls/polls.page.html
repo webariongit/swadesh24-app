@@ -1,6 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="inner-page-header">
   <ion-toolbar>
-    <ion-title>polls</ion-title>
+    <ion-title>Polls</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +13,7 @@
       <ion-title size="large">polls</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ng-container *ngFor="let poll of pollList">
+    <app-polls-box [poll]="poll"></app-polls-box>
+  </ng-container>
 </ion-content>

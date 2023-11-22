@@ -1,6 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="inner-page-header">
   <ion-toolbar>
-    <ion-title>top-shows</ion-title>
+    <ion-title>Top Shows</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +13,9 @@
       <ion-title size="large">top-shows</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-row>
+    <ion-col size="6" *ngFor="let shows of topShows">
+      <app-top-shows-box [shows]="show" [baseUrl]="base_url"></app-top-shows-box>
+    </ion-col>
+  </ion-row>
 </ion-content>

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TopShowsPageRoutingModule } from './top-shows-routing.module';
 
 import { TopShowsPage } from './top-shows.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TopShowsPageRoutingModule
+    TopShowsPageRoutingModule,
+    SharedModule
   ],
   declarations: [TopShowsPage]
 })

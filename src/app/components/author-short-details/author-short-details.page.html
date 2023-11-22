@@ -1,0 +1,38 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">author-short-details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="author-details">
+    <ion-card-content>
+      <ion-avatar>
+        <img [src]="authorDetails?.base_url + authorDetails?.profile_image" alt="">
+      </ion-avatar>
+      <ion-text>
+        <h4>{{authorDetails?.first_name}} {{authorDetails?.last_name}}</h4>
+      </ion-text>
+      <ion-button type="button" class="main-btn" [ngClass]="authorDetails?.author_follow_status == 1 ? 'active':''" (click)="followAuthor(authorDetails?.id, authorDetails?.author_follow_status)">Follow</ion-button>
+      <ion-grid>
+        <ion-label>{{authorDetails?.followers_count | numberFormate}} Followed</ion-label>
+        <span class="dot"></span>
+        <ion-label>{{shorts?.length | numberFormate}} Videos</ion-label>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" *ngFor="let short of shorts">
+        <app-shorts-box [shorts]="short" [baseUrl]="authorDetails?.base_url" ></app-shorts-box>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

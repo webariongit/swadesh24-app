@@ -77,6 +77,7 @@ export class CommentComponent  implements OnInit {
         next:(v:any) =>{
           this.commentList = v?.response;
           if(this.userInfoIncomplete){
+            this.modalCtrl.dismiss(null, 'cancel');
             this.router.navigate(['personal-information', this.news?.id])
           }else{
             this.commonService.presentSuccessToast(v.message)

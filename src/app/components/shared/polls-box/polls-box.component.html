@@ -1,3 +1,9 @@
-<p>
-  polls-box works!
-</p>
+<ion-card class="poll-box" *ngIf="poll">
+  <ion-card-content>
+    <ion-text class="poll-heading">
+      <h4>{{poll?.question}}</h4>
+    </ion-text>
+    <ion-buttons class="answer-btn" (click)="chooseOption(poll?.id,'A')"><div class="progress" [ngStyle]="{'width': poll?.user_status?.option_a+'%'}"></div><span>{{poll?.option_a}} <ion-label *ngIf="poll?.user_status?.option_a">({{poll?.user_status?.option_a}}%)</ion-label> </span>  <ion-icon *ngIf="poll?.user_status?.choice == 'A'" name="checkmark-circle-outline"></ion-icon></ion-buttons>
+    <ion-buttons class="answer-btn" (click)="chooseOption(poll?.id,'B')"><div class="progress" [ngStyle]="{'width': poll?.user_status?.option_b+'%'}"></div><span>{{poll?.option_b}} <ion-label *ngIf="poll?.user_status?.option_b">({{poll?.user_status?.option_b}}%)</ion-label> </span>  <ion-icon *ngIf="poll?.user_status?.choice == 'B'" name="checkmark-circle-outline"></ion-icon></ion-buttons>
+  </ion-card-content>
+</ion-card>

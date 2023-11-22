@@ -131,9 +131,29 @@ const routes: Routes = [
     loadChildren: () => import('./components/polls/polls.module').then( m => m.PollsPageModule)
   },
   {
-    path: 'games',
-    loadChildren: () => import('./components/games/games.module').then( m => m.GamesPageModule)
+    path: 'snake',
+    loadChildren: () => import('./components/game/snake/snake.module').then( m => m.SnakePageModule)
   },
+  {
+    path: 'tic-tak-toe',
+    loadChildren: () => import('./components/game/tic-tak-toe/tic-tak-toe.module').then( m => m.TicTakToePageModule)
+  },
+  {
+    path: 'author-short-details/:id',
+    loadChildren: () => import('./components/author-short-details/author-short-details.module').then( m => m.AuthorShortDetailsPageModule)
+  },
+  {
+    path: 'shows-details/:id',
+    loadChildren: () => import('./components/shows-details/shows-details.module').then( m => m.ShowsDetailsPageModule)
+  },
+  {
+    path: 'shows/:id',
+    loadChildren: () => import('./components/shows/shows.module').then( m => m.ShowsPageModule)
+  },
+
+
+
+
 
 
 

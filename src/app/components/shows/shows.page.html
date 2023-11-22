@@ -1,0 +1,93 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">top-shows</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ng-container *ngIf="!loader">
+    <ion-card class="top-show" *ngIf="showsDetails">
+      <ion-card-content>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="8" class="ion-no-padding">
+            <ion-text>
+              <h4>{{showsDetails?.title}}</h4>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4" class="ion-no-padding">
+            <ion-button type="button" class="main-btn" (click)="followShow(showsDetails?.id)" [ngClass]="showsDetails?.user_follow_status == 1 ? 'active':''">{{showsDetails?.user_follow_status == 1 ? 'Following': 'Follow'}}</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-text>
+          <p>{{showsDetails?.description}}</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-grid class="label-heading">
+      <ion-row>
+        <ion-col>
+          <ion-label>Episodes</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ng-container *ngFor="let episode of showsDetails?.episodes?.data">
+      <app-shows-list [shows]="episode" [baseUrl]="baseUrl"></app-shows-list>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="loader">
+    <ion-grid >
+      <ion-row>
+        <ion-col size="12">
+          <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="4" class="category-skel">
+          <ion-skeleton-text class="cskel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="4" class="category-skel">
+          <ion-skeleton-text class="cskel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="4" class="category-skel">
+          <ion-skeleton-text class="cskel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid  class="trending-topic-sec" >
+      <ion-row>
+        <ion-col size="12">
+          <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="6" class="category-skel">
+          <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2">
+              <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
+              <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6" class="category-skel">
+          <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9">
+              <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
+              <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+</ion-content>

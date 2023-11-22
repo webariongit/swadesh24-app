@@ -10,7 +10,7 @@
   <ng-container *ngIf="isNetworkAvailable">
     <ng-container *ngIf="!loader">
       <ng-container *ngIf="latestNews">
-        <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false" autoplay-delay="2500" autoplay-disable-on-interaction="true">
+        <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false">
           <swiper-slide  *ngFor="let news of latestNews">
             <app-news-box [news]="news"></app-news-box>
           </swiper-slide>
@@ -19,8 +19,11 @@
       <ion-grid class="shorts-sec">
         <ion-grid class="section-header">
           <h4>Shorts</h4>
+          <a (click)="gotoShorts()" class="view-all-btn">
+            View All
+          </a>
         </ion-grid>
-        <swiper-container class="trending-carousel" [slidesPerView]="2.6" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
+        <swiper-container class="trending-carousel" [slidesPerView]="2.6" [loop]="false" [spaceBetween]="10">
           <swiper-slide *ngFor="let short of shortList">
             <app-shorts-box [shorts]="short" [baseUrl]="base_url"></app-shorts-box>
           </swiper-slide>
@@ -30,7 +33,7 @@
         <ion-grid class="section-header">
           <h4>Top Trending Topics</h4>
         </ion-grid>
-        <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+        <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10">
           <swiper-slide  *ngFor="let category of category; let i = index">
             <app-trending-topics [category]="category" [index]="i"></app-trending-topics>
           </swiper-slide>
@@ -56,7 +59,7 @@
         <ion-grid class="section-header">
           <h4>Visual Stories</h4>
         </ion-grid>
-        <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
+        <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10" >
           <swiper-slide  *ngFor="let story of storyList">
             <app-stories-box [story]="story"></app-stories-box>
           </swiper-slide>
@@ -82,7 +85,7 @@
         <ion-grid class="section-header">
           <h4>Our Team</h4>
         </ion-grid>
-        <swiper-container class="trending-carousel" [slidesPerView]="2" [loop]="false" [spaceBetween]="10" autoplay-disable-on-interaction="false">
+        <swiper-container class="trending-carousel" [slidesPerView]="2" [loop]="false" [spaceBetween]="10" >
           <swiper-slide *ngFor="let team of teamList">
             <app-team-box [team]="team" [baseUrl]="base_url"></app-team-box>
           </swiper-slide>
@@ -92,7 +95,7 @@
         <ion-grid class="section-header">
           <h4>Entertainment</h4>
         </ion-grid>
-        <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" autoplay-disable-on-interaction="false">
+        <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" >
           <swiper-slide *ngFor="let entertainment of entertainmentList?.news.data">
             <app-entertainment-box [entertainment]="entertainment"></app-entertainment-box>
           </swiper-slide>

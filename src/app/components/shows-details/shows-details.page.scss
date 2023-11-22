@@ -1,0 +1,345 @@
+ion-toolbar{
+    ion-button{
+        --background: transparent;
+        --box-shadow: none;
+        --border-radius: 30px;
+        --padding-start: 7px;
+        --padding-end: 7px;
+        ion-icon{
+            margin-right: 5px;
+        }
+    }
+}
+
+ion-title{
+    padding-left: 16px;
+}
+
+ion-button + ion-button{
+    margin-left: 5px;
+}
+
+.text-h4{
+    font-size: 14px;
+    font-weight: 400;
+    color:#2d2d2d;
+}
+
+.text-h6{
+    font-size: 12px;
+    color: #a7a7a7;
+}
+
+.dot{
+    width: 4px;
+    height: 4px;
+    display: inline-block;
+    border-radius: 100%;
+    background-color: #d3d3d3;
+    margin: 0px 5px;
+}
+
+.para-desc{
+    font-size: 14px;
+    color: #8a8a8a;
+    line-height: 24px;
+}
+
+.news-img{
+    width: 100%;
+}
+
+.comment-card{
+    border-radius: 10px;
+    box-shadow: 0px 3px 8px #ebebeb1f;
+}
+
+.add-comment-box{
+    position: relative;
+    margin-top: 10px;
+    ion-avatar{
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        object-fit: cover;
+        object-position: 50% top;
+        position: absolute;
+        left: 5px;
+        top: 7px;
+        z-index: 9;
+    }
+    .form-field{
+        --border-radius: 12px;
+        --padding-start: 45px;
+        --padding-end: 45px;
+        --padding-top:10px;
+        min-height: 46px;
+    }
+    ion-button{
+        --background: #3F3F97;
+        --box-shadow: none;
+        --padding-start: 8px;
+        --padding-end: 8px;
+        --border-radius: 100%;
+    }
+}
+
+.editcomment{
+    --padding-top:10px;
+}
+
+.comments-avatar-img{
+    width:42px;
+    height: 42px;
+}
+
+.comment-card-content{
+    padding: 10px;
+}
+
+.send-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    z-index: 9;
+    margin: 0;
+}
+
+.edit-form-field{
+    --padding-top:10px;
+}
+
+.author-list{
+    display: flex;
+    align-items: center;
+    ion-avatar{
+        margin-right: 6px;
+    }
+}
+
+.comments-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h4{
+        display: flex;
+        align-items: center;
+        ion-icon{
+            margin-right: 6px;
+        }
+    }
+}
+
+.user-comments-box{
+    padding: 10px 0px;
+    background-color: #fff;
+}
+
+.user-comments-box{
+    h4{
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        border-bottom: 1px solid #EBEBEB;
+        display: flex;
+        align-items: center;
+        ion-icon{
+            margin-right: 10px;
+        }
+    }
+    h5{
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #334155;
+        .dot{
+            display: inline-block;
+            height: 4px;
+            width: 4px;
+            border-radius: 100%;
+            background-color: #cdcdcd;
+        }
+        span{
+            font-size: 12px;
+            font-weight: 300;
+            color: #838383;
+        }
+    }
+    ion-buttons{
+        font-weight: 400;
+        font-size: 13px;
+        margin-top: 5px;
+        display: inline-block;
+        margin-right: 10px;
+        &.reply{
+            color: #3F3F97;
+        }
+        &.edit{
+            color: #444;
+        }
+        &.delete{
+            color: red;
+        }
+    }
+    p{
+        font-size: 13px;
+        margin: 0;
+    }
+}
+
+.action-btn{
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    --background: transparent;
+    --box-shadow: none;
+    color: #616161;
+    margin: 0;
+}
+
+.commet-btn{
+    --border-radius: 12px;
+    --padding-start: 45px;
+    --padding-end: 45px;
+    min-height: 46px;
+    --box-shadow: none;
+    --background: #cacaca44;
+    border: 1px solid #e0e0e0;
+    color: #444;
+}
+
+.comments-avatar-sm-img{
+    width:30px;
+    height: 30px;
+}
+
+.news-details-img-skel{
+    height:180px;
+}
+
+.news-avatar-img-skel{
+    width:30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
+.news-author-name-skel{
+    height: 24px;
+}
+
+.news-text-skel{
+    height: 18px;
+}
+
+.news-text-sm-skel{
+    height: 16px;
+}
+
+.news-desc-skel{
+    height: 14px;
+}
+
+.add-comment-box{
+    position: relative;
+    ion-avatar{
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        object-fit: cover;
+        object-position: 50% top;
+        position: absolute;
+        left: 5px;
+        top: 10px;
+        z-index: 9;
+    }
+    .form-field{
+        --border-radius: 0px;
+        --padding-start: 50px;
+        --padding-end: 50px;
+        --padding-top:10px;
+        min-height: 42px;
+    }
+    ion-button{
+        --background: #3F3F97;
+        --box-shadow: none;
+        --padding-start: 8px;
+        --padding-end: 8px;
+        --border-radius: 100%;
+    }
+}
+
+.send-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    z-index: 9;
+    margin: 0;
+}
+
+.comments-heading{
+    position: relative;
+    padding: 10px 0px;
+    background-color: #e5e5ff;
+    width: 100%;
+    ion-buttons{
+        position: absolute;
+        right: 14px;
+        top: 10px;
+        font-size: 20px;
+        color: #5c5cb7;
+    }
+}
+
+.epsidoe-content{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e4e4e4;
+    h4{
+        font-size: 18px;
+        font-weight: 500;
+        color: #000;
+        margin: 0px;
+    }
+    ion-icon{
+        font-size: 20px;
+    }
+}
+
+.shows-buttons{
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #dfdfdf;
+    border-radius: 20px;
+    ion-icon{
+        margin-right: 6px;
+    }
+}
+
+.modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: none;
+    padding: 10px 5px;
+    ion-title{
+        padding: 0;
+        font-size: 16px;
+    }
+    ion-icon{
+        font-size: 20px;
+    }
+}
+
+.shows-details{
+    padding: 10px;
+    background-color: #fff;
+    p{
+        font-size: 14px;
+    }
+}

@@ -12,7 +12,7 @@ export class CommonService {
   @Output() selectedCountry: EventEmitter<any> = new EventEmitter();
   @Output() selectedState: EventEmitter<any> = new EventEmitter();
   @Output() categories: EventEmitter<any> = new EventEmitter();
-  @Output() updateStoryList: EventEmitter<any> = new EventEmitter();
+  @Output() pollDataUpdated: EventEmitter<any> = new EventEmitter();
 
   isOnline:boolean = false;
 

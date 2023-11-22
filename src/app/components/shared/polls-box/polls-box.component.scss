@@ -1,0 +1,48 @@
+.poll-box{
+    box-shadow:none;
+    margin: 5px;
+    ion-card-content{
+        padding: 10px;
+    }
+}
+
+.poll-heading{
+    h4{
+        font-size: 14px;
+        font-weight: 500;
+        color: #000;
+        margin-bottom: 10px;
+    }
+}
+
+.answer-btn{
+    width: 100%;
+    padding: 4px 10px;
+    border: 1px solid #7777f3;
+    border-radius: 6px;
+    color: #3f3f97;
+    position: relative;
+    font-size:12px;
+    display: inline-block;
+    margin: 2px 0px;
+    span{
+        position: relative;
+        z-index: 1;
+    }
+    .progress{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        border-radius: 6px;
+        background-color: #d8d8fd;
+    }
+    ion-icon{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        color: #3f3f97;
+        font-size: 20px;
+        transform: translateY(-50%);
+    }
+}

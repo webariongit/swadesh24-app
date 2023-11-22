@@ -3,7 +3,7 @@
   <ng-container *ngIf="storyPage">
     <ion-label class="views-span"><ion-icon name="eye-outline"></ion-icon> {{story?.total_views || '0'}}</ion-label>
     <ion-label class="like-span" (click)="storyLike(story?.id)"><ion-icon color="danger" *ngIf="liked" name="heart"></ion-icon> <ion-icon *ngIf="!liked" name="heart-outline"></ion-icon> {{story?.total_likes || '0'}}</ion-label>
-    <ion-label class="share-span" (click)="shareStory(story?.id)"><ion-icon name="share-social-outline"></ion-icon>   {{story?.total_shares || '0'}}</ion-label>
+    <ion-label class="share-span" (click)="shareStory(story)"><ion-icon name="share-social-outline"></ion-icon>   {{story?.total_shares || '0'}}</ion-label>
   </ng-container>
   <ion-buttons class="play-btn" (click)="showStories(story?.id)">
     <ion-img

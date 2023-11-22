@@ -15,11 +15,25 @@
 }
 
 .text-h4{
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
 }
 
 .text-p{
     font-size: 13px;
     font-weight: 300;
+}
+
+.follow-btn{
+    padding: 1px 2px;
+    border: 1px solid #3f3f97;
+    border-radius: 4px;
+    font-size: 17px;
+    color: #3f3f97;
+    background-color: #fff;
+    &.active{
+        color: #fff;
+        background-color: #3f3f97;
+    }
 }

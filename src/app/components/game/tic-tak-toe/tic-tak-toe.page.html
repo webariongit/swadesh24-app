@@ -1,0 +1,30 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-text-center">
+    <div class="but">
+      <h4 class="text-h4">Current Player: {{ player }} </h4>
+    </div>
+  
+    <div class="but">
+      <ion-button class="ngjyra" fill="outline" color="warning" (click)="newGame()">Start new Game</ion-button>
+    </div>
+  
+    <ion-grid>
+      <h2 class="text-h4" *ngIf="winner">Player {{ winner }} won the game!</h2>
+    </ion-grid>
+    <div class="but">
+      <main>
+        <app-square  *ngFor="let val of squares; let i = index" [value]="val" (click)="makeMove(i)">
+        </app-square>
+      </main>
+    </div>
+  </ion-grid>
+  
+</ion-content>
+

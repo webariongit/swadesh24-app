@@ -1,6 +1,8 @@
 <ion-header [translucent]="true" class="inner-page-header">
   <ion-toolbar>
-    <ion-button slot="end" class="btn" (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,96 +12,98 @@
       <ion-title size="large">shorts-details</ion-title>
     </ion-toolbar>
   </ion-header>
-  <swiper-container class="trending-carousel" direction="vertical" space-between="30" mousewheel="true">
-    <swiper-slide>
-      <ion-grid class="short-details">
-        <ion-img class="news-img"
-          src="./assets/img/stories.png"
-          alt=""
-        ></ion-img>
-        <ion-grid class="short-action-btn">
-          <ion-label> <ion-avatar><img src="./assets/img/avatar.png" alt=""></ion-avatar></ion-label>
-          <ion-label><ion-icon name="eye-outline"></ion-icon> 0</ion-label>
-          <ion-label (click)="storyLike()"><ion-icon color="danger" name="heart"></ion-icon> 0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="share-social-outline"></ion-icon>  0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="chatbubbles-outline"></ion-icon>  0</ion-label>
-        </ion-grid>
-        <ion-grid class="comment-area">
-          <ion-buttons class="comment-box">Write your comment..</ion-buttons>
-        </ion-grid>
+  <ng-container  *ngIf="shortList && shortList?.length > 0">
+    <swiper-container class="trending-carousel" [slidesPerView]="1" direction="vertical" space-between="30" mousewheel="true">
+      <ng-container *ngFor="let short of shortList">
+        <swiper-slide *ngIf="short?.id == id">
+          <ion-grid class="short-details">
+            <div (click)="toggleVideo(short?.id)">
+              <!-- <img class="news-img" [src]="baseUrl + short?.thumbnail_img" alt=""> -->
+              <video #myVideo class="news-img" autoplay>
+                <source  [src]="baseUrl + short?.media_file" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <ion-grid class="short-action-btn">
+              <ion-grid class="author-box"> <ion-avatar (click)="gotoAuthor(short?.author_id)"><img [src]="baseUrl + short?.author?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" alt=""></ion-avatar> <ion-buttons (click)="followAuthor(short?.author_id, short?.author_follow_status)" [ngClass]="short?.author_follow_status == 1 ? 'active':''"><ion-icon name="add-outline"></ion-icon></ion-buttons></ion-grid>
+              <ion-label><ion-icon name="eye-outline"></ion-icon> {{short?.total_views || '0'}}</ion-label>
+              <ion-label (click)="storyLike(short?.id, short?.user_like_status)"><ion-icon name="heart-outline" *ngIf="short?.user_like_status == 0"></ion-icon> <ion-icon name="heart" [color]="danger" *ngIf="short?.user_like_status == 1"></ion-icon> {{short?.total_likes || '0'}}</ion-label>
+              <ion-label (click)="shareShort(short)"><ion-icon name="share-social-outline"></ion-icon> {{short?.total_share || '0'}}</ion-label>
+              <ion-label (click)="openComment(true, short?.id)" ><ion-icon name="chatbubbles-outline"></ion-icon>  {{short?.total_comments || '0'}}</ion-label>
+            </ion-grid>
+            <ion-grid class="comment-area">
+              <ion-text>
+                <h4>@{{short?.category?.category}}</h4>
+              </ion-text>
+              <ion-label>{{short?.description}}</ion-label>
+            </ion-grid>
+          </ion-grid>
+        </swiper-slide>
+      </ng-container>
+      <ng-container *ngFor="let short of shortList">
+        <swiper-slide *ngIf="short?.id != id">
+          <ion-grid class="short-details">
+            <div (click)="toggleVideo(short?.id)">
+              <!-- <img class="news-img" [src]="baseUrl + short?.thumbnail_img" alt=""> -->
+              <video #myVideo class="news-img" autoplay>
+                <source  [src]="baseUrl + short?.media_file" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <ion-grid class="short-action-btn">
+              <ion-grid class="author-box"> <ion-avatar (click)="gotoAuthor(short?.author_id)"><img [src]="baseUrl + short?.author?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" alt=""></ion-avatar> <ion-buttons (click)="followAuthor(short?.author_id, short?.author_follow_status)" [ngClass]="short?.author_follow_status == 1 ? 'active':''"><ion-icon name="add-outline"></ion-icon></ion-buttons></ion-grid>
+              <ion-label><ion-icon name="eye-outline"></ion-icon> {{short?.total_views || '0'}}</ion-label>
+              <ion-label (click)="storyLike(short?.id, short?.user_like_status)"><ion-icon name="heart-outline" *ngIf="short?.user_like_status == 0"></ion-icon> <ion-icon name="heart" [color]="danger" *ngIf="short?.user_like_status == 1"></ion-icon> {{short?.total_likes || '0'}}</ion-label>
+              <ion-label (click)="shareShort(short)"><ion-icon name="share-social-outline"></ion-icon> {{short?.total_share || '0'}}</ion-label>
+              <ion-label (click)="openComment(true, short?.id)" ><ion-icon name="chatbubbles-outline"></ion-icon>  {{short?.total_comments || '0'}}</ion-label>
+            </ion-grid>
+            <ion-grid class="comment-area">
+              <ion-text>
+                <h4>@{{short?.category?.category}}</h4>
+              </ion-text>
+              <ion-label>{{short?.description}}</ion-label>
+            </ion-grid>
+          </ion-grid>
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+  </ng-container>
+  <ion-modal [isOpen]="isModalOpen" [initialBreakpoint]="1" [backdropDismiss]="false" [breakpoints]="[0, 1]">
+    <ng-template>
+      <ion-grid class="comments-heading ion-text-center">
+        <ion-text>Comments</ion-text>
+        <ion-buttons (click)="openComment(false, '')"><ion-icon name="close"></ion-icon></ion-buttons>
       </ion-grid>
-    </swiper-slide>
-    <swiper-slide>
-      <ion-grid class="short-details">
-        <ion-img class="news-img"
-          src="./assets/img/map-img.png"
-          alt=""
-        ></ion-img>
-        <ion-grid class="short-action-btn">
-          <ion-label> <ion-avatar><img src="./assets/img/avatar.png" alt=""></ion-avatar></ion-label>
-          <ion-label><ion-icon name="eye-outline"></ion-icon> 0</ion-label>
-          <ion-label (click)="storyLike()"><ion-icon color="danger" name="heart"></ion-icon> 0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="share-social-outline"></ion-icon>  0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="chatbubbles-outline"></ion-icon>  0</ion-label>
+      <ng-container *ngIf="!commentList || commentList?.length == 0">
+        <ion-grid class="no-data-text">
+          <div class="no-data-content">
+            <h4>No comments yet.</h4>
+            <p>Start the conversation</p>
+          </div>
         </ion-grid>
-        <ion-grid class="comment-area">
-          <ion-buttons class="comment-box">Write your comment..</ion-buttons>
+      </ng-container>
+      <ng-container *ngIf="commentList?.length > 0">
+        <ion-grid class="shorts-comments">
+          <ion-row class="user-comments-box" *ngFor="let comments of commentList;">
+            <ion-col size="2">
+              <ion-avatar class="comments-avatar-img">
+                <img [src]="baseUrl + comments?.customer?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="10">
+              <h5>{{comments?.customer?.first_name || '--'}} {{comments?.customer?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{comments?.created_at | date}}</span> </h5>
+              <p>{{comments?.comments}}</p>
+            </ion-col>
+          </ion-row>
         </ion-grid>
-      </ion-grid>
-    </swiper-slide>
-    <swiper-slide>
-      <ion-grid class="short-details">
-        <ion-img class="news-img"
-          src="./assets/img/stories.png"
-          alt=""
-        ></ion-img>
-        <ion-grid class="short-action-btn">
-          <ion-label> <ion-avatar><img src="./assets/img/avatar.png" alt=""></ion-avatar></ion-label>
-          <ion-label><ion-icon name="eye-outline"></ion-icon> 0</ion-label>
-          <ion-label (click)="storyLike()"><ion-icon color="danger" name="heart"></ion-icon> 0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="share-social-outline"></ion-icon>  0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="chatbubbles-outline"></ion-icon>  0</ion-label>
-        </ion-grid>
-        <ion-grid class="comment-area">
-          <ion-buttons class="comment-box">Write your comment..</ion-buttons>
-        </ion-grid>
-      </ion-grid>
-    </swiper-slide>
-    <swiper-slide>
-      <ion-grid class="short-details">
-        <ion-img class="news-img"
-          src="./assets/img/stories.png"
-          alt=""
-        ></ion-img>
-        <ion-grid class="short-action-btn">
-          <ion-avatar><img src="./assets/img/avatar.png" alt=""></ion-avatar>
-          <ion-label><ion-icon name="eye-outline"></ion-icon> 0</ion-label>
-          <ion-label (click)="storyLike()"><ion-icon color="danger" name="heart"></ion-icon> 0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="share-social-outline"></ion-icon>  0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="chatbubbles-outline"></ion-icon>  0</ion-label>
-        </ion-grid>
-        <ion-grid class="comment-area">
-          <ion-buttons class="comment-box">Write your comment..</ion-buttons>
-        </ion-grid>
-      </ion-grid>
-    </swiper-slide>
-    <swiper-slide>
-      <ion-grid class="short-details">
-        <ion-img class="news-img"
-          src="./assets/img/stories.png"
-          alt=""
-        ></ion-img>
-        <ion-grid class="short-action-btn">
-          <ion-label> <ion-avatar><img src="./assets/img/avatar.png" alt=""></ion-avatar></ion-label>
-          <ion-label><ion-icon name="eye-outline"></ion-icon> 0</ion-label>
-          <ion-label (click)="storyLike()"><ion-icon color="danger" name="heart"></ion-icon> 0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="share-social-outline"></ion-icon>  0</ion-label>
-          <ion-label (click)="shareStory()"><ion-icon name="chatbubbles-outline"></ion-icon>  0</ion-label>
-        </ion-grid>
-        <ion-grid class="comment-area">
-          <ion-buttons class="comment-box">Write your comment..</ion-buttons>
-        </ion-grid>
-      </ion-grid>
-    </swiper-slide>
-  </swiper-container>
+      </ng-container>
+      <div class="add-comment-box">
+        <ion-avatar>
+          <img [src]="userDetails?.base_url + userDetails?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+        </ion-avatar>
+        <ion-textarea type="text" placeholder="Add Your Comment" class="form-field" fill="outline" autoGrow="true" [(ngModel)]="comment"></ion-textarea>
+        <ion-button class="send-btn" [disabled]="!this.comment" (click)="addComment()"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -53,7 +53,7 @@ export class StoriesBoxComponent  implements OnInit {
       url:'https://swadesh24.com/stories-slider?story_id=' + story?.id,
     }
     await Share.share(options).then((res:any)=>{
-      // this.storyShared(story?.id)
+      this.storyShared(story?.id)
     }).catch((error)=>{
       console.log("error",error)
     })

@@ -1,13 +1,20 @@
-<ion-card class="top-shows-box">
+<ion-card class="top-shows-box" *ngIf="shows">
   <ion-card-content>
-    <ion-img src="./assets/img/news-list-img.png"></ion-img>
+    <ion-img (click)="gotoShows(shows?.id)" [src]="baseUrl + shows?.image"></ion-img>
     <ion-grid>
       <ion-text>
-        <h4 class="text-h4">The Top Shows</h4>
+        <h4 class="text-h4" (click)="gotoShows(shows?.id)">{{shows?.title}}</h4>
       </ion-text>
-      <ion-text>
-        <p class="text-p">1452 Episodes</p>
-      </ion-text>
+      <ion-row>
+        <ion-col size="10" class="ion-no-padding">
+          <ion-text>
+            <p class="text-p" (click)="gotoShows(shows?.id)">{{shows?.episodes_count | numberFormate}} Episodes</p>
+          </ion-text>
+        </ion-col>
+        <ion-col size="2" class="ion-no-padding">
+          <ion-buttons class="follow-btn" (click)="followShow(shows?.id)" [ngClass]="shows?.user_follow_status == 1 ? 'active':''"><ion-icon name="add-outline"></ion-icon></ion-buttons>
+        </ion-col>
+      </ion-row>
     </ion-grid>
   </ion-card-content>
 </ion-card>

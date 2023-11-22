@@ -1,0 +1,41 @@
+<ion-header [translucent]="true" class="inner-page-header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div #content style="width: 100%; height: 100%;">
+    <div #grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text class="score-label">
+              <ion-label>Score:</ion-label>
+            </ion-text>
+          </ion-col>
+          <ion-col class="ion-text-right">
+            <ion-text class="score score-label">
+              <ion-label>{{score}}</ion-label>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div #map class="map">
+      <div class="info-panel">
+        <div class="info" *ngIf="infoVisible">
+          {{info}}
+        </div>
+        <div class="movements-info" *ngIf="movementsInfoVisible">
+          {{controlInfo}}
+        </div>
+      </div>    
+      <div class="canvas-panel" [ngStyle]="{'height': canvasPanelHeight + 'px'}">      
+        <canvas class="game-canvas" #canvas [width]="mapWidth" [height]="mapHeight"></canvas>
+      </div>
+    </div>
+  </div>
+</ion-content>

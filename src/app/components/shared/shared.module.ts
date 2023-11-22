@@ -19,9 +19,13 @@ import { ShortsBoxComponent } from './shorts-box/shorts-box.component';
 import { TeamBoxComponent } from './team-box/team-box.component';
 import { TopShowsBoxComponent } from './top-shows-box/top-shows-box.component';
 import { PollsBoxComponent } from './polls-box/polls-box.component';
+import { ShowsListComponent } from './shows-list/shows-list.component';
+import { NumberFormatePipe } from 'src/app/pipe/number-formate-pipe/number-formate.pipe';
+import { SquareComponent } from './square/square.component';
 
 @NgModule({
   declarations: [
+    NumberFormatePipe,
     HeaderComponent,
     NewsBoxComponent,
     LikeBtnComponent,
@@ -38,7 +42,9 @@ import { PollsBoxComponent } from './polls-box/polls-box.component';
     ShortsBoxComponent,
     TeamBoxComponent,
     TopShowsBoxComponent,
-    PollsBoxComponent
+    PollsBoxComponent,
+    ShowsListComponent,
+    SquareComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +67,10 @@ import { PollsBoxComponent } from './polls-box/polls-box.component';
     ShortsBoxComponent,
     TeamBoxComponent,
     TopShowsBoxComponent,
-    PollsBoxComponent
+    PollsBoxComponent,
+    ShowsListComponent,
+    NumberFormatePipe,
+    SquareComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

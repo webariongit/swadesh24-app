@@ -100,6 +100,10 @@ export class HomePage implements OnInit, OnDestroy {
     this.router.navigate(['home/articles',id,'all'])
   }
 
+  gotoShorts(){
+    this.router.navigate(['home/shorts'])
+  }
+
   getHomeData(){
     this.loader = true;
     this.httpService.get(apiRoutes.home).subscribe({

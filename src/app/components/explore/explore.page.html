@@ -10,36 +10,128 @@
       <ion-title size="large">explore</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid class="shore-sec">
-    <ion-grid class="section-header">
-      <h4>Top Shows</h4>
+  <ng-container *ngIf="!loader">
+    <ion-grid class="shore-sec">
+      <ion-grid class="section-header">
+        <h4>Top Shows</h4>
+        <a (click)="gotoPage('top-shows')" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false">
+        <swiper-slide *ngFor="let show of topShows">
+          <app-top-shows-box [shows]="show" [baseUrl]="base_url"></app-top-shows-box>
+        </swiper-slide>
+      </swiper-container>
     </ion-grid>
-    <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" autoplay-delay="2500" autoplay-disable-on-interaction="false">
-      <swiper-slide>
-        <app-top-shows-box></app-top-shows-box>
-      </swiper-slide>
-      <swiper-slide >
-        <app-top-shows-box></app-top-shows-box>
-      </swiper-slide>
-      <swiper-slide >
-        <app-top-shows-box></app-top-shows-box>
-      </swiper-slide>
-      <swiper-slide >
-        <app-top-shows-box></app-top-shows-box>
-      </swiper-slide>
-      <swiper-slide >
-        <app-top-shows-box></app-top-shows-box>
-      </swiper-slide>
-    </swiper-container>
-  </ion-grid>
-  <ion-grid class="trending-topic-sec">
-    <ion-grid class="section-header">
-      <h4>Play Games</h4>
+    <ion-grid class="trending-topic-sec">
+      <ion-grid class="section-header">
+        <h4>Play Games</h4>
+      </ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-buttons class="game-btn" (click)="openSnakeGame()">
+           <ion-img src="../../../assets/img/snake-game.png"></ion-img>
+          </ion-buttons>
+        </ion-col>
+        <ion-col size="4">
+          <ion-buttons  class="game-btn" (click)="openTicTak()">
+            <ion-img src="../../../assets/img/tik-tac-toe.png"></ion-img>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
     </ion-grid>
-    <ion-row>
-      <ion-col size="4">
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid class="stories-sec" *ngIf="storyList">
+      <ion-grid class="section-header">
+        <h4>Visual Stories</h4>
+        <a (click)="gotoPage('stories')" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="2.2" [loop]="false" [spaceBetween]="10">
+        <swiper-slide  *ngFor="let story of storyList">
+          <app-stories-box [story]="story"></app-stories-box>
+        </swiper-slide>
+      </swiper-container>
+    </ion-grid>
+    <ion-grid class="shorts-sec">
+      <ion-grid class="section-header">
+        <h4>Polls</h4>
+        <a (click)="gotoPage('polls')" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="1" [loop]="false" [spaceBetween]="10">
+        <swiper-slide *ngFor="let poll of pollList">
+          <app-polls-box [poll]="poll"></app-polls-box>
+        </swiper-slide>
+      </swiper-container>
+    </ion-grid>
+    <ion-grid class="shorts-sec">
+      <ion-grid class="section-header">
+        <h4>Shorts</h4>
+        <a (click)="gotoPage('home/shorts')" class="view-all-btn">
+          View All
+        </a>
+      </ion-grid>
+      <swiper-container class="trending-carousel" [slidesPerView]="2.6" [loop]="false" [spaceBetween]="10">
+        <swiper-slide *ngFor="let short of shortList">
+          <app-shorts-box [shorts]="short" [baseUrl]="base_url"></app-shorts-box>
+        </swiper-slide>
+      </swiper-container>
+    </ion-grid>
+    <ng-container *ngIf="ads?.length > 0">
+      <app-ads-box [adDetails]="ads[2]"></app-ads-box>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="loader">
+    <ion-grid >
+      <ion-row>
+        <ion-col size="12">
+          <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="4" class="category-skel">
+          <ion-skeleton-text class="cskel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="4" class="category-skel">
+          <ion-skeleton-text class="cskel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="4" class="category-skel">
+          <ion-skeleton-text class="cskel-stroy" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid  class="trending-topic-sec" >
+      <ion-row>
+        <ion-col size="12">
+          <ion-skeleton-text class="category-title" style="width:60%" [animated]="true"></ion-skeleton-text>
+        </ion-col>
+        <ion-col size="6" class="category-skel">
+          <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2">
+              <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="10">
+              <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
+              <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col size="6" class="category-skel">
+          <ion-skeleton-text class="category-img-skel" [animated]="true"></ion-skeleton-text>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="3">
+              <ion-skeleton-text class="category-button-skel" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+            <ion-col size="9">
+              <ion-skeleton-text class="category-text-md-skel" [animated]="true"></ion-skeleton-text>
+              <ion-skeleton-text class="category-text-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+  
 </ion-content>

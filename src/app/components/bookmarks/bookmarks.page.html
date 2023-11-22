@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
   <ng-container *ngIf="!loading">
-    <ion-segment class="bookmark-list" [(ngModel)]="segmentButton">
+    <ion-segment class="bookmark-list" [(ngModel)]="segmentButton" [scrollable]="true">
       <ion-segment-button value="news">
         <ion-label><ion-icon name="reader-outline"></ion-icon> News <span class="count-badge">{{readNews?.length || '0'}}</span></ion-label>
       </ion-segment-button>
@@ -23,6 +23,9 @@
       </ion-segment-button>
       <ion-segment-button value="listen">
         <ion-label><ion-icon name="musical-notes-outline"></ion-icon> Listen <span class="count-badge">{{audioNews?.length || '0'}}</span></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="episode">
+        <ion-label><ion-icon name="tv-outline"></ion-icon> Episode <span class="count-badge">{{savedShows?.length || '0'}}</span></ion-label>
       </ion-segment-button>
     </ion-segment>
     <div *ngIf="segmentButton == 'news'">
@@ -52,6 +55,17 @@
         <app-articles-box [news]="news"></app-articles-box>
       </ng-container>
       <ion-card class="no-list-found" *ngIf="audioNews?.length == 0">
+        <ion-text class="ion-text-center">
+          <img src="../../../assets/img/no-data-found.png" alt=""> <br>
+          <h4>No Data Found</h4>
+        </ion-text>
+      </ion-card>
+    </div>
+    <div *ngIf="segmentButton == 'episode'">
+      <ng-container *ngFor="let episode of savedShows">
+        <app-shows-list [shows]="episode" [baseUrl]="baseUrl"></app-shows-list>
+      </ng-container>
+      <ion-card class="no-list-found" *ngIf="savedShows?.length == 0">
         <ion-text class="ion-text-center">
           <img src="../../../assets/img/no-data-found.png" alt=""> <br>
           <h4>No Data Found</h4>
