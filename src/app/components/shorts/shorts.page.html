@@ -1,10 +1,13 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="inner-page-header">
   <ion-toolbar>
-    <ion-title>shorts</ion-title>
+    <ion-title>Shorts</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="short-padding-top">
+<ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">shorts</ion-title>

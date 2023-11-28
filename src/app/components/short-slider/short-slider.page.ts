@@ -1,39 +1,38 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiRoutes } from 'src/app/constant/config';
 import { HttpService } from 'src/app/service/http-service/http.service';
-import Swiper from 'swiper';
-@Component({
-  selector: 'app-shorts',
-  templateUrl: './shorts.page.html',
-  styleUrls: ['./shorts.page.scss'],
-})
-export class ShortsPage implements OnInit {
 
-  shortList:any
-  base_url:any;
-  loader:boolean = false;
+@Component({
+  selector: 'app-short-slider',
+  templateUrl: './short-slider.page.html',
+  styleUrls: ['./short-slider.page.scss'],
+})
+export class ShortSliderPage implements OnInit {
+  baseUrl:any;
+  shortList:any;
+
   constructor(
     private httpService:HttpService,
-    private router:Router,
+    private router:Router
   ) { }
   
-
-
-  ngOnInit() {
+  ionViewDidEnter(){
     this.getShortList()
   }
 
+  ngOnInit() {
+    
+  }
+
   getShortList(){
-    this.loader = true;
     this.httpService.get(apiRoutes.shorts).subscribe({
       next:(v:any) =>{
-        this.base_url =  v.base_path
-        this.shortList = v?.response?.data
-        this.loader = false;
+        this.baseUrl = v.base_path;
+        this.shortList = v?.response?.data;
+        console.log(this.shortList)
       },
       error:(e:any)=>{
-        this.loader = false;
         if (e.status == 401) {
           localStorage.clear();
           this.router.navigate(['login']); 
@@ -41,6 +40,5 @@ export class ShortsPage implements OnInit {
       }
     })
   }
-
 
 }

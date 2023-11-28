@@ -22,6 +22,7 @@ import { PollsBoxComponent } from './polls-box/polls-box.component';
 import { ShowsListComponent } from './shows-list/shows-list.component';
 import { NumberFormatePipe } from 'src/app/pipe/number-formate-pipe/number-formate.pipe';
 import { SquareComponent } from './square/square.component';
+import { ShortDetailsComponent } from './short-details/short-details.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SquareComponent } from './square/square.component';
     TopShowsBoxComponent,
     PollsBoxComponent,
     ShowsListComponent,
-    SquareComponent
+    SquareComponent,
+    ShortDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { SquareComponent } from './square/square.component';
     PollsBoxComponent,
     ShowsListComponent,
     NumberFormatePipe,
-    SquareComponent
+    SquareComponent,
+    ShortDetailsComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

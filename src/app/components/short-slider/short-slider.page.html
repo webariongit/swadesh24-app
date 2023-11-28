@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>short-slider</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="short-slider-padding-top">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">short-slider</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <swiper-container class="mySwiper" direction="vertical" mousewheel="true" *ngIf="shortList && shortList?.length > 0">
+    <swiper-slide *ngFor="let short of shortList">
+      <app-short-details [short]="short" [baseUrl]="baseUrl"></app-short-details>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>

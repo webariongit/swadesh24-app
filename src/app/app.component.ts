@@ -100,7 +100,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       setTimeout(async()=>{
         SplashScreen.hide();
-      },10000);
+      },500);
       setTimeout(() => {
         if (this.commonService.getUserToken()) {
           this.navCtrl.navigateRoot('home');

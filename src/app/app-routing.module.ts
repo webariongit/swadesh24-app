@@ -110,6 +110,10 @@ const routes: Routes = [
     canActivate: [AuthGaurdService]
   },
   {
+    path: 'short',
+    loadChildren: () => import('./components/shorts/shorts.module').then( m => m.ShortsPageModule)
+  },
+  {
     path: 'shorts-details/:id',
     loadChildren: () => import('./components/shorts-details/shorts-details.module').then( m => m.ShortsDetailsPageModule),
     canActivate: [AuthGaurdService],
@@ -150,7 +154,6 @@ const routes: Routes = [
     path: 'shows/:id',
     loadChildren: () => import('./components/shows/shows.module').then( m => m.ShowsPageModule)
   },
-
 
 
 

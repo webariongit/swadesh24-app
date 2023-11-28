@@ -194,3 +194,9 @@ ion-card.no-list-found{
 ion-footer{
     background-color: #fff;
 }
+
+.short-slider-padding-top{
+    .news-img{
+        height: calc(100vh - 116px) !important;
+    }
+}

@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'shorts',
-        loadChildren: () => import('../shorts/shorts.module').then( m => m.ShortsPageModule)
+        loadChildren: () => import('../short-slider/short-slider.module').then( m => m.ShortSliderPageModule)
       },
       {
         path: 'explore',

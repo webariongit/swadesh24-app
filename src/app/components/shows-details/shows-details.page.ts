@@ -93,8 +93,8 @@ export class ShowsDetailsPage implements OnInit {
     this.router.navigate(['author-details', id])
   }
 
-  showDescription(open:boolean){
-    this.isModalOpen2 = open
+  showDescription(){
+    this.isModalOpen2 = !this.isModalOpen2
   }
 
   adjustDesc() {
@@ -125,8 +125,8 @@ export class ShowsDetailsPage implements OnInit {
     })
   }
 
-  openModal(open:boolean){
-    this.isModalOpen = open
+  openModal(){
+    this.isModalOpen = !this.isModalOpen
   }
 
   showLike(id:any){

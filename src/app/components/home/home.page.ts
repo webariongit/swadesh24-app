@@ -101,7 +101,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   gotoShorts(){
-    this.router.navigate(['home/shorts'])
+    this.router.navigate(['short'])
   }
 
   getHomeData(){

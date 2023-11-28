@@ -11,10 +11,10 @@
     </ion-toolbar>
   </ion-header>
   <ng-container *ngIf="!loader">
-    <ion-grid class="shore-sec">
+    <ion-grid class="shore-sec" *ngIf="topShows">
       <ion-grid class="section-header">
         <h4>Top Shows</h4>
-        <a (click)="gotoPage('top-shows')" class="view-all-btn">
+        <a (click)="gotoPage('top-shows')" class="view-all-btn" *ngIf="topShows?.length > 3">
           View All
         </a>
       </ion-grid>
@@ -44,7 +44,7 @@
     <ion-grid class="stories-sec" *ngIf="storyList">
       <ion-grid class="section-header">
         <h4>Visual Stories</h4>
-        <a (click)="gotoPage('stories')" class="view-all-btn">
+        <a (click)="gotoPage('stories')" class="view-all-btn" *ngIf="storyList?.length > 3">
           View All
         </a>
       </ion-grid>
@@ -54,10 +54,10 @@
         </swiper-slide>
       </swiper-container>
     </ion-grid>
-    <ion-grid class="shorts-sec">
+    <ion-grid class="shorts-sec" *ngIf="pollList">
       <ion-grid class="section-header">
         <h4>Polls</h4>
-        <a (click)="gotoPage('polls')" class="view-all-btn">
+        <a (click)="gotoPage('polls')" class="view-all-btn" *ngIf="pollList?.length > 3">
           View All
         </a>
       </ion-grid>
@@ -67,10 +67,10 @@
         </swiper-slide>
       </swiper-container>
     </ion-grid>
-    <ion-grid class="shorts-sec">
+    <ion-grid class="shorts-sec" *ngIf="shortList">
       <ion-grid class="section-header">
         <h4>Shorts</h4>
-        <a (click)="gotoPage('home/shorts')" class="view-all-btn">
+        <a (click)="gotoPage('home/shorts')" class="view-all-btn" *ngIf="shortList?.length > 3">
           View All
         </a>
       </ion-grid>

@@ -16,7 +16,7 @@
       <source  [src]="baseUrl + episodeDetails?.media_url" type="video/mp4">
       Your browser does not support the video tag.
     </video>
-    <ion-grid class="epsidoe-content" (click)="showDescription(true)">
+    <ion-grid class="epsidoe-content" (click)="showDescription()">
       <ion-text>
         <h4>{{episodeDetails?.title}}</h4>
       </ion-text>
@@ -35,7 +35,9 @@
           <ion-text class="text-h4">{{author?.first_name}} {{author?.last_name}}</ion-text>
         </ion-grid>
       </ng-container>
-      <ion-text class="text-h6">Updated: {{episodeDetails?.updated_at | date}}</ion-text>
+      <ion-col>
+        <ion-text class="text-h6">Updated: {{episodeDetails?.updated_at | date}}</ion-text>
+      </ion-col>
     </ion-grid>
     <ion-grid>
       <ion-row>
@@ -52,7 +54,7 @@
     </ion-grid>
     <ion-card class="comment-card">
       <ion-card-content class="comment-card-content">
-          <div class="comments-box" (click)="openModal(true)">
+          <div class="comments-box" (click)="openModal()">
             <ion-text>
               <h4 *ngIf="commentList?.length > 0"><ion-icon name="chatbubble-ellipses-outline"></ion-icon>{{commentList?.length || '0'}} Comments</h4>
               <h4 *ngIf="!commentList || commentList?.length == 0">Be the first one to comment</h4>
@@ -109,11 +111,11 @@
       <ion-skeleton-text class="news-desc-skel" style="width:60%" [animated]="true"></ion-skeleton-text>
     </ion-grid>
   </ng-container>
-  <ion-modal #modal [isOpen]="isModalOpen" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+  <ion-modal #modal [isOpen]="isModalOpen" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]"  [backdropDismiss]="false" swipeToClose="false">
     <ng-template>
       <ion-header class="modal-header">
         <ion-title>Comments</ion-title>
-        <ion-buttons (click)="openModal(false)"><ion-icon name="close-outline"></ion-icon></ion-buttons>
+        <ion-buttons (click)="openModal()"><ion-icon name="close-outline"></ion-icon></ion-buttons>
       </ion-header>
       <ion-content>
         <div class="add-comment-box">
@@ -123,36 +125,40 @@
           <ion-textarea type="text" placeholder="Add Your Comment" class="form-field" fill="outline" autoGrow="true" [(ngModel)]="comment"></ion-textarea>
           <ion-button class="send-btn" [disabled]="!this.comment" (click)="addComment(episodeDetails?.id)"><ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
         </div>
-        <ng-container *ngFor="let comments of commentList">
-          <ion-row class="user-comments-box">
-            <ion-col size="2">
-              <ion-avatar class="comments-avatar-img">
-                <img [src]="baseUrl + comments?.customer?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
-              </ion-avatar>
-            </ion-col>
-            <ion-col size="10">
-              <ion-text>
-                <h5>{{comments?.customer?.first_name || '--'}} {{comments?.customer?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{comments?.updated_at | date}}</span> </h5>
-              </ion-text>
-              <ion-text>
-                <p>{{comments?.comments}}</p>
-              </ion-text>
-            </ion-col>
-          </ion-row>
-        </ng-container>
+        <div class="comment-lists">
+          <ng-container *ngFor="let comments of commentList">
+            <ion-row class="user-comments-box">
+              <ion-col size="2">
+                <ion-avatar class="comments-avatar-img">
+                  <img [src]="baseUrl + comments?.customer?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="">
+                </ion-avatar>
+              </ion-col>
+              <ion-col size="10">
+                <ion-text>
+                  <h5>{{comments?.customer?.first_name || '--'}} {{comments?.customer?.last_name || '--'}} <span class="dot"></span> <span class="text-h6">{{comments?.updated_at | date}}</span> </h5>
+                </ion-text>
+                <ion-text>
+                  <p>{{comments?.comments}}</p>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+        </div>
       </ion-content>
     </ng-template>
   </ion-modal>
-  <ion-modal #modal [isOpen]="isModalOpen2" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]" [backdropDismiss]="false">
+  <ion-modal #modal [isOpen]="isModalOpen2" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]" [backdropDismiss]="false"  swipeToClose="false">
     <ng-template>
       <ion-header class="modal-header">
         <ion-title>Description</ion-title>
-        <ion-buttons (click)="showDescription(false)"><ion-icon name="close-outline"></ion-icon></ion-buttons>
+        <ion-buttons (click)="showDescription()"><ion-icon name="close-outline"></ion-icon></ion-buttons>
       </ion-header>
-      <ion-content class="shows-details">
-        <ion-text>
-          <p>{{episodeDetails?.description}}</p>
-        </ion-text>
+      <ion-content>
+        <ion-grid  class="shows-details">
+          <ion-text>
+            <p>{{episodeDetails?.description}}</p>
+          </ion-text>
+        </ion-grid>
       </ion-content>
     </ng-template>
   </ion-modal>
