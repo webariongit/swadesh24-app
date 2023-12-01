@@ -56,4 +56,5 @@ export const apiRoutes = {
     topShowsEpisodeComments:'top-shows-episode-comment',
     topShowsEpisodeAddComment:'top-shows-episode-comment-store',
     get_state:'https://countriesnow.space/api/v0.1/countries/states',
+    live:'live-telecast'
 }

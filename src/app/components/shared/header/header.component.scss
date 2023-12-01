@@ -7,7 +7,19 @@
     --padding-end: 5px;
     --border-radius: 100%;
     ion-icon{
-        color:#000;
+        color:#0322d4;
+    }
+}
+
+.live-btn{
+    --background: transparent;
+    --box-shadow: none;
+    --color:#0322d4;
+    border-radius: 6px;
+    ion-icon{
+        animation: blink 1s infinite;
+        color: #ef0000;
+        margin-left: 4px;
     }
 }
 
@@ -17,7 +29,19 @@ ion-toolbar{
 }
 
 ion-menu-button{
-    --color: #000;
+    --color: #0322d4;
+}
+
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
 }
 
 .tab-butoton-skel{
@@ -25,7 +49,7 @@ ion-menu-button{
 }
 
 ion-segment{
-    background-color: #eb3f01;
+    background-color: #3950d4;
     border-top: 1px solid #fff;
     ion-segment-button{
         min-width: auto;

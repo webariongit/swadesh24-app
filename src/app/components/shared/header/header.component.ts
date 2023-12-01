@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Browser } from '@capacitor/browser';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
 import { HttpService } from 'src/app/service/http-service/http.service';
@@ -13,9 +14,11 @@ export class HeaderComponent  implements OnInit {
   categoryList:any;
   loader:boolean = false;
   selectedCategory:any;
+  liveUrl:any;
   constructor(
     private router:Router,
-    private commonService:CommonService
+    private commonService:CommonService,
+    private httpService:HttpService
   ) {
     this.commonService.categories.subscribe((data)=>{
       this.categoryList = data;
@@ -34,6 +37,23 @@ export class HeaderComponent  implements OnInit {
       }
     });
 
+  }
+
+  gotoLive(){
+    let apiUrl = apiRoutes.live
+    this.httpService.get(apiUrl).subscribe({
+      next:async (v:any) =>{
+        this.liveUrl = v.url;
+        if(this.liveUrl){
+          await Browser.open({ url: this.liveUrl });
+        }else{
+          await Browser.open({ url: 'https://www.youtube.com/@Swadesh24Newschannel'});
+        }
+      },
+      error:(e:any)=>{
+        this.loader = false;
+      }
+    })
   }
 
   ngOnInit() {
