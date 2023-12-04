@@ -31,10 +31,8 @@ export class ShortsDetailsPage implements OnInit {
     this.getShortList();
   }
 
-  
-
-  onSlideChange(id:any){
-
+  checkSlide(){
+    console.log("trigger")
   }
 
   getShortList(){

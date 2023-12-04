@@ -25,6 +25,10 @@ export class ShortSliderPage implements OnInit {
     
   }
 
+  checkSlide(){
+    console.log("triggered")
+  }
+
   getShortList(){
     this.httpService.get(apiRoutes.shorts).subscribe({
       next:(v:any) =>{

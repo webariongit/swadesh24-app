@@ -18,10 +18,12 @@ export class ShortsPage implements OnInit {
     private router:Router,
   ) { }
   
-
+  ionViewDidEnter(){
+    this.getShortList()
+  }
 
   ngOnInit() {
-    this.getShortList()
+    
   }
 
   getShortList(){

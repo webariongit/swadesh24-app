@@ -10,7 +10,7 @@
   <ng-container *ngIf="isNetworkAvailable">
     <ng-container *ngIf="!loader">
       <ng-container *ngIf="latestNews">
-        <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false">
+        <swiper-container class="home-carousel" [slidesPerView]="1" [loop]="false" (ionSlideDidChange)="checkSlide()">
           <swiper-slide  *ngFor="let news of latestNews">
             <app-news-box [news]="news"></app-news-box>
           </swiper-slide>

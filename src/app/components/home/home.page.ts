@@ -59,6 +59,7 @@ export class HomePage implements OnInit, OnDestroy {
       }
     });
   }
+  
   ngOnDestroy(): void {
     this.loader = false;
   }
@@ -70,6 +71,10 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnInit() {
     this.isNetworkAvailable = this.commonService.isOnline;
     this.getNativeAds();
+  }
+
+  checkSlide(){
+    console.log("triggered")
   }
 
   getNativeAds(){
@@ -150,7 +155,6 @@ export class HomePage implements OnInit, OnDestroy {
         console.log("HI TREIGGERED 3 FALSE")
       }
     })
-
     console.log("loader3", this.loader)
   }
 

@@ -1,6 +1,6 @@
 <ion-grid class="short-details">
   <div (click)="toggleVideo()">
-    <video #myVideo class="news-img" [src]="baseUrl + short?.media_file" controls loop></video>
+    <video #myVideo class="news-img" [src]="baseUrl + short?.media_file" preload="none" controls loop></video>
   </div>
   <ion-grid class="short-action-btn">
     <ion-grid class="author-box"> <ion-avatar (click)="gotoAuthor(short?.author_id)"><img [src]="baseUrl + short?.author?.profile_image" onerror="this.src='https://ionicframework.com/docs/img/demos/avatar.svg'" alt="" alt=""></ion-avatar> <ion-buttons (click)="followAuthor(short?.author_id, short?.author_follow_status)" [ngClass]="short?.author_follow_status == 1 ? 'active':''"><ion-icon name="add-outline"></ion-icon></ion-buttons></ion-grid>
@@ -14,7 +14,7 @@
       <ion-text>
         <h4>@{{short?.category?.category}}</h4>
       </ion-text>
-      <ion-label>{{short?.description}}</ion-label>
+      <ion-label *ngIf="short?.description">{{short?.description}}</ion-label>
     </ion-grid>
   </ion-grid>
 </ion-grid>

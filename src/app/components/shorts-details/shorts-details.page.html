@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
   <ng-container *ngIf="shortList && shortList?.length > 0">
-    <swiper-container class="mySwiper" direction="vertical" mousewheel="true">
+    <swiper-container class="mySwiper" direction="vertical" mousewheel="true" (slidechange)="checkSlide()">
       <ng-container *ngFor="let short of shortList">
         <swiper-slide *ngIf="short?.id == id" (slidechange)="onSlideChange(short?.id)">
           <app-short-details [short]="short" [baseUrl]="baseUrl"></app-short-details>
