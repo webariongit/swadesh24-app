@@ -16,10 +16,12 @@
     --box-shadow: none;
     --color:#0322d4;
     border-radius: 6px;
+    --padding:0;
     ion-icon{
-        animation: blink 1s infinite;
-        color: #ef0000;
-        margin-left: 4px;
+        // animation: blink 1s infinite;
+        // color: #ef0000;
+        // margin-left: 4px;
+        font-size: 28px;
     }
 }
 
