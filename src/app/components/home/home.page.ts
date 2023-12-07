@@ -175,7 +175,8 @@ export class HomePage implements OnInit, OnDestroy {
   getShortList(){
     this.httpService.get(apiRoutes.shorts).subscribe({
       next:(v:any) =>{
-        this.shortList = v?.response?.data
+        this.shortList = v?.response?.data;
+        localStorage.setItem("shorts", JSON.stringify(this.shortList))
       },
       error:(e:any)=>{
         if (e.status == 401) {

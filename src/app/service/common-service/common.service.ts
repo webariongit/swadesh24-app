@@ -13,6 +13,8 @@ export class CommonService {
   @Output() selectedState: EventEmitter<any> = new EventEmitter();
   @Output() categories: EventEmitter<any> = new EventEmitter();
   @Output() pollDataUpdated: EventEmitter<any> = new EventEmitter();
+  @Output() playVideo:EventEmitter<any> = new EventEmitter();
+  @Output() pauseVideo:EventEmitter<any> = new EventEmitter();
 
   isOnline:boolean = false;
 

@@ -1,3 +1,4 @@
+export const baseUrl = 'https://api.swadesh24.com'
 export const apiRoutes = {
     home:'home-page',
     verfiy_otp:'verify-otp',

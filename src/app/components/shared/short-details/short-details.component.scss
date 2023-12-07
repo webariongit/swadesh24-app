@@ -29,7 +29,7 @@
 
 .news-img{
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 56px);
     object-fit: cover;
     object-position: 50% top;
 }
@@ -78,7 +78,7 @@
 }
 .comment-area{
     position: absolute;
-    bottom: 75px;
+    bottom: 6px;
     left: 0;
     width: 100%;
 }
@@ -144,7 +144,7 @@ ion-modal {
 
 .short-action-btn{
     position: absolute;
-    bottom: 145px;
+    bottom: 75px;
     right: 0;
     ion-label{
         padding: 5px 10px;

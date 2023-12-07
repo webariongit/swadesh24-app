@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Share, ShareOptions } from '@capacitor/share';
 import { apiRoutes } from 'src/app/constant/config';
@@ -10,10 +10,10 @@ import { HttpService } from 'src/app/service/http-service/http.service';
   templateUrl: './short-details.component.html',
   styleUrls: ['./short-details.component.scss'],
 })
-export class ShortDetailsComponent  implements OnInit {
+export class ShortDetailsComponent  implements OnInit{
   @Input() short:any;
   @Input() baseUrl:any;
-  @ViewChild('myVideo') myVideo: ElementRef;
+  @Input() index:any;
   isModalOpen = false;
   comment:string;
   commentList:any;
@@ -25,19 +25,37 @@ export class ShortDetailsComponent  implements OnInit {
     private httpService:HttpService,
     private router:Router,
     private commonService:CommonService
-  ) { }
-
-  ngOnInit() {
-    
+  ) { 
+    this.commonService.playVideo.subscribe(res=>{
+      this.playVideo(res)
+    })
   }
 
-  toggleVideo() {
-    const video: HTMLVideoElement = this.myVideo.nativeElement;
-    if (video.paused) {
-      video.play();
-    } else {
-      video.pause();
-    }
+  ngOnInit() {
+    this.playVideo(0)
+  }
+
+  playVideo(currentIndex:number): void {
+    // Pause the previous video
+    const previousVideo = document.querySelector(`#video-${currentIndex - 1}`);
+      const nextVideo = document.querySelector(`#video-${currentIndex + 1}`);
+      if (previousVideo) {
+        (previousVideo as HTMLVideoElement).pause();
+      }
+      
+      if(nextVideo){
+        (nextVideo as HTMLVideoElement).pause();
+      }
+  
+      // Play the current video
+      const currentVideo = document.querySelector(`#video-${currentIndex}`);
+      if (currentVideo) {
+        (currentVideo as HTMLVideoElement).play();
+        this.commonService.pauseVideo.subscribe(()=>{
+          (currentVideo as HTMLVideoElement).pause();
+        })
+      }
+    
   }
 
   shortView(id:any){

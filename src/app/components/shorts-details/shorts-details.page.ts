@@ -1,54 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { apiRoutes } from 'src/app/constant/config';
-import { HttpService } from 'src/app/service/http-service/http.service';
+import { baseUrl } from 'src/app/constant/config';
+import { CommonService } from 'src/app/service/common-service/common.service';
+
 
 @Component({
   selector: 'app-shorts-details',
   templateUrl: './shorts-details.page.html',
   styleUrls: ['./shorts-details.page.scss'],
 })
-export class ShortsDetailsPage implements OnInit {
- 
+export class ShortsDetailsPage implements OnInit, OnDestroy {
+  currentSlideIndex = 1
+  shorts:any;
   shortList:any;
-  baseUrl:any;
+  baseUrl:any = baseUrl;
   id:any;
   constructor(
-    private router:Router,
-    private httpService:HttpService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private commonService:CommonService,
   ) {
     this.activatedRoute.params.subscribe((res)=>{
       this.id = res["id"]
+      let short:any = localStorage.getItem('shorts')
+      this.getShortList(this.id, JSON.parse(short));
     })
   }
-
+ 
+  
   ngOnInit() {
     
   }
 
-  ionViewWillEnter(){
-    this.getShortList();
+
+  checkSlide(event:any){
+    this.currentSlideIndex = event.srcElement.swiper.activeIndex;
+    this.commonService.playVideo.emit(this.currentSlideIndex)
   }
 
-  checkSlide(){
-    console.log("trigger")
+  getShortList(id:any, short:any){
+      const filteredElements = short.filter((element:any) => element.id == id);
+      const remainingElements = short.filter((element:any) => element.id != id);
+      this.shortList = [...filteredElements, ...remainingElements]
+      console.log("shortList", this.shortList)
   }
 
-  getShortList(){
-    this.httpService.get(apiRoutes.shorts).subscribe({
-      next:(v:any) =>{
-        this.baseUrl = v.base_path;
-        this.shortList = v?.response?.data;
-        console.log(this.shortList)
-      },
-      error:(e:any)=>{
-        if (e.status == 401) {
-          localStorage.clear();
-          this.router.navigate(['login']); 
-        }
-      }
-    })
+  ngOnDestroy(): void {
+    this.commonService.pauseVideo.emit()
   }
 
 }

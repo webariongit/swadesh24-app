@@ -10,9 +10,11 @@
       <ion-title size="large">short-slider</ion-title>
     </ion-toolbar>
   </ion-header>
-  <swiper-container class="mySwiper" direction="vertical" mousewheel="true" *ngIf="shortList && shortList?.length > 0" (slidechange)="checkSlide()">
-    <swiper-slide *ngFor="let short of shortList">
-      <app-short-details [short]="short" [baseUrl]="baseUrl"></app-short-details>
-    </swiper-slide>
-  </swiper-container>
+  <ng-container *ngIf="shortList">
+    <swiper-container class="mySwiper" direction="vertical" mousewheel="true" (slidechange)="checkSlide($event)">
+      <swiper-slide *ngFor="let short of shortList; let i = index">
+        <app-short-details [short]="short" [baseUrl]="baseUrl" [index]="i"></app-short-details>
+      </swiper-slide>
+    </swiper-container>
+  </ng-container>
 </ion-content>

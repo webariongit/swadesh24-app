@@ -1,48 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { apiRoutes } from 'src/app/constant/config';
-import { HttpService } from 'src/app/service/http-service/http.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { baseUrl } from 'src/app/constant/config';
+import { CommonService } from 'src/app/service/common-service/common.service';
 
 @Component({
   selector: 'app-short-slider',
   templateUrl: './short-slider.page.html',
   styleUrls: ['./short-slider.page.scss'],
 })
-export class ShortSliderPage implements OnInit {
-  baseUrl:any;
+export class ShortSliderPage implements OnInit , OnDestroy{
+  baseUrl:any = baseUrl;
   shortList:any;
-
+  currentSlideIndex = 0
   constructor(
-    private httpService:HttpService,
-    private router:Router
-  ) { }
+    private commonService:CommonService
+  ) { 
+    let short:any = localStorage.getItem('shorts')
+    this.shortList = JSON.parse(short)
+  }
   
-  ionViewDidEnter(){
-    this.getShortList()
+
+  ionViewDidLeave(){
+    this.commonService.pauseVideo.emit()
   }
 
   ngOnInit() {
-    
+   
   }
 
-  checkSlide(){
-    console.log("triggered")
+  checkSlide(event:any){
+    this.currentSlideIndex = event.srcElement.swiper.activeIndex;
+    this.commonService.playVideo.emit(this.currentSlideIndex)
   }
 
-  getShortList(){
-    this.httpService.get(apiRoutes.shorts).subscribe({
-      next:(v:any) =>{
-        this.baseUrl = v.base_path;
-        this.shortList = v?.response?.data;
-        console.log(this.shortList)
-      },
-      error:(e:any)=>{
-        if (e.status == 401) {
-          localStorage.clear();
-          this.router.navigate(['login']); 
-        }
-      }
-    })
+
+  ngOnDestroy(): void {
+    console.log("page Destroyed")
   }
 
 }
