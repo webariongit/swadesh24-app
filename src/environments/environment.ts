@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.swadesh24.com/api/',
+  apiUrl: 'https://api.aajtakbharat.co/api/',
 };
 
 /*
