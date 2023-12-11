@@ -50,7 +50,7 @@ export class StoriesBoxComponent  implements OnInit {
       title: story?.title,
       text: story?.sub_title,
       dialogTitle: 'Share with friends',
-      url:'https://swadesh24.com/stories-slider?story_id=' + story?.id,
+      url:'https://web-stories.aajtakbharat.co/stories-slider?story_id=' + story?.id,
     }
     await Share.share(options).then((res:any)=>{
       this.storyShared(story?.id)

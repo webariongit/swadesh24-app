@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:342719033549:android:38587ff408187123d7f984",
         "android_client_info": {
-          "package_name": "com.swadesh24.app"
+          "package_name": "com.aajtakbharat.app"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "342719033549-7cqceu5rtbte7ofd5fi3jqpliij9aoah.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.swadesh24.app",
+            "package_name": "com.aajtakbharat.app",
             "certificate_hash": "0979b47578036471a774e55e620b1e6ebbe2293e"
           }
         },

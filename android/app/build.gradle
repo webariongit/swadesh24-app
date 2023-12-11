@@ -1,10 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.swadesh24.app"
+    signingConfigs {
+        release {
+            storeFile file('C:\\ionic-app\\swadesh24-app\\android-key-store.jks')
+            storePassword 'aajtakbharat'
+            keyAlias 'key0'
+            keyPassword 'aajtakbharat'
+        }
+    }
+    namespace "com.aajtakbharat.app"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.swadesh24.app"
+        applicationId "com.aajtakbharat.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -20,6 +28,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+          signingConfig signingConfigs.release
         }
     }
 }

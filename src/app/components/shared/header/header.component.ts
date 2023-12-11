@@ -47,7 +47,7 @@ export class HeaderComponent  implements OnInit {
         if(this.liveUrl){
           await Browser.open({ url: this.liveUrl });
         }else{
-          await Browser.open({ url: 'https://www.youtube.com/@Swadesh24Newschannel'});
+          await Browser.open({ url: 'https://www.youtube.com/@AAJTAKBHARAT-Newschannel'});
         }
       },
       error:(e:any)=>{

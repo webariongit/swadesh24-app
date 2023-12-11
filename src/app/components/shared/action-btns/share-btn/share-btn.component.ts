@@ -22,7 +22,7 @@ export class ShareBtnComponent  implements OnInit {
       title: news?.title,
       text: news?.sub_title,
       dialogTitle: 'Share with friends',
-      url:'https://swadesh24.com/article-details?news_id=' + news?.id,
+      url:'https://web-stories.aajtakbharat.co/article-details?news_id=' + news?.id,
     }
     await Share.share(options).then((res:any)=>{
       this.newsShared(news?.id)

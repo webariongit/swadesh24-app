@@ -44,7 +44,7 @@ export class StoriesDetailsPage implements OnInit, AfterViewInit {
   }
 
   async getUrl(){
-    this.ampUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web-stories.swadesh24.com/?story_id=${this.id}`)
+    this.ampUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web-stories.aajtakbharat.co/?story_id=${this.id}`)
     console.log("url",this.ampUrl)
   }
 

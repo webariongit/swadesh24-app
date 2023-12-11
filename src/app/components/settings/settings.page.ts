@@ -12,7 +12,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-  CopyInputText:string = "https://swadesh24.com";
+  CopyInputText:string = "https://web-stories.aajtakbharat.co";
   rating:any = 5;
   constructor(
     // private clipboard: Clipboard
@@ -52,7 +52,7 @@ export class SettingsPage implements OnInit {
     const options:ShareOptions={
       title: "Swadesh 24 App",
       dialogTitle: 'Share with friends',
-      url:'https://swadesh24.com',
+      url:'https://web-stories.aajtakbharat.co',
     }
     await Share.share(options).then((res:any)=>{
       console.log("error",res)
