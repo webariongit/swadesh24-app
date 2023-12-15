@@ -1,15 +1,15 @@
 {
   "project_info": {
-    "project_number": "342719033549",
-    "project_id": "swadesh-24",
-    "storage_bucket": "swadesh-24.appspot.com"
+    "project_number": "877416662884",
+    "project_id": "aajtak-bharat-141db",
+    "storage_bucket": "aajtak-bharat-141db.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:342719033549:android:38587ff408187123d7f984",
+        "mobilesdk_app_id": "1:877416662884:android:ee39180907f0788b939c71",
         "android_client_info": {
-          "package_name": "com.aajtakbharat.app"
+          "package_name": "com.AajTakBharat.app"
         }
       },
       "oauth_client": [
@@ -17,25 +17,25 @@
           "client_id": "877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.aajtakbharat.app",
+            "package_name": "com.AajTakBharat.app",
             "certificate_hash": "0979b47578036471a774e55e620b1e6ebbe2293e"
           }
         },
         {
-          "client_id": "877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com",
+          "client_id": "877416662884-k78ih38nsilknsgkngt54nd2dngmmt4d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBywdO-SvgidI4QxL5XPHBI6s7gbilNDA4"
+          "current_key": "AIzaSyBn0hrb-Ugrz1J-_0n3qNLC7wtNTAMBlfY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com",
+              "client_id": "877416662884-k78ih38nsilknsgkngt54nd2dngmmt4d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
