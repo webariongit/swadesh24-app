@@ -1,7 +1,7 @@
 <ion-grid class="short-details">
   <div *ngIf="short?.media_file">
-    <video class="news-img" id="video-{{index}}" preload="none" loop>
-      <source [src]="baseUrl + short?.media_file" type="video/mp4">
+    <video class="news-img" id="video-{{index}}" (click)="togglePlayPause('video-'+index)"  [poster]="baseUrl + short?.media_file"  preload="auto" muted loop>
+      <source [src]="short?.media_file" type="video/mp4">
     </video>
   </div>
   <ion-grid class="short-action-btn">
@@ -16,7 +16,7 @@
       <ion-text>
         <h4>@{{short?.category?.category}}</h4>
       </ion-text>
-      <ion-label *ngIf="short?.description">{{short?.description}}</ion-label>
+      <ion-label *ngIf="short?.description" [innerHtml]="short?.description"></ion-label>
     </ion-grid>
   </ion-grid>
 </ion-grid>

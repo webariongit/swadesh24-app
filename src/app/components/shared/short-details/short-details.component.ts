@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Share, ShareOptions } from '@capacitor/share';
 import { apiRoutes } from 'src/app/constant/config';
@@ -24,7 +25,8 @@ export class ShortDetailsComponent  implements OnInit{
   constructor(
     private httpService:HttpService,
     private router:Router,
-    private commonService:CommonService
+    private commonService:CommonService,
+    private sanitizer: DomSanitizer
   ) { 
     this.commonService.playVideo.subscribe(res=>{
       this.playVideo(res)
@@ -32,13 +34,14 @@ export class ShortDetailsComponent  implements OnInit{
   }
 
   ngOnInit() {
-    this.playVideo(0)
+    this.short.media_file = this.sanitizer.bypassSecurityTrustResourceUrl(this.baseUrl + this.short?.media_file)
+    this.playVideo(0);
   }
 
   playVideo(currentIndex:number): void {
     // Pause the previous video
     const previousVideo = document.querySelector(`#video-${currentIndex - 1}`);
-      const nextVideo = document.querySelector(`#video-${currentIndex + 1}`);
+    const nextVideo = document.querySelector(`#video-${currentIndex + 1}`);
       if (previousVideo) {
         (previousVideo as HTMLVideoElement).pause();
       }
@@ -51,27 +54,22 @@ export class ShortDetailsComponent  implements OnInit{
       const currentVideo = document.querySelector(`#video-${currentIndex}`);
       if (currentVideo) {
         (currentVideo as HTMLVideoElement).play();
+        console.log("current Video",currentVideo)
         this.commonService.pauseVideo.subscribe(()=>{
           (currentVideo as HTMLVideoElement).pause();
         })
       }
-    
   }
 
-  shortView(id:any){
-    var formData = new FormData();
-    formData.append("shorts_id", id)
-    this.httpService.post(apiRoutes.shortView, formData).subscribe({
-      next:(v:any) =>{
-        console.log(v)
-      },
-      error:(e:any)=>{
-        if (e.status == 401) {
-          localStorage.clear();
-          this.router.navigate(['login']); 
-        }
+  togglePlayPause(videoId:any) {
+    const video = document.getElementById(videoId);
+    if (video instanceof HTMLVideoElement){
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
       }
-    })
+    }
   }
 
   storyLike(id:any, status:any){
@@ -100,8 +98,10 @@ export class ShortDetailsComponent  implements OnInit{
 
   async shareShort(short:any){
     const options:ShareOptions={
+      title: short?.category?.category,
       text: short?.description,
-      dialogTitle: 'Share with friends'
+      dialogTitle: 'Share with friends',
+      url:'https://aajtakbharat.co/short-details/' + short?.id
     }
     await Share.share(options).then((res:any)=>{
       this.shortShared(short?.id)

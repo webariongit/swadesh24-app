@@ -17,7 +17,7 @@ export class PollsBoxComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("Polls", this.poll)
+
   }
 
   chooseOption(id:any ,option:any){

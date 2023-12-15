@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Browser } from '@capacitor/browser';
-import { Share, ShareOptions } from '@capacitor/share';
 import { ModalController, Platform } from '@ionic/angular';
 import { apiRoutes } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
@@ -45,7 +43,6 @@ export class StoriesDetailsPage implements OnInit, AfterViewInit {
 
   async getUrl(){
     this.ampUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://web-stories.aajtakbharat.co/?story_id=${this.id}`)
-    console.log("url",this.ampUrl)
   }
 
   swiper: Swiper;

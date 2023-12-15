@@ -12,7 +12,7 @@ import { HttpService } from 'src/app/service/http-service/http.service';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-  CopyInputText:string = "https://web-stories.aajtakbharat.co";
+  CopyInputText:string = "https://play.google.com/store/apps/details?id=com.aajtakbharat.app";
   rating:any = 5;
   constructor(
     // private clipboard: Clipboard
@@ -52,7 +52,7 @@ export class SettingsPage implements OnInit {
     const options:ShareOptions={
       title: "Swadesh 24 App",
       dialogTitle: 'Share with friends',
-      url:'https://web-stories.aajtakbharat.co',
+      url:'https://play.google.com/store/apps/details?id=com.aajtakbharat.app',
     }
     await Share.share(options).then((res:any)=>{
       console.log("error",res)

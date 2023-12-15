@@ -155,7 +155,8 @@ export class ShowsDetailsPage implements OnInit {
   async shareShows(short:any){
     const options:ShareOptions={
       text: short?.title,
-      dialogTitle: 'Share with friends'
+      dialogTitle: 'Share with friends',
+      url:'https://aajtakbharat.co/shows-episodes-details/' + short?.id
     }
     await Share.share(options).then((res:any)=>{
       console.log("ress",res)

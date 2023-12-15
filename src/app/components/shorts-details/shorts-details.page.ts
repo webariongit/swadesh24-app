@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { baseUrl } from 'src/app/constant/config';
+import { apiRoutes, baseUrl } from 'src/app/constant/config';
 import { CommonService } from 'src/app/service/common-service/common.service';
+import { HttpService } from 'src/app/service/http-service/http.service';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { CommonService } from 'src/app/service/common-service/common.service';
   templateUrl: './shorts-details.page.html',
   styleUrls: ['./shorts-details.page.scss'],
 })
-export class ShortsDetailsPage implements OnInit, OnDestroy {
+export class ShortsDetailsPage implements OnInit {
   currentSlideIndex = 1
   shorts:any;
   shortList:any;
@@ -18,6 +19,8 @@ export class ShortsDetailsPage implements OnInit, OnDestroy {
   constructor(
     private activatedRoute:ActivatedRoute,
     private commonService:CommonService,
+    private httpService:HttpService,
+    private router:Router
   ) {
     this.activatedRoute.params.subscribe((res)=>{
       this.id = res["id"]
@@ -25,7 +28,10 @@ export class ShortsDetailsPage implements OnInit, OnDestroy {
       this.getShortList(this.id, JSON.parse(short));
     })
   }
- 
+
+  ionViewDidLeave(){
+    this.commonService.pauseVideo.emit()
+  }
   
   ngOnInit() {
     
@@ -34,6 +40,11 @@ export class ShortsDetailsPage implements OnInit, OnDestroy {
 
   checkSlide(event:any){
     this.currentSlideIndex = event.srcElement.swiper.activeIndex;
+    this.shortList.forEach((el:any, index:any)=>{
+      if(this.currentSlideIndex == index){
+        this.shortView(el.id)
+      }
+    })
     this.commonService.playVideo.emit(this.currentSlideIndex)
   }
 
@@ -41,11 +52,22 @@ export class ShortsDetailsPage implements OnInit, OnDestroy {
       const filteredElements = short.filter((element:any) => element.id == id);
       const remainingElements = short.filter((element:any) => element.id != id);
       this.shortList = [...filteredElements, ...remainingElements]
-      console.log("shortList", this.shortList)
   }
 
-  ngOnDestroy(): void {
-    this.commonService.pauseVideo.emit()
+  shortView(id:any){
+    var formData = new FormData();
+    formData.append("shorts_id", id)
+    this.httpService.post(apiRoutes.shortView, formData).subscribe({
+      next:(v:any) =>{
+        console.log(v)
+      },
+      error:(e:any)=>{
+        if (e.status == 401) {
+          localStorage.clear();
+          this.router.navigate(['login']); 
+        }
+      }
+    })
   }
 
 }
