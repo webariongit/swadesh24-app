@@ -43,7 +43,7 @@ export class ArticlesPage implements OnInit {
   }
 
   getNativeAds(){
-    AdmobAds.loadNativeAd({ adId: "ca-app-pub-3940256099942544/2247696110", isTesting: true, adsCount: 5 }).then((res) => {
+    AdmobAds.loadNativeAd({ adId: "ca-app-pub-8538744979078345/3308488337", isTesting: false, adsCount: 5 }).then((res) => {
       this.ads = res.ads;
    }).catch((error) => {
       console.log("Native Error",error.message);

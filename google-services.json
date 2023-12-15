@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "342719033549-7cqceu5rtbte7ofd5fi3jqpliij9aoah.apps.googleusercontent.com",
+          "client_id": "877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.aajtakbharat.app",
@@ -22,7 +22,7 @@
           }
         },
         {
-          "client_id": "342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com",
+          "client_id": "877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com",
+              "client_id": "877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

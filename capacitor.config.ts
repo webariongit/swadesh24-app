@@ -10,7 +10,7 @@ const config: CapacitorConfig = {
   plugins:{
     GoogleAuth: {
       scopes: ["profile","email"],
-      serverClientId: '342719033549-uvgf6us7otfmh05mik6efgh3mk3tdpb1.apps.googleusercontent.com',
+      serverClientId: '877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
     },
     SplashScreen: {
