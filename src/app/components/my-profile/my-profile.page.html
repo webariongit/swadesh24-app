@@ -72,7 +72,7 @@
               </ion-select>
             </ion-col>
             <ion-col size="9" class="ion-no-padding">
-              <ion-input aria-label="Mobile Number" type="number" placeholder="Mobile Number" readonly="userDetails?.contact" formControlName="contact" fill="outline"></ion-input>
+              <ion-input aria-label="Mobile Number" type="number" placeholder="Mobile Number" readonly="userDetails?.contact != null && userDetails?.contact != ''" formControlName="contact" fill="outline"></ion-input>
             </ion-col>
           </ion-row>
           <ng-container *ngFor="let validation of validationMessages.contact">

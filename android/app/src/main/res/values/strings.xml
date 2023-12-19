@@ -4,8 +4,8 @@
     <string name="title_activity_main">AajTak Bharat</string>
     <string name="package_name">com.aajtakbharat.app</string>
     <string name="custom_url_scheme">com.aajtakbharat.app</string>
-    <string name="server_client_id">877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com</string>
-    <string name="facebook_app_id">com.aajtakbharat.app</string>
-    <string name="facebook_client_token">158391760586519</string>
+    <string name="server_client_id">756713277919-d5tovd92mmu2o1ihi6v90egsp4sgt1pa.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">1349140999067243</string>
+    <string name="facebook_client_token">1349140999067243</string>
     <string name="admob_app_id">ca-app-pub-8538744979078345~4343773379</string>
 </resources>

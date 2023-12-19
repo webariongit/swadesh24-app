@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.AajTakBharat.app',
+  appId: 'com.aajtakbharat.app',
   appName: 'AajTak Bharat',
   webDir: 'www',
   server: {
@@ -10,7 +10,7 @@ const config: CapacitorConfig = {
   plugins:{
     GoogleAuth: {
       scopes: ["profile","email"],
-      serverClientId: '877416662884-45dekvg2bfakj94tjssh5pncbqpunat9.apps.googleusercontent.com',
+      serverClientId: '756713277919-d5tovd92mmu2o1ihi6v90egsp4sgt1pa.apps.googleusercontent.com',
       forceCodeForRefreshToken: true
     },
     SplashScreen: {
