@@ -74,6 +74,21 @@ ion-segment{
     }
 }
 
+ion-modal#example-modal {
+    --width: fit-content;
+    --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
+
+.modal-header{
+    padding: 10px 15px 0px;
+    h4{
+        font-size: 18px;
+        margin: 0;
+    }
+}
 
 ion-menu-button{
     height: 40px;
@@ -86,4 +101,10 @@ ion-menu-button{
 
 .header-logo img{
     height: 36px;
+}
+
+.wrapper{
+    ion-item{
+        font-size: 14px;
+    }
 }

@@ -1,6 +1,6 @@
 <ion-grid class="short-details">
   <div *ngIf="short?.media_file">
-    <video class="news-img" id="video-{{index}}" (click)="togglePlayPause('video-'+index)"  [poster]="baseUrl + short?.media_file"  preload="auto" muted loop>
+    <video class="news-img" id="video-{{index}}" (click)="togglePlayPause('video-'+index)"  preload="none" muted loop>
       <source [src]="short?.media_file" type="video/mp4">
     </video>
   </div>

@@ -22,6 +22,9 @@
     </ion-row>
   </ion-toolbar>
   <ion-segment [scrollable]="true" *ngIf="categoryList">
+    <ion-segment-button value="India" id="open-custom-dialog">
+      <ion-label>India</ion-label>
+    </ion-segment-button>
     <ng-container *ngFor="let link of categoryList">
       <ion-segment-button value="{{link?.category}}" (click)="gotoPage(link?.category_id)">
         <ion-label>{{link?.category}}</ion-label>
@@ -30,4 +33,20 @@
   </ion-segment>
   <ion-skeleton-text *ngIf="!categoryList" class="tab-butoton-skel" [animated]="true"></ion-skeleton-text>
 </ion-header>
-      
+
+<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ng-template>
+    <div class="modal-header">
+      <h4>India News</h4>
+    </div>
+    <div class="wrapper">
+      <ion-list lines="none">
+        <ng-container *ngFor="let state of newsStateList">
+          <ion-item button="true" detail="false" (click)="modal.dismiss();gotoStateArticles(state)">
+            <ion-label>{{state?.state}}</ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </div>
+  </ng-template>
+</ion-modal>

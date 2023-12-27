@@ -37,7 +37,7 @@ export class ArticleDetailsPage implements OnInit {
     private alertController:AlertController,
     private domsanitizer:DomSanitizer,
     private modalCntrl:ModalController
-  ) {
+  ){
     this.activatedRoute.params.subscribe((params)=>{
       this.newsId = params['id'];
       let userData:any = localStorage.getItem('userDetails')
@@ -49,7 +49,7 @@ export class ArticleDetailsPage implements OnInit {
       }
       this.getNewsDetails(this.newsId)
     })
-   }
+  }
 
   ngOnInit() {
     this.newsViews();

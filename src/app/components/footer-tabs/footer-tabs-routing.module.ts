@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: () => import('../explore/explore.module').then( m => m.ExplorePageModule)
       },
       {
+        path: 'state-articles/:id/:state',
+        loadChildren: () => import('../state-articles/state-articles.module').then( m => m.StateArticlesPageModule)
+      },
+      {
         path: '',
         redirectTo: 'all',
         pathMatch: 'full'

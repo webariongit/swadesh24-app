@@ -155,11 +155,6 @@ const routes: Routes = [
     loadChildren: () => import('./components/shows/shows.module').then( m => m.ShowsPageModule)
   },
 
-
-
-
-
-
   // {
   //   path: 'delete-my-account',
   //   loadChildren: () => import('./components/delete-my-account/delete-my-account.module').then( m => m.DeleteMyAccountPageModule),

@@ -41,7 +41,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid class="stories-sec" *ngIf="storyList">
+    <ion-grid class="stories-sec" *ngIf="storyList?.length > 0">
       <ion-grid class="section-header">
         <h4>Visual Stories</h4>
         <a (click)="gotoPage('stories')" class="view-all-btn" *ngIf="storyList?.length > 3">
@@ -54,7 +54,7 @@
         </swiper-slide>
       </swiper-container>
     </ion-grid>
-    <ion-grid class="shorts-sec" *ngIf="pollList">
+    <ion-grid class="shorts-sec" *ngIf="pollList?.length > 0">
       <ion-grid class="section-header">
         <h4>Polls</h4>
         <a (click)="gotoPage('polls')" class="view-all-btn" *ngIf="pollList?.length > 3">

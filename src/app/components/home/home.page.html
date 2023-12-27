@@ -16,7 +16,7 @@
           </swiper-slide>
         </swiper-container>
       </ng-container>
-      <ion-grid class="shorts-sec">
+      <ion-grid class="shorts-sec" *ngIf="shortList?.length > 0">
         <ion-grid class="section-header">
           <h4>Shorts</h4>
           <a (click)="gotoShorts()" class="view-all-btn">
@@ -55,7 +55,7 @@
           </ng-container>
         </ng-container>
       </ion-grid>
-      <ion-grid class="trending-topic-sec" *ngIf="storyList">
+      <ion-grid class="trending-topic-sec" *ngIf="storyList?.length > 0">
         <ion-grid class="section-header">
           <h4>Visual Stories</h4>
         </ion-grid>
@@ -462,5 +462,9 @@
       </ion-card-content>
     </ion-card>
   </ng-container>
-
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small" (click)="openWhatsapp()">
+      <ion-icon name="logo-whatsapp"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

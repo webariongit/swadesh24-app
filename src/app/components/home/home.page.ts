@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Browser } from '@capacitor/browser';
 import { MenuController } from '@ionic/angular';
 import { AdmobAds } from 'capacitor-admob-ads';
 import { apiRoutes } from 'src/app/constant/config';
@@ -44,6 +45,7 @@ export class HomePage implements OnInit, OnDestroy {
   entertainmentList:any;
   isNetworkAvailable:boolean;
   teamList:any;
+  newsByState:any;
 
   constructor(
     private httpService:HttpService,
@@ -116,6 +118,7 @@ export class HomePage implements OnInit, OnDestroy {
         this.loader = false;
         this.latestNews = v?.Latest_news
         this.category = v?.NewsByCategory_id;
+        this.newsByState = v?.NewsByState_id;
         console.log(this.category)
         let category = []
         this.base_url = this.category[0].base_url
@@ -140,6 +143,7 @@ export class HomePage implements OnInit, OnDestroy {
             this.entertainmentList = this.category[i]
           }
         }
+        this.commonService.newStateList.emit(this.newsByState)
         this.commonService.categories.emit(category)
         localStorage.setItem("category", JSON.stringify(category))
       },
@@ -152,10 +156,8 @@ export class HomePage implements OnInit, OnDestroy {
       },
       complete:()=>{
         this.loader = false;
-        console.log("HI TREIGGERED 3 FALSE")
       }
     })
-    console.log("loader3", this.loader)
   }
 
   getStoryList(){
@@ -199,6 +201,10 @@ export class HomePage implements OnInit, OnDestroy {
         }
       }
     })
+  }
+
+  openWhatsapp(){
+    Browser.open({ url: 'https://wa.me/+916203252643?text=hello%20i%20have%20some%20query.' });
   }
 
 }

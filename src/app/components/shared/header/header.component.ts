@@ -15,6 +15,7 @@ export class HeaderComponent  implements OnInit {
   loader:boolean = false;
   selectedCategory:any;
   liveUrl:any;
+  newsStateList:any;
   constructor(
     private router:Router,
     private commonService:CommonService,
@@ -23,7 +24,9 @@ export class HeaderComponent  implements OnInit {
     this.commonService.categories.subscribe((data)=>{
       this.categoryList = data;
     })
-
+    this.commonService.newStateList.subscribe((data)=>{
+      this.newsStateList = data;
+    })
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         let pageType = event?.url.split('/')[3];
@@ -63,6 +66,10 @@ export class HeaderComponent  implements OnInit {
 
   gotoPage(id:any){
     this.router.navigate(['home/articles',id,'all'])
+  }
+
+  gotoStateArticles(state:any){
+    this.router.navigate(['home/state-articles',state.state_id, state.state ])
   }
 
   gotoSearch(){

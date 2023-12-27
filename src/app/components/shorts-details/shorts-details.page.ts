@@ -22,11 +22,7 @@ export class ShortsDetailsPage implements OnInit {
     private httpService:HttpService,
     private router:Router
   ) {
-    this.activatedRoute.params.subscribe((res)=>{
-      this.id = res["id"]
-      let short:any = localStorage.getItem('shorts')
-      this.getShortList(this.id, JSON.parse(short));
-    })
+    
   }
 
   ionViewDidLeave(){
@@ -34,7 +30,11 @@ export class ShortsDetailsPage implements OnInit {
   }
   
   ngOnInit() {
-    
+    this.activatedRoute.params.subscribe((res)=>{
+      this.id = res["id"]
+      let short:any = localStorage.getItem('shorts')
+      this.getShortList(this.id, JSON.parse(short));
+    })
   }
 
 
