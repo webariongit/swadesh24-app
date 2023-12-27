@@ -103,7 +103,11 @@ export class AppComponent implements OnInit {
       },500);
       setTimeout(() => {
         if (this.commonService.getUserToken()) {
-          this.navCtrl.navigateRoot('home');
+          if(this.userDetails.contact != null && this.userDetails.contact != ""){
+            this.navCtrl.navigateRoot('home');
+          }else{
+            this.router.navigate(['my-profile', 'update'])
+          }
         }else{
           this.navCtrl.navigateRoot('login');
           // GoogleAuth.initialize()
