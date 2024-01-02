@@ -58,6 +58,7 @@ export class RequestForAuthorPage implements OnInit {
         console.log(v)
         if (v.status == 200) {
           this.commonService.presentSuccessToast(v.message);
+          this.httpService.updateUserDetails();
           this.router.navigate(['home']); 
         }else{
           this.commonService.presentFailureToast(v.error.message)

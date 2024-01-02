@@ -33,5 +33,12 @@
   </ion-card>
 </ion-content>
 <ion-footer class="ion-text-center">
-  <ion-button class="main-btn" (click)="presentAlertPopup()">Delete My Account</ion-button>
+  <ion-button class="main-btn" (click)="presentAlertPopup()" [disabled]="userDetails.user_account_delete_request == 1">
+    <ng-container *ngIf="userDetails.user_account_delete_request == 0">
+      Delete My Account
+    </ng-container>
+    <ng-container *ngIf="userDetails.user_account_delete_request == 1">
+      Delete Request Sent
+    </ng-container>
+  </ion-button>
 </ion-footer>

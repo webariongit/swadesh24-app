@@ -58,6 +58,7 @@ export class DeleteMyAccountPage implements OnInit {
         console.log(v)
         if (v.status == 200) {
           this.commonService.presentSuccessToast(v.message);
+          this.httpService.updateUserDetails();
           this.router.navigate(['home']); 
         }
       },

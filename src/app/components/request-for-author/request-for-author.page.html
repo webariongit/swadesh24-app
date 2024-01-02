@@ -33,5 +33,12 @@
   </ion-card>
 </ion-content>
 <ion-footer class="ion-text-center">
-  <ion-button class="main-btn" (click)="presentAlertPopup()">Request for Author</ion-button>
+  <ion-button class="main-btn" [disabled]="userDetails.author_request == 1" (click)="presentAlertPopup()"> 
+    <ng-container *ngIf="userDetails.author_request == 0">
+      Request for Author
+    </ng-container>
+    <ng-container *ngIf="userDetails.author_request == 1">
+      Author Request Sent
+    </ng-container>
+  </ion-button>
 </ion-footer>
