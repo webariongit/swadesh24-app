@@ -14,7 +14,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-row class="shorts-list" *ngIf="!loader">
-    <ion-col size="4" class="ion-no-padding" *ngFor="let short of shortList">
+    <ion-col size="4" class="ion-no-padding" *ngFor="let short of shorts">
       <app-shorts-box [shorts]="short" [baseUrl]="base_url"></app-shorts-box>
     </ion-col>
   </ion-row>
@@ -40,4 +40,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="getMoreList($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
